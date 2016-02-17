@@ -9,20 +9,20 @@ angular.module('tutorialApp', ['ngRoute'])
     .factory('TraineeService', ['$http', function ($http) {
         return {
             getTrainee: function (id) {
-                $http.get('http://localhost:8090/oneuser/' + id).then(function (response) {
+                $http.get('http://localhost:7070/oneuser/' + id).then(function (response) {
                     return response.data;
                 });
 
             },
             getTrainees:function(){
-                $http.get('http://localhost:8090/user').then(function (response) {
+                $http.get('http://localhost:7070/user').then(function (response) {
                     return response.data;
                 });
             }
         }
     }])
     .controller('TraineeCtrl', function ($scope, $http) {
-        $http.get('http://localhost:8090/user').then(function (response) {
+        $http.get('http://localhost:7070/user').then(function (response) {
             $scope.trainees = response.data;
         });
 
