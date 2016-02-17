@@ -26,7 +26,7 @@ public class TraineeController {
 
     @RequestMapping("/trainee/{id}")
     public Trainee getTrainee(@PathVariable("id") Long id) {
-        System.out.println("Trainee wird gesucht...ID: "+id);
+        System.out.println("Auszubildender mit der ID: "+id+" wird gesucht...");
         return traineeService.getTraineeById(id);
     }
 
