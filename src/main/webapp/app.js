@@ -15,21 +15,30 @@ angular.module('tutorialApp', ['ngRoute'])
 
             },
             getTrainees:function(){
-                $http.get('http://localhost:7070/user').then(function (response) {
+                $http.get('http://localhost:7070/list').then(function (response) {
                     return response.data;
                 });
             }
         }
     }])
     .controller('TraineeCtrl', function ($scope, $http) {
-        $http.get('http://localhost:7070/user').then(function (response) {
+        $http.get('http://localhost:7070/list').then(function (response) {
             $scope.trainees = response.data;
         });
 
     })
-    .controller('OneTraineeCtrl',function($scope,TraineeService){
-        $scope.service=TraineeService;
-    });
+    .controller('OneTraineeCtrl',['$scope','TraineeService',function($scope,TraineeService){
+        var self=this;
+        self.trainees=[];
+        self.fetchAllUsers=function(){
+            TraineeService.getTrainees().then(
+                function(d){
+                    self.trainees=d;
+                }
+            );
+        };
+        self.fetchAllUsers();
+    }]);
 ///**
 // * Created by LECOORDE on 15.02.2016.
 // */
