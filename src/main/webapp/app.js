@@ -22,7 +22,7 @@ angular.module('tutorialApp', ['ngRoute'])
         }
     }])
     .controller('TraineeCtrl', function ($scope, $http) {
-        $http.get('http://localhost:7070/user').then(function (response) {
+        $http.get('http://localhost:7070/list').then(function (response) {
             $scope.trainees = response.data;
         });
 
