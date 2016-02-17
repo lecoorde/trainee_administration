@@ -35,8 +35,6 @@ public class Trainee implements Comparable<Trainee> {
     @Column(name = "START_OF_TRAINING")
     private Date start_of_training;
 
-    @Column(name = "YEARS_OF_TRAINING")
-    private int years_of_training;
 
     @JsonBackReference
     @ManyToOne(targetEntity = Department.class, fetch = FetchType.LAZY)
@@ -69,7 +67,6 @@ public class Trainee implements Comparable<Trainee> {
         this.jobName = job.name();
         this.birthday = birthday;
         this.start_of_training = start_of_training;
-        this.years_of_training = (int) ((time.getTime() - start_of_training.getTime()) / 3.1556926e10) + 1;
 
         this.department = department;
 
@@ -90,13 +87,7 @@ public class Trainee implements Comparable<Trainee> {
         }
     }
 
-    public int getYearsOfTraining() {
-        return this.years_of_training;
-    }
 
-    public void setYearsOfTraining(int yearsOfTraining) {
-        this.years_of_training = yearsOfTraining;
-    }
 
     public Date getStart_of_training() {
         return this.start_of_training;
@@ -208,7 +199,7 @@ public class Trainee implements Comparable<Trainee> {
     public String toString() {
         SimpleDateFormat shorter = new SimpleDateFormat("dd.MM.yyyy");
         return "---- ID: " + this.id + " ---- " +
-                "\n" + this.forename + " " + this.lastName + ", geboren am " + shorter.format(this.birthday) + " --- " + this.jobName + ", " + years_of_training + ". Lehrjahr" +
+                "\n" + this.forename + " " + this.lastName + ", geboren am " + shorter.format(this.birthday) + " --- " + this.jobName + ", " +
                 "\n";
     }
 }
