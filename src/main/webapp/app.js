@@ -4,6 +4,7 @@ angular.module('tutorialApp', ['ngRoute'])
         $routeProvider
             .when('/', {templateUrl: 'start.html'})
             .when('/about', {template: 'Über die Trainees'})
+            .when('/detail', {templateUrl:'traineeDetail.html'})
             .otherwise({redirectTo: '/'});
     })
     .factory('TraineeService', ['$http', '$q', function ($http, $q) {
@@ -36,7 +37,7 @@ angular.module('tutorialApp', ['ngRoute'])
     .controller('OneTraineeCtrl', ['$scope', 'TraineeService', function ($scope, TraineeService) {
         var self = this;
         self.trainees = [];
-        self.trainee={id:null,forename:'',lastname:'',job:'',birthday:1,start_of_training:1};
+        self.trainee={id:null,forename:'',lastName:'',job:'',birthday:1,start_of_training:1};
         self.fetchAllTrainees = function () {
             TraineeService.getTrainees().then(
                 function (d) {
@@ -50,7 +51,6 @@ angular.module('tutorialApp', ['ngRoute'])
         self.getSingleTrainee=function(id){
             TraineeService.getTrainee(id).then(function(d){
                 self.trainee=d;
-                return self.trainee;
             },
 
                 function (errResponse) {

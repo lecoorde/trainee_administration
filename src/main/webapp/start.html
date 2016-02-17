@@ -1,5 +1,7 @@
 
-<table class="table" ng-controller="OneTraineeCtrl as ctrl">
+
+
+    <table class="table">
     <tr>
         <th>ID</th>
         <th>Nachname</th>
@@ -15,8 +17,11 @@
         <td>{{trainee.birthday | date:'dd.MM.yyyy'}}</td>
         <td>{{trainee.job}}</td>
         <td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
+        <td><a href="#/detail" class="btn btn-default btn-sm" ng-click="ctrl.getSingleTrainee(trainee.id)">Details</a></td>
     </tr>
 </table>
+
+
 
 
 

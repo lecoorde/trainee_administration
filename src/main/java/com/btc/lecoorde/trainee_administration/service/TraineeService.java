@@ -19,12 +19,12 @@ public class TraineeService {
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t order by t.id", Trainee.class);
         return query.getResultList();
     }
-
+//TODO mit den joins funktioniert die abfrage nicht!
     public Trainee getTraineeById(Long id) {
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
-                "join fetch t.department d " +
-                "join fetch t.location l " +
-                "join fetch t.skillList s " +
+//                "join fetch t.department d " +
+//                "join fetch t.location l " +
+//                "join fetch t.skillList s " +
                 "where t.id = " + id, Trainee.class);
         return query.getSingleResult();
     }

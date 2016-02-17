@@ -11,7 +11,9 @@
     <p class="well">
         <a href="#/">Start</a> | <a href="#/about">Über</a>
     </p>
-    <div ng-view></div>
+    <div ng-controller="OneTraineeCtrl as ctrl">
+        <div ng-view></div>
+    </div>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
