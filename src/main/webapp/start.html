@@ -1,0 +1,43 @@
+<table class="table" ng-controller="TraineeCtrl">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>PreName</th>
+        <th>BirthDate</th>
+        <th>Professional</th>
+        <th>Start of Training</th>
+    </tr>
+    <tr ng-repeat="trainee in trainees">
+        <td>{{trainee.id}}</td>
+        <td>{{trainee.name}}</td>
+        <td>{{trainee.preName}}</td>
+        <td>{{trainee.birthDate | date:'dd.MM.yyyy'}}</td>
+        <td>{{trainee.professional}}</td>
+        <td>{{trainee.startOfTraining | date:'dd.MM.yyyy'}}</td>
+    </tr>
+</table>
+
+<!--<table class="table" ng-controller="OneTraineeCtrl">-->
+    <!--<tr>-->
+        <!--<th>Id</th>-->
+        <!--<th>Name</th>-->
+        <!--<th>PreName</th>-->
+        <!--<th>BirthDate</th>-->
+        <!--<th>Professional</th>-->
+        <!--<th>Start of Training</th>-->
+    <!--</tr>-->
+    <!--<tr ng-repeat="trainee in service.getTrainees()">-->
+        <!--<td>{{trainee.id}}</td>-->
+        <!--<td>{{trainee.name}}</td>-->
+        <!--<td>{{trainee.preName}}</td>-->
+        <!--<td>{{trainee.birthDate | date:'dd.MM.yyyy'}}</td>-->
+        <!--<td>{{trainee.professional}}</td>-->
+        <!--<td>{{trainee.startOfTraining | date:'dd.MM.yyyy'}}</td>-->
+    <!--</tr>-->
+<!--</table>-->
+
+
+
+
+
+
