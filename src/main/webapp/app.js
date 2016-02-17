@@ -15,7 +15,7 @@ angular.module('tutorialApp', ['ngRoute'])
 
             },
             getTrainees:function(){
-                $http.get('http://localhost:7070/user').then(function (response) {
+                $http.get('http://localhost:7070/list').then(function (response) {
                     return response.data;
                 });
             }
