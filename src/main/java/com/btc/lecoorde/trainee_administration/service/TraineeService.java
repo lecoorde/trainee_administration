@@ -16,9 +16,8 @@ public class TraineeService {
     private EntityManager entityManager;
 
     public List<Trainee> getAllTrainees() {
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t ", Trainee.class);
-        List<Trainee> trainees = query.getResultList();
-        return trainees;
+        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t order by t.id", Trainee.class);
+        return query.getResultList();
     }
 
     public Trainee getTraineeById(Long id) {
