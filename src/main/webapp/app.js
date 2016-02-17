@@ -27,9 +27,18 @@ angular.module('tutorialApp', ['ngRoute'])
         });
 
     })
-    .controller('OneTraineeCtrl',function($scope,TraineeService){
-        $scope.service=TraineeService;
-    });
+    .controller('OneTraineeCtrl',['$scope','TraineeService',function($scope,TraineeService){
+        var self=this;
+        self.trainees=[];
+        self.fetchAllUsers=function(){
+            TraineeService.getTrainees().then(
+                function(d){
+                    self.trainees=d;
+                }
+            );
+        };
+        self.fetchAllUsers();
+    }]);
 ///**
 // * Created by LECOORDE on 15.02.2016.
 // */
