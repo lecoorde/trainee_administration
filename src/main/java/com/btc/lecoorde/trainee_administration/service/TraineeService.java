@@ -1,10 +1,12 @@
 package com.btc.lecoorde.trainee_administration.service;
 
 import com.btc.lecoorde.trainee_administration.model.Trainee;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,9 +17,19 @@ public class TraineeService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Trainee> getAllTrainees() {
+    public List<TraineeDTO> getAllTrainees() {
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t order by t.id", Trainee.class);
-        return query.getResultList();
+        List<Trainee> traineeList = query.getResultList();
+        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+        for (Trainee t : traineeList) {
+            traineeDTOList.add(new TraineeDTO(t.getId(),
+                    t.getLastName(),
+                    t.getForename(),
+                    t.getJob(),
+                    t.getBirthday(),
+                    t.getStart_of_training()));
+        }
+        return traineeDTOList;
     }
 
     public Trainee getTraineeById(Long id) {
@@ -27,5 +39,6 @@ public class TraineeService {
                 "join fetch t.skillList s " +
                 "where t.id = " + id, Trainee.class);
         return query.getSingleResult();
+
     }
 }
