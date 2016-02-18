@@ -43,6 +43,7 @@ angular.module('tutorialApp', ['ngRoute'])
                 function (d) {
                     self.trainees = d;
                 },
+                //TODO Currencies müsste Trainees sein
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
                 }
@@ -57,6 +58,7 @@ angular.module('tutorialApp', ['ngRoute'])
                     console.error('Error while fetching Currencies');
                 }
             )
+            //TODO "unterminated statement"
         }
         self.fetchAllTrainees();
     }]);
