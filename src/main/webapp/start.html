@@ -1,23 +1,7 @@
-<!--<table class="table" ng-controller="TraineeCtrl">-->
-    <!--<tr>-->
-        <!--<th>ID</th>-->
-        <!--<th>Nachname</th>-->
-        <!--<th>Vorname</th>-->
-        <!--<th>Geburtsdatum</th>-->
-        <!--<th>Job</th>-->
-        <!--<th>Ausbildungsanfang</th>-->
-    <!--</tr>-->
-    <!--<tr ng-repeat="trainee in trainees">-->
-        <!--<td>{{trainee.id}}</td>-->
-        <!--<td>{{trainee.lastName}}</td>-->
-        <!--<td>{{trainee.forename}}</td>-->
-        <!--<td>{{trainee.birthday | date:'dd.MM.yyyy'}}</td>-->
-        <!--<td>{{trainee.job}}</td>-->
-        <!--<td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>-->
-    <!--</tr>-->
-<!--</table>-->
 
-<table class="table" ng-controller="OneTraineeCtrl as ctrl">
+
+
+    <table class="table">
     <tr>
         <th>ID</th>
         <th>Nachname</th>
@@ -33,8 +17,12 @@
         <td>{{trainee.birthday | date:'dd.MM.yyyy'}}</td>
         <td>{{trainee.job}}</td>
         <td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
+        <td><a href="#/detail" class="btn btn-default btn-sm" ng-click="ctrl.getSingleTrainee(trainee.id)">Details</a></td>
     </tr>
 </table>
+
+
+
 
 
 
