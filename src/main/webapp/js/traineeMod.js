@@ -23,12 +23,17 @@ angular.module('traineeMod', [])
         }
     }])
 
-    // der Controller "Trainee-Ctrl" wurde wohl nicht mehr benötigt, glaube ich
-
     .controller('TraineeCtrl', ['$scope', 'TraineeService', function ($scope, TraineeService) {
         var self = this;
         self.trainees = [];
-        self.trainee = {id: null, forename: '', lastName: '', jobName: '', birthday: 1, start_of_training: 1};
+        self.trainee = {
+            id: null,
+            forename: '',
+            lastName: '',
+            jobName: '',
+            birthday: 1,
+            start_of_training: 1,
+        };
         self.fetchAllTrainees = function () {
             TraineeService.getTrainees().then(
                 function (d) {
