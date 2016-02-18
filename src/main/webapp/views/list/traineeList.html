@@ -1,0 +1,32 @@
+<div ng-controller="TraineeCtrl as ctrl">
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Nachname</th>
+            <th>Vorname</th>
+            <th>Geburtsdatum</th>
+            <th>Job</th>
+            <th>Ausbildungsanfang</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="trainee in ctrl.trainees">
+            <td>{{trainee.id}}</td>
+            <td>{{trainee.lastName}}</td>
+            <td>{{trainee.forename}}</td>
+            <td>{{trainee.birthday | date:'dd.MM.yyyy'}}</td>
+            <td>{{trainee.jobName}}</td>
+            <td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
+            <td><a href="#/trainees/detail" class="btn btn-default btn-sm"
+                   ng-click="ctrl.getSingleTrainee(trainee.id)">Details</a></td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+

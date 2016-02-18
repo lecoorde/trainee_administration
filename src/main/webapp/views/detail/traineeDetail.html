@@ -1,0 +1,20 @@
+<h2>Detailansicht: Auszubildender</h2>
+<b></b>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nachname</th>
+        <th>Vorname</th>
+        <th>Geburtsdatum</th>
+        <th>Job</th>
+        <th>Ausbildungsanfang</th>
+    </tr>
+    <tr>
+        <td>{{ctrl.trainee.id}}</td>
+        <td>{{ctrl.trainee.lastName}}</td>
+        <td>{{ctrl.trainee.forename}}</td>
+        <td>{{ctrl.trainee.birthday | date:'dd.MM.yyyy'}}</td>
+        <td>{{ctrl.trainee.jobName}}</td>
+        <td>{{ctrl.trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
+    </tr>
+</table>

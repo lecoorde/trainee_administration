@@ -1,0 +1,16 @@
+<div ng-controller="DepartmentCtrl as ctrl">
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Beschreibung</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="department in ctrl.departments">
+        <td>{{department.id}}</td>
+        <td>{{department.name}}</td>
+        <td>{{department.description}}</td>
+        <td><a href="#/departments/detail" class="btn btn-default btn-sm" ng-click="ctrl.getSingleDepartment(department.id)">Details</a></td>
+    </tr>
+</table>
+</div>

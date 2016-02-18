@@ -57,13 +57,13 @@ public class Trainee implements Comparable<Trainee> {
 
     }
 
-    public Trainee(String lastName, String forename, Date birthday, JobType job, Date start_of_training, Department department, Location location, HashSet<Skill> skillList) {
+    public Trainee(String lastName, String forename, Date birthday, JobType jobName, Date start_of_training, Department department, Location location, HashSet<Skill> skillList) {
 
         Date time = new Date();
 
         this.lastName = lastName;
         this.forename = forename;
-        this.jobName = job.name();
+        this.jobName = jobName.name();
         this.birthday = birthday;
         this.start_of_training = start_of_training;
         this.department = department;
@@ -94,22 +94,22 @@ public class Trainee implements Comparable<Trainee> {
         this.start_of_training = start_of_training;
     }
 
-    public String getJob() {
+    public String getJobName() {
         return this.jobName;
     }
 
-    public void setJob(JobType jobType) {
+    public void setJobName(JobType jobType) {
         this.jobName = jobType.name();
     }
 
 
     //ENUMS
-    //    public JobType getJob(){
-//        return JobType.valueOf(this.job.toUpperCase());
+    //    public JobType getJobName(){
+//        return JobType.valueOf(this.jobName.toUpperCase());
 //    }
 //
-//    public void setJob(JobType job) {
-//        this.job = job.name();
+//    public void setJobName(JobType jobName) {
+//        this.jobName = jobName.name();
 //    }
 
 

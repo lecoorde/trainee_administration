@@ -1,0 +1,22 @@
+<div ng-controller="LocationCtrl as ctrl">
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Straße</th>
+        <th>Hausnummer</th>
+        <th>Postleitzahl</th>
+        <th>Stadt</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="location in ctrl.locations">
+        <td>{{location.id}}</td>
+        <td>{{location.name}}</td>
+        <td>{{location.street}}</td>
+        <td>{{location.houseNum}}</td>
+        <td>{{location.postCode}}</td>
+        <td>{{location.city}}</td>
+        <td><a href="#/locations/detail" class="btn btn-default btn-sm" ng-click="ctrl.getSingleLocation(location.id)">Details</a></td>
+    </tr>
+</table>
+</div>
