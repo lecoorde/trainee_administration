@@ -35,7 +35,8 @@ public class TraineeService {
                     t.getForename(),
                     t.getJobName(),
                     t.getBirthday(),
-                    t.getStart_of_training()));
+                    t.getStart_of_training(),
+                    t.getDepartment().getName()));
         }
         return traineeDTOList;
     }
@@ -45,8 +46,7 @@ public class TraineeService {
         logger.info("Service lädt den Auszubildenden");
 
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
-                "join fetch t.department d " +
-                "where t.id = " + id, Trainee.class); //TODO Detailansicht
+                "where t.id = " + id, Trainee.class);
         return query.getSingleResult();
 
     }

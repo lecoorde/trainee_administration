@@ -15,8 +15,16 @@
         <a href="#/skills">Skills</a> |
         <a href="#/about">Über uns</a>
     </p>
-    <div ng-view></div>
 
+     <!--TODO an dieser Stelle müsste man irgendwie selektiv einen Controller für das ng-view bekommen-->
+     <!--TODO die Detailansicht ist nur verfügbar, wenn der Controller dafür hier aktiv ist.-->
+
+    <!--<div ng-controller="SkillCtrl as ctrl">-->
+    <div ng-controller="TraineeCtrl as ctrl">
+    <!--<div ng-controller="DepartmentCtrl as ctrl">-->
+    <!--<div ng-controller="LocationCtrl as ctrl">-->
+        <div ng-view></div>
+    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-animate.js"></script>

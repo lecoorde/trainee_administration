@@ -19,6 +19,7 @@ public class TraineeDTO {
 
     private Date start_of_training;
 
+
     public TraineeDTO(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training) {
         this.id = id;
         this.lastName = lastName;
@@ -75,4 +76,5 @@ public class TraineeDTO {
     public void setStart_of_training(Date start_of_training) {
         this.start_of_training = start_of_training;
     }
+
 }
