@@ -1,4 +1,4 @@
-package com.btc.lecoorde.trainee_administration.model;
+package com.btc.lecoorde.trainee_administration.model.entity;
 
 /**
  * Created by DESIMON on 05.10.2015.

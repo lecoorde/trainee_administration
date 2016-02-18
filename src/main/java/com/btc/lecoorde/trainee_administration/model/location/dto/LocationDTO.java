@@ -1,7 +1,5 @@
 package com.btc.lecoorde.trainee_administration.model.location.dto;
 
-import com.btc.lecoorde.trainee_administration.model.Location;
-
 /**
  * Created by Denis Simon on 18.02.2016.
  */

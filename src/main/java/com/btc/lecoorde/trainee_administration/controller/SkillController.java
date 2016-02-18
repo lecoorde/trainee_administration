@@ -1,6 +1,6 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.Skill;
+import com.btc.lecoorde.trainee_administration.model.entity.Skill;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
 import com.btc.lecoorde.trainee_administration.service.SkillService;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.btc.lecoorde.trainee_administration.model;
+package com.btc.lecoorde.trainee_administration.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;

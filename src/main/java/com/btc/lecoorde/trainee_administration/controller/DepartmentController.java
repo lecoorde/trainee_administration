@@ -1,6 +1,6 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.Department;
+import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
 import com.btc.lecoorde.trainee_administration.service.DepartmentService;
 import org.slf4j.Logger;
