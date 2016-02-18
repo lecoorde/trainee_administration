@@ -43,9 +43,8 @@ angular.module('tutorialApp', ['ngRoute'])
                 function (d) {
                     self.trainees = d;
                 },
-                //TODO Currencies müsste Trainees sein
                 function (errResponse) {
-                    console.error('Error while fetching Currencies');
+                    console.error('Error while fetching trainees');
                 }
             );
         };
@@ -55,10 +54,10 @@ angular.module('tutorialApp', ['ngRoute'])
             },
 
                 function (errResponse) {
-                    console.error('Error while fetching Currencies');
+                    console.error('Error while fetching trainee');
                 }
             )
-            //TODO "unterminated statement"
+            //TODO irgendwie fehlen dem Semikolons, weil da 3 Funktionen sind.
         }
         self.fetchAllTrainees();
     }]);
