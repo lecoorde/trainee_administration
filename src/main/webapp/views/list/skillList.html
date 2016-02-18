@@ -1,0 +1,16 @@
+<div ng-controller="SkillCtrl as ctrl">
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Bezeichnung</th>
+        <th>Beschreibung</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="skill in ctrl.skills">
+        <td>{{skill.id}}</td>
+        <td>{{skill.name}}</td>
+        <td>{{skill.description}}</td>
+        <td><a href="#/skills/detail" class="btn btn-default btn-sm" ng-click="ctrl.getSingleSkill(skill.id)">Details</a></td>
+    </tr>
+</table>
+</div>

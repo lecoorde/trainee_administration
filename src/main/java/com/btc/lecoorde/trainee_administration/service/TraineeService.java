@@ -2,6 +2,8 @@ package com.btc.lecoorde.trainee_administration.service;
 
 import com.btc.lecoorde.trainee_administration.model.Trainee;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,30 +16,37 @@ import java.util.List;
  */
 public class TraineeService {
 
+    private final Logger logger = LoggerFactory.getLogger(TraineeService.class);
+
     @PersistenceContext
     private EntityManager entityManager;
 
     public List<TraineeDTO> getAllTrainees() {
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t order by t.id", Trainee.class);
+
+        logger.info("Service lädt die Liste von Auzubildenden");
+
+        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
+                "order by t.id", Trainee.class);
         List<Trainee> traineeList = query.getResultList();
         List<TraineeDTO> traineeDTOList = new LinkedList<>();
         for (Trainee t : traineeList) {
             traineeDTOList.add(new TraineeDTO(t.getId(),
                     t.getLastName(),
                     t.getForename(),
-                    t.getJob(),
+                    t.getJobName(),
                     t.getBirthday(),
                     t.getStart_of_training()));
         }
         return traineeDTOList;
     }
-//TODO mit den joins funktioniert die abfrage nicht!
+
     public Trainee getTraineeById(Long id) {
+
+        logger.info("Service lädt den Auszubildenden");
+
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
-//                "join fetch t.department d " +
-//                "join fetch t.location l " +
-//                "join fetch t.skillList s " +
-                "where t.id = " + id, Trainee.class);
+                "join fetch t.department d " +
+                "where t.id = " + id, Trainee.class); //TODO Detailansicht
         return query.getSingleResult();
 
     }

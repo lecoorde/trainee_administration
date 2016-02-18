@@ -10,4 +10,13 @@
     <bean id="traineeService" class="com.btc.lecoorde.trainee_administration.service.TraineeService">
     </bean>
 
+    <bean id="locationService" class="com.btc.lecoorde.trainee_administration.service.LocationService">
+    </bean>
+
+    <bean id="departmentService" class="com.btc.lecoorde.trainee_administration.service.DepartmentService">
+    </bean>
+
+    <bean id="skillService" class="com.btc.lecoorde.trainee_administration.service.SkillService">
+    </bean>
+
 </beans>
