@@ -18,5 +18,5 @@ angular.module('mainApp', ['ngRoute', 'traineeMod', 'locationMod', 'departmentMo
 
             .when('/about', {template: 'Made by Lennard Coordes and Denis Simon'})
 
-            .otherwise({redirectTo: 'index.html'});
+            .otherwise({redirectTo: '/trainees'});
     });
