@@ -94,10 +94,10 @@
 
             <tr>
                 <td>
-                    <button ng-click="reset()">Zurücksetzen</button>
+                    <button ng-click="ctrl.reset()">Zurücksetzen</button>
                 </td>
                 <td>
-                    <input type="submit" ng-disabled="(traineeForm.firstname.$dirty &&
+                    <input type="submit" value="Speichern" ng-disabled="(traineeForm.firstname.$dirty &&
                         traineeForm.firstname.$invalid) || traineeForm.lastname.$dirty &&
                         traineeForm.lastname.$invalid || traineeForm.birthday.$dirty &&
                         traineeForm.birthday.$invalid || traineeForm.start_of_training.$dirty &&
