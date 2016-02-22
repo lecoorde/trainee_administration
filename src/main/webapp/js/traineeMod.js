@@ -57,6 +57,9 @@ angular.module('traineeMod', [])
             departmentName: '',
             locationName: ''
         };
+        self.creatableTrainee={
+            id:null
+        }
 
         self.getSkillsByTraineeId = function (id) {
             TraineeService.getSkills(id).then(
@@ -78,7 +81,7 @@ angular.module('traineeMod', [])
                 );
         };
         self.submit = function () {
-            self.createTrainee(self.trainee)
+            self.createTrainee(self.creatableTrainee)
         }
         self.fetchAllTrainees = function () {
             TraineeService.getTrainees().then(
@@ -100,11 +103,10 @@ angular.module('traineeMod', [])
             )
         };
         self.reset = function () {
-            self.trainee.forename = "TestVorname";
-            self.trainee.lastName = "TestNachname";
-            self.trainee.birthday = new Date(1996, 10, 30);
-            self.trainee.start_of_training = new Date(2015, 9, 1);
-            self.trainee.jobName = "Dualer Student - Anwendungsentwicklung"
+            self.creatableTrainee.forename = "TestVorname";
+            self.creatableTrainee.lastName = "TestNachname";
+            self.creatableTrainee.birthday = new Date(1996, 10, 30);
+            self.creatableTrainee.start_of_training = new Date(2015, 9, 1);
         };
 
         self.reset();
