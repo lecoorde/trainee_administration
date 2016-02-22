@@ -111,5 +111,4 @@ angular.module('traineeMod', [])
 
         self.reset();
         self.fetchAllTrainees();
-        self.getSkillsByTraineeId();
     }]);

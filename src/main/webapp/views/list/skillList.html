@@ -1,17 +1,19 @@
-<div ng-controller="SkillCtrl">
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Bezeichnung</th>
-            <th>Beschreibung</th>
-            <th></th>
-        </tr>
-        <tr ng-repeat="skill in ctrl.skills">
-            <td>{{skill.id}}</td>
-            <td>{{skill.name}}</td>
-            <td>{{skill.description}}</td>
-            <td><a href="#/skills/detail" class="btn btn-default btn-sm"
-                   ng-click="ctrl.getSingleSkill(skill.id)">Details</a></td>
-        </tr>
-    </table>
+<div ng-controller="SkillCtrl as sctrl">
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Bezeichnung</th>
+        <th>Beschreibung</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="skill in sctrl.skills">
+        <td>{{skill.id}}</td>
+        <td>{{skill.name}}</td>
+        <td>{{skill.description}}</td>
+        <td><a href="" class="btn btn-default btn-sm"
+               ng-click="sctrl.getSingleSkill(skill.id);">Details</a></td>
+    </tr>
+</table>
+    <div ng-include="'/views/detail/skillDetail.html'">
+    </div>
 </div>
