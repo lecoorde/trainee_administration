@@ -41,3 +41,4 @@ public class SkillController {
         return skillService.getSkillById(id);
     }
 }
+

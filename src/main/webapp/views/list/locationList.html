@@ -1,20 +1,23 @@
-<table class="table">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Straße</th>
-        <th>Hausnummer</th>
-        <th>Postleitzahl</th>
-        <th>Stadt</th>
-        <th></th>
-    </tr>
-    <tr ng-repeat="location in lctrl.locations">
-        <td>{{location.id}}</td>
-        <td>{{location.name}}</td>
-        <td>{{location.street}}</td>
-        <td>{{location.houseNum}}</td>
-        <td>{{location.postCode}}</td>
-        <td>{{location.city}}</td>
-        <td><a href="#/locations/detail" class="btn btn-default btn-sm" ng-click="lctrl.getSingleLocation(location.id)">Details</a></td>
-    </tr>
-</table>
+<!--<div ng-controller="LocationCtrl">-->
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Straße</th>
+            <th>Hausnummer</th>
+            <th>Postleitzahl</th>
+            <th>Stadt</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="location in lctrl.locations">
+            <td>{{location.id}}</td>
+            <td>{{location.name}}</td>
+            <td>{{location.street}}</td>
+            <td>{{location.houseNum}}</td>
+            <td>{{location.postCode}}</td>
+            <td>{{location.city}}</td>
+            <td><a href="#/locations/detail" class="btn btn-default btn-sm"
+                   ng-click="lctrl.getSingleLocation(location.id)">Details</a></td>
+        </tr>
+    </table>
+<!--</div>-->

@@ -1,24 +1,31 @@
-<table class="table">
-    <tr>
-        <th>ID</th>
-        <th>Nachname</th>
-        <th>Vorname</th>
-        <th>Geburtsdatum</th>
-        <th>Job</th>
-        <th>Ausbildungsanfang</th>
-        <th></th>
-    </tr>
-    <tr ng-repeat="trainee in ctrl.trainees">
-        <td>{{trainee.id}}</td>
-        <td>{{trainee.lastName}}</td>
-        <td>{{trainee.forename}}</td>
-        <td>{{trainee.birthday | date:'dd.MM.yyyy'}}</td>
-        <td>{{trainee.jobName}}</td>
-        <td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
-        <td><a href="#/trainees/detail" class="btn btn-default btn-sm"
-               ng-click="ctrl.getSingleTrainee(trainee.id)">Details</a></td>
-    </tr>
-</table>
+<div ng-init="visible=true" ng-controller="TraineeCtrl as ctrl">
+    <input type="text" placeholder="Filter" ng-model="search">
+    <a href="#/trainees/form" class="btn btn-default btn-sm">Auszubildenden hinzufügen</a>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Nachname</th>
+            <th>Vorname</th>
+            <th>Geburtsdatum</th>
+            <th>Job</th>
+            <th>Ausbildungsanfang</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="trainee in ctrl.trainees | filter:search">
+            <td>{{trainee.id}}</td>
+            <td>{{trainee.lastName}}</td>
+            <td>{{trainee.forename}}</td>
+            <td>{{trainee.birthday | date:'dd.MM.yyyy'}}</td>
+            <td>{{trainee.jobName}}</td>
+            <td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
+            <td><a href="" class="btn btn-default btn-sm"
+                   ng-click="ctrl.getSingleTrainee(trainee.id);">Details</a></td>
+        </tr>
+    </table>
+    <div ng-include="'/views/detail/traineeDetail.html'">
+    </div>
+</div>
 
 
 

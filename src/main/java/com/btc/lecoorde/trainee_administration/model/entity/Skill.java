@@ -14,7 +14,7 @@ public class Skill {
 
     @Id
     @SequenceGenerator(name = "skill_seq", sequenceName = "skill_seq")
-    @GeneratedValue(strategy = GenerationType.AUTO ,generator = "skill_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "skill_seq")
     @Column(name = "ID")
     private Long id;
 
@@ -25,10 +25,10 @@ public class Skill {
     private String description;
 
     @JsonManagedReference
-    @ManyToMany(mappedBy="skillList")
+    @ManyToMany(mappedBy = "skillList")
     private Set<Trainee> trainees;
 
-    public Skill(){
+    public Skill() {
 
     }
 
@@ -36,13 +36,6 @@ public class Skill {
         this.name = name;
         this.description = description;
     }
-
-//    public Skill(Long id, String name, String description) {
-//        this.id = id;
-//        this.name = name;
-//        this.description = description;
-//    }
-
 
     public Long getId() {
         return id;
@@ -71,17 +64,14 @@ public class Skill {
     public Set<Trainee> getTrainees() {
         return trainees;
     }
-    public void setTrainees(Set<Trainee> skilledTrainees) {
-        this.trainees = skilledTrainees;
-    }
 
-    public void addSkilledTrainee(Trainee t) {
-        this.trainees.add(t);
+    public void setTrainees(Set<Trainee> trainees) {
+        this.trainees = trainees;
     }
 
     @Override
     public String toString() {
-        return id+". "+name+": "+description;
+        return id + ". " + name + ": " + description;
     }
 }
 

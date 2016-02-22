@@ -1,7 +1,9 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
+import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDetailDTO;
 import com.btc.lecoorde.trainee_administration.service.TraineeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +36,18 @@ public class TraineeController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Trainee getSingleTrainee(@PathVariable("id") Long id) {
+    public TraineeDetailDTO getSingleTrainee(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Auszubildender mit der ID: " + id);
 
         return traineeService.getTraineeById(id);
+    }
+
+    @RequestMapping(value = "/skill_list/{id}", method = RequestMethod.GET)
+    public List<SkillDTO> getSkillListById(@PathVariable("id") Long id) {
+
+        logger.info("Anfrage: Liste von Skills für Auszubildenden mit ID: " + id);
+
+        return traineeService.getSkillListByTraineeId(id);
     }
 }
