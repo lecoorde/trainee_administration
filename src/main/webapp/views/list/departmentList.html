@@ -1,17 +1,17 @@
 <!--<div ng-controller="DepartmentCtrl">-->
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Beschreibung</th>
-            <th></th>
-        </tr>
-        <tr ng-repeat="department in dctrl.departments">
-            <td>{{department.id}}</td>
-            <td>{{department.name}}</td>
-            <td>{{department.description}}</td>
-            <td><a href="#/departments/detail" class="btn btn-default btn-sm"
-                   ng-click="dctrl.getSingleDepartment(department.id)">Details</a></td>
-        </tr>
-    </table>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Beschreibung</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="department in dctrl.departments">
+        <td>{{department.id}}</td>
+        <td>{{department.name}}</td>
+        <td>{{department.description}}</td>
+        <td><a href="#/departments/detail" class="btn btn-default btn-sm"
+               ng-click="dctrl.getSingleDepartment(department.id)">Details</a></td>
+    </tr>
+</table>
 <!--</div>-->

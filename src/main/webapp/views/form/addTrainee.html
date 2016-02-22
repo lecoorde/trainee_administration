@@ -9,20 +9,20 @@
 <h2>Auszubildenden hinzufügen</h2>
 <div ng-controller="TraineeCtrl as ctrl">
 
-    <form name="traineeForm" novalidate>
+    <form name="traineeForm" ng-submit="ctrl.submit()" novalidate>
         <table>
             <tr>
                 <td>Vorname:</td>
-                <td><input name="firstname" type="text" ng-model="firstName" required>
-                     <span style="color:red" ng-show="traineeForm.firstname.$dirty && traineeForm.firstname.$invalid">
-                        <span ng-show="traineeForm.firstname.$error.required">Bitte geben Sie einen Vornamen ein</span>
+                <td><input name="firstname" type="text" ng-model="ctrl.trainee.forename" required>
+                     <span style="color:red" ng-show="ctrl.trainee.forename.$dirty && ctrl.trainee.forename.$invalid">
+                        <span ng-show="ctrl.trainee.forename.$error.required">Bitte geben Sie einen Vornamen ein</span>
                      </span>
                 </td>
             </tr>
 
             <tr>
                 <td>Nachname:</td>
-                <td><input name="lastname" type="text" ng-model="lastName" required>
+                <td><input name="lastname" type="text" ng-model="ctrl.trainee.lastName" required>
                      <span style="color:red" ng-show="traineeForm.lastname.$dirty && traineeForm.lastname.$invalid">
                         <span ng-show="traineeForm.lastname.$error.required">Bitte geben Sie einen Nachnamen ein</span>
                      </span>
@@ -31,7 +31,7 @@
 
             <tr>
                 <td>Geburtsdatum</td>
-                <td><input name="birthday" type="date" ng-model="birthday" required>
+                <td><input name="birthday" type="date" ng-model="ctrl.trainee.birthday" required>
                      <span style="color:red" ng-show="traineeForm.birthday.$dirty && traineeForm.birthday.$invalid">
                         <span ng-show="traineeForm.birthday.$error.required">Bitte geben Sie ein Geburtsdatum ein</span>
                      </span>
@@ -40,7 +40,7 @@
 
             <tr>
                 <td>Ausbildungsanfang</td>
-                <td><input name="start_of_training" type="date" ng-model="start_of_training" required>
+                <td><input name="start_of_training" type="date" ng-model="ctrl.trainee.start_of_training" required>
                      <span style="color:red"
                            ng-show="traineeForm.start_of_training.$dirty && traineeForm.start_of_training.$invalid">
                         <span ng-show="traineeForm.start_of_training.$error.required">Bitte geben Sie das Datum des Ausbildungsanfangs ein</span>
@@ -50,27 +50,30 @@
 
             <tr>
                 <td>Job</td>
-                <td><select name="job" ng-model="job" required size="1">
-                    <option>Dualer Student Anwendungsentwicklung</option>
-                    <option>Dualer Student BWL</option>
-                    <option>Dualer Student Systemintegration</option>
-                    <option>Fachoinformatiker Anwendungsentwicklung</option>
-                    <option>Fachinformatiker Systemintegration</option>
-                    <option>IT-Systemkaufmann</option>
+                <td><select name="jobName" ng-model="ctrl.trainee.jobOrdinal" required size="1">
+                    <option value="0">Dualer Student - Anwendungsentwicklung</option>
+                    <option value="1">Dualer Student - BWL</option>
+                    <option value="2">Dualer Student - Systemintegration</option>
+                    <option value="3">Fachinformatiker - Anwendungsentwicklung</option>
+                    <option value="4">Fachinformatiker Systemintegration</option>
+                    <option value="5">IT-Systemkaufmann</option>
                 </select>
-                     <span style="color:red" ng-show="traineeForm.job.$dirty && traineeForm.job.$invalid">
-                        <span ng-show="traineeForm.job.$error.required">Bitte wählen Sie eine Option aus</span>
+                     <span style="color:red" ng-show="traineeForm.jobName.$dirty && traineeForm.jobName.$invalid">
+                        <span ng-show="traineeForm.jobName.$error.required">Bitte wählen Sie eine Option aus</span>
                      </span>
                 </td>
             </tr>
 
             <tr ng-controller="DepartmentCtrl as dctrl">
                 <td>Abteilung</td>
-                <td><select name="selectedDepartmentId" ng-model="selectedDepartmentId" ng-init="selectedDepartmentId=departments[1]">
-                    <option ng:repeat="department in dctrl.departments" value="{{department.id}}">{{department.name}}</option>
+                <td><select name="selectedDepartmentId" ng-model="ctrl.trainee.departmentId"
+                            ng-init="selectedDepartmentId=departments[1]">
+                    <option ng:repeat="department in dctrl.departments" value="{{department.id}}">{{department.name}}
+                    </option>
                 </select>
                     </input>
-                     <span style="color:red" ng-show="traineeForm.selectedDepartmentId.$dirty && traineeForm.selectedDepartmentId.$invalid">
+                     <span style="color:red"
+                           ng-show="traineeForm.selectedDepartmentId.$dirty && traineeForm.selectedDepartmentId.$invalid">
                         <span ng-show="traineeForm.selectedDepartmentId.$error.required">Bitte wählen Sie eine Abteilung aus</span>
                      </span>
                 </td>
@@ -78,10 +81,12 @@
 
             <tr ng-controller="LocationCtrl as lctrl">
                 <td>Standort</td>
-                <td><select name="selectedLocationId" ng-model="selectedLocationId" ng-init="selectedLocationId=locations[1]">
+                <td><select name="selectedLocationId" ng-model="ctrl.trainee.locationId"
+                            ng-init="selectedLocationId=locations[1]">
                     <option ng:repeat="location in lctrl.locations" value="{{location.id}}">{{location.name}}</option>
                 </select>
-                     <span style="color:red" ng-show="traineeForm.selectedLocationId.$dirty && traineeForm.selectedLocationId.$invalid">
+                     <span style="color:red"
+                           ng-show="traineeForm.selectedLocationId.$dirty && traineeForm.selectedLocationId.$invalid">
                         <span ng-show="traineeForm.selectedLocationId.$error.required">Bitte wählen Sie einen Standort aus</span>
                      </span>
                 </td>
@@ -92,15 +97,15 @@
                     <button ng-click="reset()">Zurücksetzen</button>
                 </td>
                 <td>
-                    <button ng-disabled="traineeForm.firstname.$dirty &&
-                        traineeForm.firstname.$invalid || traineeForm.lastname.$dirty &&
+                    <input type="submit" ng-disabled="(traineeForm.firstname.$dirty &&
+                        traineeForm.firstname.$invalid) || traineeForm.lastname.$dirty &&
                         traineeForm.lastname.$invalid || traineeForm.birthday.$dirty &&
                         traineeForm.birthday.$invalid || traineeForm.start_of_training.$dirty &&
-                        traineeForm.start_of_training.$invalid || traineeForm.job.$dirty &&
-                        traineeForm.job.$invalid || traineeForm.selectedDepartmentId.$dirty &&
+                        traineeForm.start_of_training.$invalid || traineeForm.jobName.$dirty &&
+                        traineeForm.jobName.$invalid || traineeForm.selectedDepartmentId.$dirty &&
                         traineeForm.selectedDepartmentId.$invalid || traineeForm.selectedLocationId.$dirty &&
-                        traineeForm.selectedLocationId.$invalid" ng-click="submit()">Speichern
-                    </button>
+                        traineeForm.selectedLocationId.$invalid">
+                    </input>
                 </td>
             </tr>
 

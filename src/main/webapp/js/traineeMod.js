@@ -12,7 +12,7 @@ angular.module('traineeMod', [])
 
             },
             getSkills: function (id) {
-                return $http.get('http://localhost:7070/trainees/skill_list/'+id).then(function (response) {
+                return $http.get('http://localhost:7070/trainees/skill_list/' + id).then(function (response) {
                     return response.data;
                 }, function (errResponse) {
                     console.error('Error while fetching skills');
@@ -27,6 +27,18 @@ angular.module('traineeMod', [])
                     console.error('Error while fetching trainees');
                     return $q.reject(errResponse);
                 });
+            },
+            createTrainee: function (trainee) {
+                return $http.post('http://localhost:7070/trainees/createTrainee/', trainee)
+                    .then(
+                        function (response) {
+                            return response.data;
+                        },
+                        function (errResponse) {
+                            console.error('Error while creating user');
+                            return $q.reject(errResponse);
+                        }
+                    );
             }
         }
     }])
@@ -34,7 +46,7 @@ angular.module('traineeMod', [])
     .controller('TraineeCtrl', ['$scope', 'TraineeService', function ($scope, TraineeService) {
         var self = this;
         self.trainees = [];
-        self.traineeskills=[];
+        self.traineeskills = [];
         self.trainee = {
             id: null,
             forename: '',
@@ -56,6 +68,18 @@ angular.module('traineeMod', [])
                 }
             );
         };
+        self.createTrainee = function (trainee) {
+            TraineeService.createTrainee(trainee)
+                .then(
+                    self.fetchAllTrainees(),
+                    function (errResponse) {
+                        console.error('Error while creating User.');
+                    }
+                );
+        };
+        self.submit = function () {
+            self.createTrainee(self.trainee)
+        }
         self.fetchAllTrainees = function () {
             TraineeService.getTrainees().then(
                 function (d) {
@@ -75,15 +99,15 @@ angular.module('traineeMod', [])
                 }
             )
         };
-        $scope.reset = function () {
-            $scope.firstName = "TestVorname";
-            $scope.lastName = "TestNachname";
-            $scope.birthday = new Date(1996,10,30);
-            $scope.start_of_training = new Date(2015,9,1);
-            $scope.job = "Dualer Student Anwendungsentwicklung"
+        self.reset = function () {
+            self.trainee.forename = "TestVorname";
+            self.trainee.lastName = "TestNachname";
+            self.trainee.birthday = new Date(1996, 10, 30);
+            self.trainee.start_of_training = new Date(2015, 9, 1);
+            self.trainee.jobName = "Dualer Student - Anwendungsentwicklung"
         };
 
-        $scope.reset();
+        self.reset();
         self.fetchAllTrainees();
         self.getSkillsByTraineeId();
     }]);

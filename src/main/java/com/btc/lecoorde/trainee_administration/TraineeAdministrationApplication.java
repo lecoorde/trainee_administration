@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ImportResource;
 @ComponentScan({"com.btc.lecoorde.trainee_administration"})
 public class TraineeAdministrationApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TraineeAdministrationApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TraineeAdministrationApplication.class, args);
+    }
 }

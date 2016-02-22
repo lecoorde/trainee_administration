@@ -27,7 +27,7 @@ public class Trainee implements Comparable<Trainee> {
     private String forename;
 
     @Column(name = "JOB")
-    private String jobName;
+    private JobType job;
 
     @Column(name = "BIRTHDAY")
     private Date birthday;
@@ -57,13 +57,13 @@ public class Trainee implements Comparable<Trainee> {
 
     }
 
-    public Trainee(String lastName, String forename, Date birthday, JobType jobName, Date start_of_training, Department department, Location location, HashSet<Skill> skillList) {
+    public Trainee(String lastName, String forename, Date birthday, JobType job, Date start_of_training, Department department, Location location, HashSet<Skill> skillList) {
 
         Date time = new Date();
 
         this.lastName = lastName;
         this.forename = forename;
-        this.jobName = jobName.name();
+        this.job = job;
         this.birthday = birthday;
         this.start_of_training = start_of_training;
         this.department = department;
@@ -94,22 +94,22 @@ public class Trainee implements Comparable<Trainee> {
         this.start_of_training = start_of_training;
     }
 
-    public String getJobName() {
-        return this.jobName;
+    public JobType getJob() {
+        return this.job;
     }
 
-    public void setJobName(JobType jobType) {
-        this.jobName = jobType.name();
+    public void setJob(JobType jobType) {
+        this.job = jobType;
     }
 
 
     //ENUMS
     //    public JobType getJobName(){
-//        return JobType.valueOf(this.jobName.toUpperCase());
+//        return JobType.valueOf(this.job.toUpperCase());
 //    }
 //
-//    public void setJobName(JobType jobName) {
-//        this.jobName = jobName.name();
+//    public void setJobName(JobType job) {
+//        this.job = job.name();
 //    }
 
 
@@ -196,6 +196,6 @@ public class Trainee implements Comparable<Trainee> {
     public String toString() {
         SimpleDateFormat shorter = new SimpleDateFormat("dd.MM.yyyy");
         return "---- ID: " + this.id + " ---- " +
-                "\n" + this.forename + " " + this.lastName + ", geboren am " + shorter.format(this.birthday) + " --- " + this.jobName;
+                "\n" + this.forename + " " + this.lastName + ", geboren am " + shorter.format(this.birthday) + " --- " + this.job;
     }
 }
