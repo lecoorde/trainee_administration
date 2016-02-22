@@ -29,6 +29,9 @@ public class TraineeDTO {
         this.start_of_training = start_of_training;
     }
 
+    public TraineeDTO() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -77,4 +80,15 @@ public class TraineeDTO {
         this.start_of_training = start_of_training;
     }
 
+    @Override
+    public String toString() {
+        return "TraineeDTO{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", forename='" + forename + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", birthday=" + birthday +
+                ", start_of_training=" + start_of_training +
+                '}';
+    }
 }

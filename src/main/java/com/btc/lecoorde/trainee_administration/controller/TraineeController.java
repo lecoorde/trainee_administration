@@ -2,16 +2,14 @@ package com.btc.lecoorde.trainee_administration.controller;
 
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDetailDTO;
 import com.btc.lecoorde.trainee_administration.service.TraineeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,5 +47,10 @@ public class TraineeController {
         logger.info("Anfrage: Liste von Skills für Auszubildenden mit ID: " + id);
 
         return traineeService.getSkillListByTraineeId(id);
+    }
+
+    @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
+    public void createUser(@RequestBody CreateTraineeDto input) {
+        traineeService.createTrainee(input);
     }
 }

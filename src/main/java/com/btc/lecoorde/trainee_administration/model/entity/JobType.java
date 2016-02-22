@@ -6,48 +6,48 @@ package com.btc.lecoorde.trainee_administration.model.entity;
 
 public enum JobType {
 
-    DUALER_STUDENT_ANWENDUNGSENTWICKLUNG(0),
-    DUALER_STUDENT_BWL(1),
-    DUALER_STUDENT_SYSTEMINTEGRATION(2),
-    FACHINFORMATIKER_ANWENDUNGSENTWICKLUNG(3),
-    FACHINFORMATIKER_SYSTEMINTEGRATION(4),
-    IT_SYSTEMKAUFMANN(5);
+    DUALER_STUDENT_ANWENDUNGSENTWICKLUNG("Dualer Student - Anwendungsentwicklung"),
+    DUALER_STUDENT_BWL("Dualer Student - BWL"),
+    DUALER_STUDENT_SYSTEMINTEGRATION("Dualer Student - Systemintegration"),
+    FACHINFORMATIKER_ANWENDUNGSENTWICKLUNG("Fachinformatiker - Anwendungsentwicklung"),
+    FACHINFORMATIKER_SYSTEMINTEGRATION("Fachinformatiker - Systemintegration"),
+    IT_SYSTEMKAUFMANN("IT-Systemkaufmann");
 
-    private final int ordinal;
+    private final String jobName;
 
-    JobType(int ordinal) {
-        this.ordinal = ordinal;
+    JobType(String jobName) {
+        this.jobName = jobName;
     }
 
-    public int getOrdinal() {
-        return this.ordinal;
+    public String getJobName() {
+        return this.jobName;
     }
 
-    public int compareToJob(JobType jobtype) {
-        if (this.ordinal > jobtype.getOrdinal()) {
-            return 1;
-        } else if (this.ordinal == jobtype.getOrdinal()) {
-            return 0;
-        } else return -1;
-    }
+//    public int compareToJob(JobType jobtype) {
+//        if (this.ordinal > jobtype.getJobName()) {
+//            return 1;
+//        } else if (this.ordinal == jobtype.getJobName()) {
+//            return 0;
+//        } else return -1;
+//    }
 
-    public static String getJobName(JobType jobType) {
-        switch (jobType) {
-            case DUALER_STUDENT_ANWENDUNGSENTWICKLUNG:
-                return "Dualer_Student_Anwendungsentwicklung";
-            case DUALER_STUDENT_BWL:
-                return "Dualer_Student_BWL";
-            case DUALER_STUDENT_SYSTEMINTEGRATION:
-                return "Dualer_Student_Systemintegration";
-            case FACHINFORMATIKER_ANWENDUNGSENTWICKLUNG:
-                return "Fachinformatiker_Anwendungsentwicklung";
-            case FACHINFORMATIKER_SYSTEMINTEGRATION:
-                return "Fachinformatiker_Systemintegration";
-            case IT_SYSTEMKAUFMANN:
-                return "IT-Systemkaufmann";
-        }
-        return null;
-    }
+//    public static String getJobName(JobType jobType) {
+//        switch (jobType) {
+//            case DUALER_STUDENT_ANWENDUNGSENTWICKLUNG:
+//                return "Dualer_Student_Anwendungsentwicklung";
+//            case DUALER_STUDENT_BWL:
+//                return "Dualer_Student_BWL";
+//            case DUALER_STUDENT_SYSTEMINTEGRATION:
+//                return "Dualer_Student_Systemintegration";
+//            case FACHINFORMATIKER_ANWENDUNGSENTWICKLUNG:
+//                return "Fachinformatiker_Anwendungsentwicklung";
+//            case FACHINFORMATIKER_SYSTEMINTEGRATION:
+//                return "Fachinformatiker_Systemintegration";
+//            case IT_SYSTEMKAUFMANN:
+//                return "IT-Systemkaufmann";
+//        }
+//        return null;
+//    }
 }
 
 

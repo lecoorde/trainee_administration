@@ -1,18 +1,19 @@
 package com.btc.lecoorde.trainee_administration.service;
 
-import com.btc.lecoorde.trainee_administration.model.entity.Skill;
-import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
+import com.btc.lecoorde.trainee_administration.model.entity.*;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDetailDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.LinkedList;
-import java.util.List;
+import javax.transaction.Transactional;
+import java.util.*;
 
 /**
  * Created by Denis Simon on 16.02.2016.
@@ -23,6 +24,11 @@ public class TraineeService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    LocationService locationService;
+    @Autowired
+    DepartmentService departmentService;
 
     public List<TraineeDTO> getAllTrainees() {
 
@@ -36,7 +42,7 @@ public class TraineeService {
             traineeDTOList.add(new TraineeDTO(t.getId(),
                     t.getLastName(),
                     t.getForename(),
-                    t.getJobName(),
+                    t.getJob().getJobName(),
                     t.getBirthday(),
                     t.getStart_of_training()));
         }
@@ -56,7 +62,7 @@ public class TraineeService {
         traineeDetailDTO = new TraineeDetailDTO(trainee.getId(),
                 trainee.getLastName(),
                 trainee.getForename(),
-                trainee.getJobName(),
+                trainee.getJob().getJobName(),
                 trainee.getBirthday(),
                 trainee.getStart_of_training(),
                 trainee.getDepartment().getName(),
@@ -82,5 +88,19 @@ public class TraineeService {
             skillDTOList.add(new SkillDTO(s.getId(), s.getName(), s.getDescription()));
         }
         return skillDTOList;
+    }
+
+    @Transactional
+    public void createTrainee(CreateTraineeDto createTraineeDto) {
+        Trainee trainee = new Trainee();
+        trainee.setLastName(createTraineeDto.getLastName());
+        trainee.setForename(createTraineeDto.getForename());
+        trainee.setJob(JobType.values()[createTraineeDto.getJobOrdinal()]);
+        trainee.setBirthday(createTraineeDto.getBirthday());
+        trainee.setStart_of_training(createTraineeDto.getStart_of_training());
+        trainee.setDepartment(departmentService.getDepartmentById(createTraineeDto.getDepartmentId()));
+        trainee.setLocation(locationService.getLocationById(createTraineeDto.getLocationId()));
+        trainee.setSkillList(new HashSet<>());
+        entityManager.persist(trainee);
     }
 }
