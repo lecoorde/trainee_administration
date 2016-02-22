@@ -55,6 +55,10 @@ public class Location {
 
     }
 
+    @Override
+    public String toString() {
+        return this.street + " " + this.houseNum + ", " + this.city;
+    }
 
     public long getId() {
         return id;
@@ -64,7 +68,6 @@ public class Location {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
@@ -73,16 +76,13 @@ public class Location {
         this.name = name;
     }
 
-
     public String getStreet() {
         return street;
     }
 
-
     public void setStreet(String street) {
         this.street = street;
     }
-
 
     public int getHouseNum() {
         return houseNum;
@@ -114,11 +114,6 @@ public class Location {
 
     public void setTrainees(Set<Trainee> trainees) {
         this.trainees = trainees;
-    }
-
-    @Override
-    public String toString() {
-        return this.street + " " + this.houseNum + ", " + this.city;
     }
 
 }

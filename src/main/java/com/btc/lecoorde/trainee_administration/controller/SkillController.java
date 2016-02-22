@@ -25,20 +25,20 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<SkillDTO> getSkillList() {
-
-        logger.info("Anfrage: Liste von Skills");
-
-        return skillService.getAllSkills();
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Skill getSkill(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Skill mit der ID: " + id);
 
         return skillService.getSkillById(id);
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<SkillDTO> getSkillList() {
+
+        logger.info("Anfrage: Liste von Skills");
+
+        return skillService.getAllSkills();
     }
 }
 

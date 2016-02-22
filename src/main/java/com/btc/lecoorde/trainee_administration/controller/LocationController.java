@@ -25,21 +25,20 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<LocationDTO> getLocationList() {
-
-        logger.info("Anfrage: Liste von Standorten");
-
-        return locationService.getAllLocations();
-    }
-
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Location getLocation(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Standort mit der ID: " + id);
 
         return locationService.getLocationById(id);
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<LocationDTO> getLocationList() {
+
+        logger.info("Anfrage: Liste von Standorten");
+
+        return locationService.getAllLocations();
     }
 
 }

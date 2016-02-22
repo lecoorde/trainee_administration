@@ -21,6 +21,15 @@ public class SkillService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public Skill getSkillById(Long id) {
+
+        logger.info("Service lädt den Skill");
+
+        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s " +
+                "where s.id = " + id, Skill.class); //TODO Detailansicht
+        return query.getSingleResult();
+    }
+
     public List<SkillDTO> getAllSkills() {
 
         logger.info("Service lädt die Liste von Skills");
@@ -36,14 +45,5 @@ public class SkillService {
                     s.getDescription()));
         }
         return skillDTOList;
-    }
-
-    public Skill getSkillById(Long id) {
-
-        logger.info("Service lädt den Skill");
-
-        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s " +
-                "where s.id = " + id, Skill.class); //TODO Detailansicht
-        return query.getSingleResult();
     }
 }

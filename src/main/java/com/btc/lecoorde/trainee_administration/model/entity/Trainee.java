@@ -85,6 +85,41 @@ public class Trainee implements Comparable<Trainee> {
         }
     }
 
+    public void addSkill(Skill skill) {
+        this.skillList.add(skill);
+
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if ((object == null) || (object.getClass() != this.getClass())) {
+            return false;
+        }
+        Trainee trainee = (Trainee) object;
+        return this.id.equals(trainee.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getId().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat shorter = new SimpleDateFormat("dd.MM.yyyy");
+        return "---- ID: " + this.id + " ---- " +
+                "\n" + this.forename + " " + this.lastName + ", geboren am " + shorter.format(this.birthday) + " --- " + this.job;
+    }
+
+
+    //ENUMS
+    //    public JobType getJobName(){
+//        return JobType.valueOf(this.job.toUpperCase());
+//    }
+//
+//    public void setJobName(JobType job) {
+//        this.job = job.name();
+//    }
 
     public Date getStart_of_training() {
         return this.start_of_training;
@@ -101,17 +136,6 @@ public class Trainee implements Comparable<Trainee> {
     public void setJob(JobType jobType) {
         this.job = jobType;
     }
-
-
-    //ENUMS
-    //    public JobType getJobName(){
-//        return JobType.valueOf(this.job.toUpperCase());
-//    }
-//
-//    public void setJobName(JobType job) {
-//        this.job = job.name();
-//    }
-
 
     public String getLastName() {
         return this.lastName;
@@ -137,7 +161,6 @@ public class Trainee implements Comparable<Trainee> {
         this.birthday = birthday;
     }
 
-
     public Department getDepartment() {
         return department;
     }
@@ -145,7 +168,6 @@ public class Trainee implements Comparable<Trainee> {
     public void setDepartment(Department department) {
         this.department = department;
     }
-
 
     public Location getLocation() {
         return location;
@@ -155,7 +177,6 @@ public class Trainee implements Comparable<Trainee> {
         this.location = location;
     }
 
-
     public Set<Skill> getSkillList() {
         return skillList;
     }
@@ -164,38 +185,11 @@ public class Trainee implements Comparable<Trainee> {
         this.skillList = skillList;
     }
 
-
-    public void addSkill(Skill skill) {
-        this.skillList.add(skill);
-
-    }
-
     public Long getId() {
         return this.id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if ((object == null) || (object.getClass() != this.getClass())) {
-            return false;
-        }
-        Trainee trainee = (Trainee) object;
-        return this.id.equals(trainee.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return this.getId().hashCode();
-    }
-
-    @Override
-    public String toString() {
-        SimpleDateFormat shorter = new SimpleDateFormat("dd.MM.yyyy");
-        return "---- ID: " + this.id + " ---- " +
-                "\n" + this.forename + " " + this.lastName + ", geboren am " + shorter.format(this.birthday) + " --- " + this.job;
     }
 }

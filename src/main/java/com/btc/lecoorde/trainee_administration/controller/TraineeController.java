@@ -1,6 +1,5 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
@@ -25,14 +24,6 @@ public class TraineeController {
     @Autowired
     private TraineeService traineeService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeList() {
-
-        logger.info("Anfrage: Liste von Auszubildenden");
-
-        return traineeService.getAllTrainees();
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public TraineeDetailDTO getSingleTrainee(@PathVariable("id") Long id) {
 
@@ -51,6 +42,16 @@ public class TraineeController {
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
     public void createUser(@RequestBody CreateTraineeDto input) {
+        logger.info("Anfrage: Trainee Speichern.");
         traineeService.createTrainee(input);
+        logger.info("Trainee gespeichert: " + input);
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<TraineeDTO> getTraineeList() {
+
+        logger.info("Anfrage: Liste von Auszubildenden");
+
+        return traineeService.getAllTrainees();
     }
 }

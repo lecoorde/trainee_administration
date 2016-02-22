@@ -21,6 +21,15 @@ public class LocationService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public Location getLocationById(Long id) {
+
+        logger.info("Service lädt den Standort");
+
+        TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
+                "where l.id = " + id, Location.class); //TODO Detailansicht
+        return query.getSingleResult();
+    }
+
     public List<LocationDTO> getAllLocations() {
 
         logger.info("Service lädt die Liste von Standorten");
@@ -39,14 +48,5 @@ public class LocationService {
                     l.getCity()));
         }
         return locationDTOList;
-    }
-
-    public Location getLocationById(Long id) {
-
-        logger.info("Service lädt den Standort");
-
-        TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
-                "where l.id = " + id, Location.class); //TODO Detailansicht
-        return query.getSingleResult();
     }
 }

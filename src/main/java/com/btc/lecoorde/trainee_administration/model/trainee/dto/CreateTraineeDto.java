@@ -1,18 +1,39 @@
 package com.btc.lecoorde.trainee_administration.model.trainee.dto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by LECOORDE on 22.02.2016.
  */
 public class CreateTraineeDto extends TraineeDTO {
+    private List<Long> skillIds;
+    private int jobOrdinal;
+    private long locationId;
+    private long departmentId;
+
     public CreateTraineeDto(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training) {
         super(id, lastName, forename, jobName, birthday, start_of_training);
     }
 
     public CreateTraineeDto() {
     }
-private int jobOrdinal;
+
+    @Override
+    public String toString() {
+        return "CreateTraineeDto{" +
+                "locationId=" + locationId +
+                ", departmentId=" + departmentId +
+                "} " + super.toString();
+    }
+
+    public List<Long> getSkillIds() {
+        return skillIds;
+    }
+
+    public void setSkillIds(List<Long> skillIds) {
+        this.skillIds = skillIds;
+    }
 
     public int getJobOrdinal() {
         return jobOrdinal;
@@ -21,9 +42,6 @@ private int jobOrdinal;
     public void setJobOrdinal(int jobOrdinal) {
         this.jobOrdinal = jobOrdinal;
     }
-
-    private long locationId;
-    private long departmentId;
 
     public long getLocationId() {
         return locationId;
@@ -39,13 +57,5 @@ private int jobOrdinal;
 
     public void setDepartmentId(long departmentId) {
         this.departmentId = departmentId;
-    }
-
-    @Override
-    public String toString() {
-        return "CreateTraineeDto{" +
-                "locationId=" + locationId +
-                ", departmentId=" + departmentId +
-                "} " + super.toString();
     }
 }

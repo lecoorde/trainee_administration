@@ -40,6 +40,10 @@ public class Department {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return this.id + ". " + this.name + ": " + this.description;
+    }
 
     public long getId() {
         return id;
@@ -71,11 +75,6 @@ public class Department {
 
     public void setTrainees(Set<Trainee> trainees) {
         this.trainees = trainees;
-    }
-
-    @Override
-    public String toString() {
-        return this.id + ". " + this.name + ": " + this.description;
     }
 
 

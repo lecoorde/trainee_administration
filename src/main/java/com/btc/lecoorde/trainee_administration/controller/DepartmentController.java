@@ -1,7 +1,7 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
+import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import com.btc.lecoorde.trainee_administration.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,20 +25,20 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<DepartmentDTO> getDepartmentList() {
-
-        logger.info("Anfrage: Liste von Abteilungen");
-
-        return departmentService.getAllDepartments();
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Department getSingleDepartment(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Abteilung mit der ID: " + id);
 
         return departmentService.getDepartmentById(id);
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<DepartmentDTO> getDepartmentList() {
+
+        logger.info("Anfrage: Liste von Abteilungen");
+
+        return departmentService.getAllDepartments();
     }
 }
 

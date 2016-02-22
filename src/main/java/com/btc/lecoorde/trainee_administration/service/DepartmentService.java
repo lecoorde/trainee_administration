@@ -1,7 +1,7 @@
 package com.btc.lecoorde.trainee_administration.service;
 
-import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
+import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +21,15 @@ public class DepartmentService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public Department getDepartmentById(Long id) {
+
+        logger.info("Service lädt die Abteilung");
+
+        TypedQuery<Department> query = this.entityManager.createQuery("select d from Department d " +
+                "where d.id = " + id, Department.class); //TODO Detailansicht
+        return query.getSingleResult();
+    }
+
     public List<DepartmentDTO> getAllDepartments() {
 
         logger.info("Service lädt die Liste von Abteilungen");
@@ -36,14 +45,5 @@ public class DepartmentService {
                     d.getDescription()));
         }
         return departmentDTOList;
-    }
-
-    public Department getDepartmentById(Long id) {
-
-        logger.info("Service lädt die Abteilung");
-
-        TypedQuery<Department> query = this.entityManager.createQuery("select d from Department d " +
-                "where d.id = " + id, Department.class); //TODO Detailansicht
-        return query.getSingleResult();
     }
 }

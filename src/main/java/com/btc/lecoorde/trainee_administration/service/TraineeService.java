@@ -1,6 +1,8 @@
 package com.btc.lecoorde.trainee_administration.service;
 
-import com.btc.lecoorde.trainee_administration.model.entity.*;
+import com.btc.lecoorde.trainee_administration.model.entity.JobType;
+import com.btc.lecoorde.trainee_administration.model.entity.Skill;
+import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
@@ -13,7 +15,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Denis Simon on 16.02.2016.
@@ -29,25 +34,8 @@ public class TraineeService {
     LocationService locationService;
     @Autowired
     DepartmentService departmentService;
-
-    public List<TraineeDTO> getAllTrainees() {
-
-        logger.info("Service lädt die Liste von Auzubildenden");
-
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
-                "order by t.id", Trainee.class);
-        List<Trainee> traineeList = query.getResultList();
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
-        for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(),
-                    t.getLastName(),
-                    t.getForename(),
-                    t.getJob().getJobName(),
-                    t.getBirthday(),
-                    t.getStart_of_training()));
-        }
-        return traineeDTOList;
-    }
+    @Autowired
+    SkillService skillService;
 
     public TraineeDetailDTO getTraineeById(Long id) {
 
@@ -100,7 +88,33 @@ public class TraineeService {
         trainee.setStart_of_training(createTraineeDto.getStart_of_training());
         trainee.setDepartment(departmentService.getDepartmentById(createTraineeDto.getDepartmentId()));
         trainee.setLocation(locationService.getLocationById(createTraineeDto.getLocationId()));
-        trainee.setSkillList(new HashSet<>());
+        Set<Skill> skillSet = new HashSet<>();
+        for (Long aLong : createTraineeDto.getSkillIds()) {
+            skillSet.add(skillService.getSkillById(aLong));
+        }
+        trainee.setSkillList(skillSet);
         entityManager.persist(trainee);
+        for (Skill skill : skillSet) {
+            skill.getTrainees().add(trainee);
+        }
+    }
+
+    public List<TraineeDTO> getAllTrainees() {
+
+        logger.info("Service lädt die Liste von Auzubildenden");
+
+        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
+                "order by t.id", Trainee.class);
+        List<Trainee> traineeList = query.getResultList();
+        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+        for (Trainee t : traineeList) {
+            traineeDTOList.add(new TraineeDTO(t.getId(),
+                    t.getLastName(),
+                    t.getForename(),
+                    t.getJob().getJobName(),
+                    t.getBirthday(),
+                    t.getStart_of_training()));
+        }
+        return traineeDTOList;
     }
 }
