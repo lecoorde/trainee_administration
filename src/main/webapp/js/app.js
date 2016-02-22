@@ -4,7 +4,6 @@ angular.module('mainApp', ['ngRoute', 'traineeMod', 'locationMod', 'departmentMo
         $routeProvider
 
             .when('/trainees', {templateUrl: '../views/list/traineeList.html'})
-            .when('/trainees/detail', {templateUrl: '../views/detail/traineeDetail.html'})
             .when('/trainees/form', {templateUrl: '../views/form/addTrainee.html'})
 
             .when('/locations', {templateUrl: '../views/list/locationList.html'})

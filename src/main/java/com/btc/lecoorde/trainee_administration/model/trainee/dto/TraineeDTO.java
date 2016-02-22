@@ -19,17 +19,39 @@ public class TraineeDTO {
 
     private Date start_of_training;
 
+    private String departmentName;
 
-    public TraineeDTO(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training) {
+    private String locationName;
+
+
+    public TraineeDTO(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training, String departmentName, String locationName) {
         this.id = id;
         this.lastName = lastName;
         this.forename = forename;
         this.jobName = jobName;
         this.birthday = birthday;
         this.start_of_training = start_of_training;
+        this.departmentName = departmentName;
+        this.locationName = locationName;
     }
 
     public TraineeDTO() {
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public Long getId() {

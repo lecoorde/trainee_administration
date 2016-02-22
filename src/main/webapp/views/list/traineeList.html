@@ -24,25 +24,24 @@
             <td>{{trainee.jobName}}</td>
             <td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
         </tr>
-        <tr ng-if="trainee.expanded">
+        <tr ng-if="trainee.expanded" ng-init="tctrl.getSkillsByTraineeId(trainee.id)">
             <td colspan="3" ><span class="table-row-title">Arbeitsplatz</span></td>
             <td colspan="2"><span class="table-row-title2">Standort</span></td>
             <td colspan="3"><span class="table-row-title2">Abteilung</span></td>
         </tr>
-        <tr ng-if="trainee.expanded"
-            ng-init="tctrl.getSkillsByTraineeId(trainee.id);tctrl.getSingleTrainee(trainee.id)">
+        <tr ng-if="trainee.expanded">
             <td colspan="3"></td>
-            <td colspan="2">{{tctrl.trainee.locationName}}</td>
-            <td colspan="3">{{tctrl.trainee.departmentName}}</td>
+            <td colspan="2">{{trainee.locationName}}</td>
+            <td colspan="3">{{trainee.departmentName}}</td>
         </tr>
         <tr ng-if="trainee.expanded">
-            <td colspan="3" ><span class="table-row-title">Skills</span></td>
+            <td colspan="3"><span class="table-row-title">Skills</span></td>
             <td colspan="2"><span class="table-row-title2">Bezeichnung</span></td>
             <td colspan="3"><span class="table-row-title2">Beschreibung</span></td>
         </tr>
         <tr ng-if="trainee.expanded" ng-repeat="skill in tctrl.traineeskills" ng-repeat-end="">
             <td colspan="2"></td>
-            <td align="right">•</td>
+            <td align="right">►</td>
             <td colspan="2">{{skill.name}}</td>
             <td colspan="3">{{skill.description}}</td>
         </tr>

@@ -5,14 +5,85 @@ import java.util.Date;
 /**
  * Created by LECOORDE on 22.02.2016.
  */
-public class CreateTraineeDto extends TraineeDTO {
+public class CreateTraineeDto {
+
+    private Long id;
+
+    private String lastName;
+
+    private String forename;
+
+    private String jobName;
+
+    private Date birthday;
+
+    private Date start_of_training;
+
+    private long locationId;
+
+    private long departmentId;
+
+    private int jobOrdinal;
+
     public CreateTraineeDto(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training) {
-        super(id, lastName, forename, jobName, birthday, start_of_training);
+        this.id = id;
+        this.lastName = lastName;
+        this.forename = forename;
+        this.jobName = jobName;
+        this.birthday = birthday;
+        this.start_of_training = start_of_training;
     }
 
     public CreateTraineeDto() {
     }
-private int jobOrdinal;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getForename() {
+        return forename;
+    }
+
+    public void setForename(String forename) {
+        this.forename = forename;
+    }
+
+    public String getJobName() {
+        return jobName;
+    }
+
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Date getStart_of_training() {
+        return start_of_training;
+    }
+
+    public void setStart_of_training(Date start_of_training) {
+        this.start_of_training = start_of_training;
+    }
 
     public int getJobOrdinal() {
         return jobOrdinal;
@@ -22,8 +93,6 @@ private int jobOrdinal;
         this.jobOrdinal = jobOrdinal;
     }
 
-    private long locationId;
-    private long departmentId;
 
     public long getLocationId() {
         return locationId;
