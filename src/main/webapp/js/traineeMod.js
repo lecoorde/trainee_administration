@@ -85,5 +85,4 @@ angular.module('traineeMod', [])
 
         $scope.reset();
         self.fetchAllTrainees();
-        self.getSkillsByTraineeId();
     }]);

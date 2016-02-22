@@ -1,9 +1,15 @@
-.cart-item.ng-enter {
-    -webkit-transition: 0.5s linear all;
-    transition: 0.5s linear all;
-    background-color: #31ff13;
+.button {
+    background-color: cornflowerblue;
+    border: 2px solid darkblue;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
 }
-
-.cart-item.ng-enter-active {
-    background-color: white;
+.table-row-title{
+    color: darkslategrey;
+    font-size: 17px;
+    font-family: "Arial Black";
 }

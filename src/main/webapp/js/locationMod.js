@@ -25,7 +25,7 @@ angular.module('locationMod', [])
     .controller('LocationCtrl', ['$scope', 'LocationService', function ($scope, LocationService) {
         var self = this;
         self.locations = [];
-        self.location = {id: null, name: '', street: '', houseNum: '', postCode: 1, city: ''};
+        self.location = {id: null, name: '', street: '', houseNum: '', postCode: '', city: ''};
         self.fetchAllLocations = function () {
             LocationService.getLocations().then(
                 function (d) {

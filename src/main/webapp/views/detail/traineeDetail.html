@@ -1,4 +1,4 @@
-<div ng-init="boolean=false">
+<br>
 <h2>Detailansicht: Auszubildender</h2>
 <b></b>
 <table class="table">
@@ -14,23 +14,18 @@
 
     </tr>
     <tr>
-        <td>{{ctrl.trainee.id}}</td>
-        <td>{{ctrl.trainee.lastName}}</td>
-        <td>{{ctrl.trainee.forename}}</td>
-        <td>{{ctrl.trainee.birthday | date:'dd.MM.yyyy'}}</td>
-        <td>{{ctrl.trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
-        <td>{{ctrl.trainee.departmentName}}</td>
-        <td>{{ctrl.trainee.locationName}}</td>
-        <td>{{ctrl.trainee.jobName}}</td>
-
+        <td>{{tctrl.trainee.id}}</td>
+        <td>{{tctrl.trainee.lastName}}</td>
+        <td>{{tctrl.trainee.forename}}</td>
+        <td>{{tctrl.trainee.birthday | date:'dd.MM.yyyy'}}</td>
+        <td>{{tctrl.trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
+        <td>{{tctrl.trainee.departmentName}}</td>
+        <td>{{tctrl.trainee.locationName}}</td>
+        <td>{{tctrl.trainee.jobName}}</td>
     </tr>
 </table>
-
 <br/>
-<input type="checkbox" class="btn btn-default btn-sm"  ng-click="ctrl.getSkillsByTraineeId(ctrl.trainee.id);boolean=true">Skills anzeigen</input>
-<br/>
-
-<div ng-if="boolean=true">
+<div>
     <h4>Skills</h4>
     <table class="table">
         <tr>
@@ -38,11 +33,10 @@
             <th>Bezeichnung</th>
             <th>Beschreibung</th>
         </tr>
-        <tr ng-repeat="skill in ctrl.traineeskills">
+        <tr ng-repeat="skill in tctrl.traineeskills">
             <td>{{skill.id}}</td>
             <td>{{skill.name}}</td>
             <td>{{skill.description}}</td>
         </tr>
     </table>
-</div>
 </div>
