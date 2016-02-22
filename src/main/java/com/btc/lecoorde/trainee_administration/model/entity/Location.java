@@ -18,22 +18,22 @@ public class Location {
     @Id
     @SequenceGenerator(name = "location_seq", sequenceName = "location_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "location_seq")
-    @Column(name="ID")
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "NAME")
     private String name;
 
-    @Column(name="STREET")
+    @Column(name = "STREET")
     private String street;
 
-    @Column(name="HOUSENUM")
+    @Column(name = "HOUSENUM")
     private int houseNum;
 
     @Column(name = "POSTCODE")
     private int postCode;
 
-    @Column(name="CITY")
+    @Column(name = "CITY")
     private String city;
 
     @JsonManagedReference
@@ -41,11 +41,11 @@ public class Location {
     private Set<Trainee> trainees = new HashSet<>();
 
 
-    public Location(){
+    public Location() {
 
     }
 
-    public Location(String name, String street, int houseNum, int postCode, String city){
+    public Location(String name, String street, int houseNum, int postCode, String city) {
 
         this.name = name;
         this.street = street;
@@ -100,11 +100,11 @@ public class Location {
         this.city = city;
     }
 
-    public int getPostCode(){
+    public int getPostCode() {
         return this.postCode;
     }
 
-    public void setPostCode(int postCode){
+    public void setPostCode(int postCode) {
         this.postCode = postCode;
     }
 
@@ -118,7 +118,7 @@ public class Location {
 
     @Override
     public String toString() {
-        return this.street+" "+this.houseNum+", "+this.city;
+        return this.street + " " + this.houseNum + ", " + this.city;
     }
 
 }
