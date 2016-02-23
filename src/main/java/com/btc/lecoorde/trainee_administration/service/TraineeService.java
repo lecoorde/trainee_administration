@@ -122,4 +122,9 @@ public class TraineeService {
         }
         return traineeDTOList;
     }
+
+    @Transactional
+    public void deleteTrainee(Long id) {
+        this.entityManager.remove(this.entityManager.find(Trainee.class, id));
+    }
 }

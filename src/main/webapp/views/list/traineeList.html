@@ -74,15 +74,14 @@
         </tr>
         <tr ng-if="trainee.expanded" ng-repeat="skill in tctrl.traineeskills">
             <td colspan="2"></td>
-            <td align="right">►</td>
+            <td align="right">•</td>
             <td colspan="2">{{skill.name}}</td>
             <td colspan="3">{{skill.description}}</td>
         </tr>
         <tr ng-if="trainee.expanded" ng-repeat-end="">
             <td colspan="3"><a href="#/trainees/update" ng-click="tctrl.updateTraineeById(trainee.id)"
                                class="btn btn-default btn-sm">Auszubildenden bearbeiten</a></td>
-            <td colspan="3"><a href="#/trainees/delete" ng-click="tctrl.deleteTraineeById(trainee.id)"
-                               class="btn btn-default btn-sm">Auszubildenden löschen</a></td>
+            <td colspan="3"><a href="#" ng-click="tctrl.confirmDelete(trainee.id)" class="btn btn-default btn-sm">Auszubildenden löschen</a></td>
         </tr>
     </table>
 </div>

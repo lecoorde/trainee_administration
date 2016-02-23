@@ -50,17 +50,31 @@ public class TraineeController {
     }
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
-    public ResponseEntity<CreateTraineeDto> createUser(@RequestBody CreateTraineeDto input) {
-        logger.info("Anfrage: Trainee Speichern.");
+    public ResponseEntity<CreateTraineeDto> createTrainee(@RequestBody CreateTraineeDto input) {
+        logger.info("Anfrage: Auszubildenden speichern");
         try {
             traineeService.createTrainee(input);
-            logger.info("Trainee gespeichert: " + input);
-            return new ResponseEntity<CreateTraineeDto>(HttpStatus.CREATED);
+            logger.info("Service: Auszubildender gespeichert: " + input);
+            return new ResponseEntity<>(HttpStatus.CREATED);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<CreateTraineeDto>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-
     }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public ResponseEntity deleteTrainee(@PathVariable  Long id) {
+        logger.info("Anfrage: Auszubildenden löschen");
+        try {
+            traineeService.deleteTrainee(id);
+            logger.info("Service: Auszubildender mit ID: "+id+" wurde gelöscht!");
+            return new ResponseEntity(HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+    }
+
 }
