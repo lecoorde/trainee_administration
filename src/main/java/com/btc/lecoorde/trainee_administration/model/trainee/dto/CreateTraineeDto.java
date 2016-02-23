@@ -26,13 +26,16 @@ public class CreateTraineeDto {
 
     private int jobOrdinal;
 
-    public CreateTraineeDto(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training) {
+    private List<Long> skillIds;
+
+    public CreateTraineeDto(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training, List<Long> skillIds) {
         this.id = id;
         this.lastName = lastName;
         this.forename = forename;
         this.jobName = jobName;
         this.birthday = birthday;
         this.start_of_training = start_of_training;
+        this.skillIds = skillIds;
     }
 
     public CreateTraineeDto() {
@@ -122,8 +125,16 @@ public class CreateTraineeDto {
     @Override
     public String toString() {
         return "CreateTraineeDto{" +
-                "locationId=" + locationId +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", forename='" + forename + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", birthday=" + birthday +
+                ", start_of_training=" + start_of_training +
+                ", locationId=" + locationId +
                 ", departmentId=" + departmentId +
-                "}";
+                ", jobOrdinal=" + jobOrdinal +
+                ", skillIds=" + skillIds +
+                '}';
     }
 }

@@ -69,10 +69,8 @@ angular.module('traineeMod', [])
 
         self.creatableTrainee={
             id:null
-            departmentId: ''
         };
-        self.traineeDepartment={};
-        self.traineeLocation={};
+
 
         $scope.ageFilter = function (trainee) {
             return (trainee.birthday > $scope.min_age && trainee.birthday < $scope.max_age);
