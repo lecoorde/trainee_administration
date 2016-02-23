@@ -2,7 +2,7 @@
     <a href="#/trainees/form" class="btn btn-default btn-sm">Auszubildenden hinzufügen</a><b></b>
     <input type="checkbox" ng-model="filter">Filter aktivieren</input>
 
-    <table class="borderTable" ng-show="filter" title="Filter">
+    <table class="table" ng-show="filter" title="Filter">
         <tr>
             <th>ID</th>
             <th>Nachname</th>
@@ -15,16 +15,17 @@
             <td><input ng-model="trainee_lastName"/></td>
             <td><input ng-model="trainee_forename"/></td>
             <td><input ng-model="trainee_department"/></td>
-            <td><input ng-model="trainee_location"/></td></tr>
+            <td><input ng-model="trainee_location"/></td>
+        </tr>
         <!--<tr>-->
-            <!--<th>Mindestalter</th>-->
-            <!--<th>Höchstalter</th>-->
-            <!--<th>Ausbildungsanfang</th>-->
+        <!--<th>Mindestalter</th>-->
+        <!--<th>Höchstalter</th>-->
+        <!--<th>Ausbildungsanfang</th>-->
         <!--</tr>-->
         <!--<tr>-->
-            <!--<td><input type="date" ng-model="min_age"/></td>-->
-            <!--<td><input type="date" ng-model="max_age"/></td>-->
-            <!--<td><input type="date" ng-model="filter_start_of_training"/></td>-->
+        <!--<td><input type="date" ng-model="min_age"/></td>-->
+        <!--<td><input type="date" ng-model="max_age"/></td>-->
+        <!--<td><input type="date" ng-model="filter_start_of_training"/></td>-->
         <!--</tr>-->
     </table>
 
@@ -54,28 +55,34 @@
             <td>{{trainee.birthday | date:'dd.MM.yyyy'}}</td>
             <td>{{trainee.jobName}}</td>
             <td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
+            <td></td>
         </tr>
         <tr ng-if="trainee.expanded" ng-init="tctrl.getSkillsByTraineeId(trainee.id)">
             <td colspan="3"><span class="table-row-title">Arbeitsplatz</span></td>
             <td colspan="2"><span class="table-row-title2">Standort</span></td>
-            <td colspan="3"><span class="table-row-title2">Abteilung</span></td>
-            <td><span class="table-row-title2"><a href="#/trainees/form" class="btn btn-default btn-sm">Auszubildenden hinzufügen</a></span></td>
+            <td colspan="2"><span class="table-row-title2">Abteilung</span></td>
         </tr>
         <tr ng-if="trainee.expanded">
             <td colspan="3"></td>
             <td colspan="2">{{trainee.locationName}}</td>
-            <td colspan="3">{{trainee.departmentName}}</td>
+            <td colspan="2">{{trainee.departmentName}}</td>
         </tr>
         <tr ng-if="trainee.expanded">
             <td colspan="3"><span class="table-row-title">Skills</span></td>
             <td colspan="2"><span class="table-row-title2">Bezeichnung</span></td>
             <td colspan="3"><span class="table-row-title2">Beschreibung</span></td>
         </tr>
-        <tr ng-if="trainee.expanded" ng-repeat="skill in tctrl.traineeskills" ng-repeat-end="">
+        <tr ng-if="trainee.expanded" ng-repeat="skill in tctrl.traineeskills">
             <td colspan="2"></td>
             <td align="right">►</td>
             <td colspan="2">{{skill.name}}</td>
             <td colspan="3">{{skill.description}}</td>
+        </tr>
+        <tr ng-if="trainee.expanded" ng-repeat-end="">
+            <td colspan="3"><a href="#/trainees/update" ng-click="tctrl.updateTraineeById(trainee.id)"
+                               class="btn btn-default btn-sm">Auszubildenden bearbeiten</a></td>
+            <td colspan="3"><a href="#/trainees/delete" ng-click="tctrl.deleteTraineeById(trainee.id)"
+                               class="btn btn-default btn-sm">Auszubildenden löschen</a></td>
         </tr>
     </table>
 </div>
