@@ -43,14 +43,14 @@ public class LocationService {
         return locationDTOList;
     }
 
-//    public Location getLocationById(Long id) {
-//
-//        logger.info("Service lädt den Standort");
-//
-//        TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
-//                "where l.id = " + id, Location.class);
-//        return query.getSingleResult();
-//    }
+    public Location getLocationById(Long id) {
+
+        logger.info("Service lädt den Standort");
+
+        TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
+                "where l.id = " + id, Location.class);
+        return query.getSingleResult();
+    }
 
     public List<TraineeDTO> getTraineeListForSkillId(Long id) {
 

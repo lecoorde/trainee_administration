@@ -40,14 +40,14 @@ public class DepartmentService {
         return departmentDTOList;
     }
 
-//    public Department getDepartmentById(Long id) {
-//
-//        logger.info("Service lädt die Abteilung");
-//
-//        TypedQuery<Department> query = this.entityManager.createQuery("select d from Department d " +
-//                "where d.id = " + id, Department.class);
-//        return query.getSingleResult();
-//    }
+    public Department getDepartmentById(Long id) {
+
+        logger.info("Service lädt die Abteilung");
+
+        TypedQuery<Department> query = this.entityManager.createQuery("select d from Department d " +
+                "where d.id = " + id, Department.class);
+        return query.getSingleResult();
+    }
 
     public List<TraineeDTO> getTraineeListForDepartmentId(Long id) {
         logger.info("Service lädt die Liste von Auszubildenden für Abteilungs-ID "+id);

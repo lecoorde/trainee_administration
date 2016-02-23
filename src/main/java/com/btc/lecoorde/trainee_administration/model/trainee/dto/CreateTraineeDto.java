@@ -26,13 +26,16 @@ public class CreateTraineeDto {
 
     private int jobOrdinal;
 
-    public CreateTraineeDto(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training) {
+    private List<Long> skillIds;
+
+    public CreateTraineeDto(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training, List<Long> skillIds) {
         this.id = id;
         this.lastName = lastName;
         this.forename = forename;
         this.jobName = jobName;
         this.birthday = birthday;
         this.start_of_training = start_of_training;
+        this.skillIds = skillIds;
     }
 
     public CreateTraineeDto() {
