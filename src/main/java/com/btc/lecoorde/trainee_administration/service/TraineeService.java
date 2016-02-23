@@ -89,7 +89,7 @@ public class TraineeService {
         trainee.setDepartment(departmentService.getDepartmentById(createTraineeDto.getDepartmentId()));
         trainee.setLocation(locationService.getLocationById(createTraineeDto.getLocationId()));
         Set<Skill> skillSet = new HashSet<>();
-        if (createTraineeDto.getSkillIds()!=null) {
+        if (createTraineeDto.getSkillIds() != null) {
             for (Long aLong : createTraineeDto.getSkillIds()) {
                 skillSet.add(skillService.getSkillById(aLong));
             }
