@@ -125,8 +125,16 @@ public class CreateTraineeDto {
     @Override
     public String toString() {
         return "CreateTraineeDto{" +
-                "locationId=" + locationId +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", forename='" + forename + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", birthday=" + birthday +
+                ", start_of_training=" + start_of_training +
+                ", locationId=" + locationId +
                 ", departmentId=" + departmentId +
-                "}";
+                ", jobOrdinal=" + jobOrdinal +
+                ", skillIds=" + skillIds +
+                '}';
     }
 }
