@@ -1,6 +1,32 @@
 <div ng-controller="TraineeCtrl as tctrl">
-    <input type="text" placeholder="Filter" ng-model="search">
-    <a href="#/trainees/form" class="btn btn-default btn-sm">Auszubildenden hinzufügen</a>
+    <a href="#/trainees/form" class="btn btn-default btn-sm">Auszubildenden hinzufügen</a><b></b>
+    <input type="checkbox" ng-model="filter">Filter aktivieren</input>
+
+    <table class="borderTable" ng-show="filter" title="Filter">
+        <tr>
+            <th>ID</th>
+            <th>Nachname</th>
+            <th>Vorname</th>
+            <th>Abteilung</th>
+            <th>Standort</th>
+        </tr>
+        <tr>
+            <td><input ng-model="trainee_id"/></td>
+            <td><input ng-model="trainee_lastName"/></td>
+            <td><input ng-model="trainee_forename"/></td>
+            <td><input ng-model="trainee_department"/></td>
+            <td><input ng-model="trainee_location"/></td></tr>
+        <!--<tr>-->
+            <!--<th>Mindestalter</th>-->
+            <!--<th>Höchstalter</th>-->
+            <!--<th>Ausbildungsanfang</th>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td><input type="date" ng-model="min_age"/></td>-->
+            <!--<td><input type="date" ng-model="max_age"/></td>-->
+            <!--<td><input type="date" ng-model="filter_start_of_training"/></td>-->
+        <!--</tr>-->
+    </table>
 
     <table class="table">
         <tr>
@@ -11,8 +37,13 @@
             <th>Geburtsdatum</th>
             <th>Job</th>
             <th>Ausbildungsanfang</th>
+            <th></th>
         </tr>
-        <tr bgcolor="#add8e6" ng-repeat-start="trainee in tctrl.trainees | filter:search">
+        <tr bgcolor="#add8e6"
+            ng-repeat-start="trainee in tctrl.trainees | filter:{id: trainee_id, lastName:trainee_lastName,
+            forename: trainee_forename, departmentName: trainee_department,
+            locationName: trainee_location}">
+
             <td>
                 <button class="button" ng-if="trainee.expanded" ng-click="trainee.expanded = false"> -</button>
                 <button class="button" ng-if="!trainee.expanded" ng-click="trainee.expanded = true"> +</button>
@@ -25,9 +56,10 @@
             <td>{{trainee.start_of_training | date:'dd.MM.yyyy'}}</td>
         </tr>
         <tr ng-if="trainee.expanded" ng-init="tctrl.getSkillsByTraineeId(trainee.id)">
-            <td colspan="3" ><span class="table-row-title">Arbeitsplatz</span></td>
+            <td colspan="3"><span class="table-row-title">Arbeitsplatz</span></td>
             <td colspan="2"><span class="table-row-title2">Standort</span></td>
             <td colspan="3"><span class="table-row-title2">Abteilung</span></td>
+            <td><span class="table-row-title2"><a href="#/trainees/form" class="btn btn-default btn-sm">Auszubildenden hinzufügen</a></span></td>
         </tr>
         <tr ng-if="trainee.expanded">
             <td colspan="3"></td>
@@ -47,6 +79,7 @@
         </tr>
     </table>
 </div>
+
 
 
 

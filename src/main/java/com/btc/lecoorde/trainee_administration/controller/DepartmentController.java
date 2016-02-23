@@ -2,6 +2,7 @@ package com.btc.lecoorde.trainee_administration.controller;
 
 import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import com.btc.lecoorde.trainee_administration.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,14 @@ public class DepartmentController {
         logger.info("Anfrage: Abteilung mit der ID: " + id);
 
         return departmentService.getDepartmentById(id);
+    }
+
+    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
+    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
+
+        logger.info("Anfrage: Liste von Auszubildenden für Abteilung mit ID: " + id);
+
+        return departmentService.getTraineeListForDepartmentId(id);
     }
 }
 

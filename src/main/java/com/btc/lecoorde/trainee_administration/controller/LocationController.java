@@ -2,6 +2,7 @@ package com.btc.lecoorde.trainee_administration.controller;
 
 import com.btc.lecoorde.trainee_administration.model.entity.Location;
 import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import com.btc.lecoorde.trainee_administration.service.LocationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,4 +43,11 @@ public class LocationController {
         return locationService.getLocationById(id);
     }
 
+    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
+    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
+
+        logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
+
+        return locationService.getTraineeListForSkillId(id);
+    }
 }

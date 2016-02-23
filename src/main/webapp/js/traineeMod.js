@@ -11,7 +11,7 @@ angular.module('traineeMod', [])
                 });
 
             },
-            getSkills: function (id) {
+            getSkillsByTraineeId: function (id) {
                 return $http.get('http://localhost:7070/trainees/skill_list/' + id).then(function (response) {
                     return response.data;
                 }, function (errResponse) {
@@ -57,12 +57,25 @@ angular.module('traineeMod', [])
             departmentName: '',
             locationName: ''
         };
+
+        $scope.trainee_id = "";
+        $scope.trainee_lastName = "";
+        $scope.trainee_forename = "";
+        $scope.trainee_department = "";
+        $scope.trainee_location = "";
+        //$scope.filter_start_of_training = new Date(2015,8,1);
+        //$scope.min_age = new Date(0);
+        //$scope.max_age = new Date(9999,11,31);
+
         self.creatableTrainee={
             id:null
-        }
+        };
+        $scope.ageFilter = function (trainee) {
+            return (trainee.birthday > $scope.min_age && trainee.birthday < $scope.max_age);
+        };
 
         self.getSkillsByTraineeId = function (id) {
-            TraineeService.getSkills(id).then(
+            TraineeService.getSkillsByTraineeId(id).then(
                 function (s) {
                     self.traineeskills = s;
                 },

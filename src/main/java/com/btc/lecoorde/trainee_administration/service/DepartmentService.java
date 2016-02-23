@@ -2,6 +2,8 @@ package com.btc.lecoorde.trainee_administration.service;
 
 import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
+import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,5 +47,22 @@ public class DepartmentService {
         TypedQuery<Department> query = this.entityManager.createQuery("select d from Department d " +
                 "where d.id = " + id, Department.class); //TODO Detailansicht
         return query.getSingleResult();
+    }
+
+    public List<TraineeDTO> getTraineeListForDepartmentId(Long id) {
+        logger.info("Service lädt die Liste von Auszubildenden für Abteilungs-ID "+id);
+
+        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Department d " +
+                "join d.trainees t " +
+                "where d.id = " + id, Trainee.class);
+
+        List<Trainee> traineeList = query.getResultList();
+
+        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+
+        for (Trainee t : traineeList) {
+            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
+        }
+        return traineeDTOList;
     }
 }

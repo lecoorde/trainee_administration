@@ -18,6 +18,15 @@ angular.module('skillMod', [])
                     console.error('Error while fetching skills');
                     return $q.reject(errResponse);
                 });
+            },
+            getTraineesBySkillId: function(id){
+                return $http.get('http://localhost:7070/skills/trainee_list/' + id).then(function (response){
+                    return response.data;
+                },
+                function(errResponse){
+                    console.error('Error while fetching trainees');
+                    return $q.reject(errResponse)
+                });
             }
         }
     }])
@@ -25,7 +34,13 @@ angular.module('skillMod', [])
     .controller('SkillCtrl', ['$scope', 'SkillService', function ($scope, SkillService) {
         var self = this;
         self.skills = [];
+        self.trainees = [];
         self.skill = {id: null, name: '', description: ''};
+
+        $scope.filter_skill_id='';
+        $scope.filter_skill_name='';
+        $scope.filter_skill_description='';
+
         self.fetchAllSkills = function () {
             SkillService.getSkills().then(
                 function (d) {
@@ -42,6 +57,15 @@ angular.module('skillMod', [])
                 },
                 function (errResponse) {
                     console.error('Error while fetching skill');
+                }
+            )
+        };
+        self.getTraineesBySkillId = function (id) {
+            SkillService.getTraineesBySkillId(id).then(function (d) {
+                    self.trainees = d;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching trainees')
                 }
             )
         };
