@@ -60,7 +60,7 @@ public class TraineeService {
 
     public List<SkillDTO> getSkillListByTraineeId(Long id) {
 
-        logger.info("Service lädt die Liste von Skills für ID "+id);
+        logger.info("Service lädt die Liste von Skills für ID " + id);
 
         TypedQuery<Skill> query = this.entityManager.createQuery("select s from Trainee t " +
                 "join t.skillList s " +

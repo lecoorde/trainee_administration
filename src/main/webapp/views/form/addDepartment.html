@@ -1,0 +1,34 @@
+<h2>Abteilung hinzufügen</h2>
+<div ng-controller="DepartmentCtrl as ctrl">
+    <form name="departmentForm" ng-submit="ctrl.submit()">
+        <table>
+        <tr>
+            <td>Name:</td>
+            <td>
+                <input name="name" type="text" ng-model="ctrl.department.name" required>
+                     <span style="color:red" ng-show="departmentForm.name.$dirty && departmentForm.name.$invalid">
+                        <span ng-show="departmentForm.name.$error.required">Bitte geben Sie einen Namen ein</span>
+                     </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Beschreibung:</td>
+            <td>
+                <textarea name="description"   ng-model="ctrl.department.description" required></textarea>
+                     <span style="color:red" ng-show="departmentForm.description.$dirty && departmentForm.description.$invalid">
+                        <span ng-show="departmentForm.description.$error.required">Bitte geben Sie einen Namen ein</span>
+                     </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button ng-click="ctrl.reset()">Zurücksetzen</button>
+            </td>
+            <td>
+                <input type="submit" value="Speichern" ng-disabled="departmentForm.$invalid">
+                </input>
+            </td>
+        </tr>
+        </table>
+    </form>
+</div>

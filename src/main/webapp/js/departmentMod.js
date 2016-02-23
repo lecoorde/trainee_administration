@@ -27,6 +27,18 @@ angular.module('departmentMod', [])
                         console.error('Error while fetching trainees');
                         return $q.reject(errResponse)
                     });
+            },
+            createDepartment: function(department){
+                return $http.post('http://localhost:7070/trainees/createDepartment/', department)
+                    .then(
+                        function (response) {
+                            return response.data;
+                        },
+                        function (errResponse) {
+                            console.error('Error while creating department');
+                            return $q.reject(errResponse);
+                        }
+                    );
             }
         }
     }])
@@ -69,6 +81,13 @@ angular.module('departmentMod', [])
                 }
             )
         };
-
+        self.reset=function(){
+            self.department.name="Bitte Namen eingeben";
+            self.department.description="Bitte Beschreibung eingeben"
+        }
+        self.submit=function(){
+            DepartmentService.createDepartment(self.department);
+        }
+        self.reset();
         self.fetchAllDepartments();
     }]);

@@ -1,10 +1,4 @@
-<html>
-<head>
-    <title>Auszubildenden hinzufügen</title>
 
-
-</head>
-<body>
 
 <h2>Auszubildenden hinzufügen</h2>
 <div ng-controller="TraineeCtrl as ctrl">
@@ -22,7 +16,7 @@
 
             <tr>
                 <td>Nachname:</td>
-                <td><input name="lastname" type="text" ng-model="ctrl.createableTrainee.lastName" required>
+                <td><input name="lastname" type="text" class="text" ng-model="ctrl.createableTrainee.lastName" required>
                      <span style="color:red" ng-show="traineeForm.lastname.$dirty && traineeForm.lastname.$invalid">
                         <span ng-show="traineeForm.lastname.$error.required">Bitte geben Sie einen Nachnamen ein</span>
                      </span>
@@ -30,7 +24,7 @@
             </tr>
 
             <tr>
-                <td>Geburtsdatum</td>
+                <td>Geburtsdatum:</td>
                 <td><input name="birthday" type="date" ng-model="ctrl.createableTrainee.birthday" required>
                      <span style="color:red" ng-show="traineeForm.birthday.$dirty && traineeForm.birthday.$invalid">
                         <span ng-show="traineeForm.birthday.$error.required">Bitte geben Sie ein Geburtsdatum ein</span>
@@ -39,7 +33,7 @@
             </tr>
 
             <tr>
-                <td>Ausbildungsanfang</td>
+                <td>Ausbildungsanfang:</td>
                 <td><input name="start_of_training" type="date" ng-model="ctrl.createableTrainee.start_of_training"
                            required>
                      <span style="color:red"
@@ -50,7 +44,7 @@
             </tr>
 
             <tr>
-                <td>Job</td>
+                <td>Job:</td>
                 <td><select name="jobName" ng-model="ctrl.createableTrainee.jobOrdinal" required>
                     <option value="">---Bitte Job wählen---</option>
                     <option value="0">Dualer Student - Anwendungsentwicklung</option>
@@ -67,7 +61,7 @@
             </tr>
 
             <tr ng-controller="DepartmentCtrl as dctrl">
-                <td>Abteilung</td>
+                <td>Abteilung:</td>
                 <td><select ng-init="ctrl.createableTrainee.departmentId=department[0].id"
                             ng-options="department.id as department.name for department in dctrl.departments"
                             name="selectedDepartmentId" ng-model="ctrl.createableTrainee.departmentId"
@@ -83,7 +77,7 @@
             </tr>
 
             <tr ng-controller="LocationCtrl as lctrl">
-                <td>Standort</td>
+                <td>Standort:</td>
                 <td><select name="selectedLocationId" ng-model="ctrl.createableTrainee.locationId"
                             ng-options="location.id as location.name for location in lctrl.locations" required>
                     <option value="">---Bitte Standort wählen---</option>
@@ -95,7 +89,7 @@
                 </td>
             </tr>
             <tr ng-controller="SkillCtrl as sctrl">
-                <td>Skills</td>
+                <td>Skills:</td>
                 <td>
 
                     <select class="form-control" ng-model="ctrl.createableTrainee.skillIds" multiple>
@@ -118,5 +112,3 @@
         </table>
     </form>
 </div>
-</body>
-</html>

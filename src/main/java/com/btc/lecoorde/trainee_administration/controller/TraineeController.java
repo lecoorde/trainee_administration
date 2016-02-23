@@ -7,6 +7,8 @@ import com.btc.lecoorde.trainee_administration.service.TraineeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,9 +50,17 @@ public class TraineeController {
     }
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
-    public void createUser(@RequestBody CreateTraineeDto input) {
+    public ResponseEntity<CreateTraineeDto> createUser(@RequestBody CreateTraineeDto input) {
         logger.info("Anfrage: Trainee Speichern.");
-        traineeService.createTrainee(input);
-        logger.info("Trainee gespeichert: " + input);
+        try {
+            traineeService.createTrainee(input);
+            logger.info("Trainee gespeichert: " + input);
+            return new ResponseEntity<CreateTraineeDto>(HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<CreateTraineeDto>(HttpStatus.CONFLICT);
+        }
+
     }
 }
