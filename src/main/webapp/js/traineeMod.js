@@ -11,7 +11,7 @@ angular.module('traineeMod', [])
                 });
 
             },
-            getSkillsByTraineeId: function (id) {
+            getSkills: function (id) {
                 return $http.get('http://localhost:7070/trainees/skill_list/' + id).then(function (response) {
                     return response.data;
                 }, function (errResponse) {
@@ -35,7 +35,17 @@ angular.module('traineeMod', [])
                             return response.data;
                         },
                         function (errResponse) {
-                            console.error('Error while creating user');
+                            console.error('Error while creating trainee');
+                            return $q.reject(errResponse);
+                        }
+                    );
+            },
+            deleteTrainee: function (id) {
+                return $http.post('http://localhost:7070/trainees/delete/' + id)
+                    .then(function (response) {
+                            return response.data
+                        }, function (errResponse) {
+                            console.error('Error while deleting trainee');
                             return $q.reject(errResponse);
                         }
                     );
@@ -67,8 +77,8 @@ angular.module('traineeMod', [])
         //$scope.min_age = new Date(0);
         //$scope.max_age = new Date(9999,11,31);
 
-        self.createableTrainee={
-            id:null
+        self.createableTrainee = {
+            id: null
         };
 
 
@@ -77,7 +87,7 @@ angular.module('traineeMod', [])
         };
 
         self.getSkillsByTraineeId = function (id) {
-            TraineeService.getSkillsByTraineeId(id).then(
+            TraineeService.getSkills(id).then(
                 function (s) {
                     self.traineeskills = s;
                 },
@@ -122,6 +132,13 @@ angular.module('traineeMod', [])
             self.createableTrainee.lastName = "TestNachname";
             self.createableTrainee.birthday = new Date(1996, 10, 30);
             self.createableTrainee.start_of_training = new Date(2015, 9, 1);
+        };
+        self.confirmDelete = function confirmDelete(id) {
+
+            if (confirm("Möchten Sie diesen Auszubildenden wirklich löschen?") == true) {
+                TraineeService.deleteTrainee(id);
+                alert("Auszubildender mit der ID:"+id+" wurde gelöscht!")
+            }
         };
 
         self.reset();

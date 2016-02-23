@@ -49,8 +49,15 @@ public class TraineeController {
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
     public void createUser(@RequestBody CreateTraineeDto input) {
-        logger.info("Anfrage: Trainee Speichern.");
+        logger.info("Anfrage: Auszubildenden speichern.");
         traineeService.createTrainee(input);
-        logger.info("Trainee gespeichert: " + input);
+        logger.info("Service hat den Auszubildenden gespeichert: " + input);
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public void deleteTrainee(@PathVariable Long id) {
+        logger.info("Anfrage: Auszubildenden löschen mit der ID: "+id);
+        traineeService.deleteTrainee(id);
+        logger.info("Service hat den Auszubildenden mit der ID: "+id+" gelöscht." );
     }
 }
