@@ -51,7 +51,7 @@
 
             <tr>
                 <td>Job</td>
-                <td><select  name="jobName" ng-model="ctrl.createableTrainee.jobOrdinal" required>
+                <td><select name="jobName" ng-model="ctrl.createableTrainee.jobOrdinal" required>
                     <option value="">---Bitte Job wählen---</option>
                     <option value="0">Dualer Student - Anwendungsentwicklung</option>
                     <option value="1">Dualer Student - BWL</option>
@@ -68,8 +68,10 @@
 
             <tr ng-controller="DepartmentCtrl as dctrl">
                 <td>Abteilung</td>
-                <td><select ng-init="ctrl.createableTrainee.departmentId=department[0].id" ng-options="department.id as department.name for department in dctrl.departments"  name="selectedDepartmentId" ng-model="ctrl.createableTrainee.departmentId"
-                             required>
+                <td><select ng-init="ctrl.createableTrainee.departmentId=department[0].id"
+                            ng-options="department.id as department.name for department in dctrl.departments"
+                            name="selectedDepartmentId" ng-model="ctrl.createableTrainee.departmentId"
+                            required>
                     <option value="">---Bitte Abteilung wählen---</option>
                 </select>
                     </input>

@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Created by Denis Simon on 17.02.2016.
  */
+//Test
 @RestController
 @RequestMapping(value = "/departments")
 public class DepartmentController {
