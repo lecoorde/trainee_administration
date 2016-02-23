@@ -1,6 +1,7 @@
 package com.btc.lecoorde.trainee_administration.model.trainee.dto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by LECOORDE on 22.02.2016.
@@ -110,11 +111,19 @@ public class CreateTraineeDto {
         this.departmentId = departmentId;
     }
 
+    public List<Long> getSkillIds() {
+        return skillIds;
+    }
+
+    public void setSkillIds(List<Long> skillIds) {
+        this.skillIds = skillIds;
+    }
+
     @Override
     public String toString() {
         return "CreateTraineeDto{" +
                 "locationId=" + locationId +
                 ", departmentId=" + departmentId +
-                "} " + super.toString();
+                "}";
     }
 }

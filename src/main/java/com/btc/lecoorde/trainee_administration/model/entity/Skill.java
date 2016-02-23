@@ -37,6 +37,11 @@ public class Skill {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return id + ". " + name + ": " + description;
+    }
+
     public Long getId() {
         return id;
     }
@@ -67,11 +72,6 @@ public class Skill {
 
     public void setTrainees(Set<Trainee> trainees) {
         this.trainees = trainees;
-    }
-
-    @Override
-    public String toString() {
-        return id + ". " + name + ": " + description;
     }
 }
 

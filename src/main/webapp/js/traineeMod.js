@@ -69,7 +69,11 @@ angular.module('traineeMod', [])
 
         self.creatableTrainee={
             id:null
+            departmentId: ''
         };
+        self.traineeDepartment={};
+        self.traineeLocation={};
+
         $scope.ageFilter = function (trainee) {
             return (trainee.birthday > $scope.min_age && trainee.birthday < $scope.max_age);
         };
@@ -94,7 +98,7 @@ angular.module('traineeMod', [])
                 );
         };
         self.submit = function () {
-            self.createTrainee(self.creatableTrainee)
+            self.createTrainee(self.createableTrainee)
         }
         self.fetchAllTrainees = function () {
             TraineeService.getTrainees().then(
@@ -116,11 +120,14 @@ angular.module('traineeMod', [])
             )
         };
         self.reset = function () {
-            self.creatableTrainee.forename = "TestVorname";
-            self.creatableTrainee.lastName = "TestNachname";
-            self.creatableTrainee.birthday = new Date(1996, 10, 30);
-            self.creatableTrainee.start_of_training = new Date(2015, 9, 1);
+            self.createableTrainee.forename = "TestVorname";
+            self.createableTrainee.lastName = "TestNachname";
+            self.createableTrainee.birthday = new Date(1996, 10, 30);
+            self.createableTrainee.start_of_training = new Date(2015, 9, 1);
         };
+        self.setDepartmentId=function(id){
+            self.createableTrainee.departmentId=id;
+        }
 
         self.reset();
         self.fetchAllTrainees();
