@@ -34,13 +34,13 @@ public class SkillController {
         return skillService.getAllSkills();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Skill getSkill(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Skill mit der ID: " + id);
-
-        return skillService.getSkillById(id);
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public Skill getSkill(@PathVariable("id") Long id) {
+//
+//        logger.info("Anfrage: Skill mit der ID: " + id);
+//
+//        return skillService.getSkillById(id);
+//    }
 
     @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
     public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {

@@ -53,12 +53,4 @@ public class TraineeController {
         traineeService.createTrainee(input);
         logger.info("Trainee gespeichert: " + input);
     }
-
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeList() {
-
-        logger.info("Anfrage: Liste von Auszubildenden");
-
-        return traineeService.getAllTrainees();
-    }
 }

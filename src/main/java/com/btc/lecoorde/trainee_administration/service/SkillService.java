@@ -40,14 +40,14 @@ public class SkillService {
         return skillDTOList;
     }
 
-    public Skill getSkillById(Long id) {
-
-        logger.info("Service lädt den Skill");
-
-        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s " +
-                "where s.id = " + id, Skill.class);
-        return query.getSingleResult();
-    }
+//    public Skill getSkillById(Long id) {
+//
+//        logger.info("Service lädt den Skill");
+//
+//        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s " +
+//                "where s.id = " + id, Skill.class);
+//        return query.getSingleResult();
+//    }
 
     public List<TraineeDTO> getTraineeListForSkillId(Long id) {
         logger.info("Service lädt die Liste von Auszubildenden für Skill-ID "+id);

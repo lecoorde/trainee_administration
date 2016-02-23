@@ -116,7 +116,9 @@ public class TraineeService {
                     t.getForename(),
                     t.getJob().getJobName(),
                     t.getBirthday(),
-                    t.getStart_of_training()));
+                    t.getStart_of_training(),
+                    t.getDepartment().getName(),
+                    t.getLocation().getName()));
         }
         return traineeDTOList;
     }

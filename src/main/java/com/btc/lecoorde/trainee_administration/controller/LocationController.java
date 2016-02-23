@@ -35,13 +35,13 @@ public class LocationController {
     }
 
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Location getLocation(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Standort mit der ID: " + id);
-
-        return locationService.getLocationById(id);
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public Location getLocation(@PathVariable("id") Long id) {
+//
+//        logger.info("Anfrage: Standort mit der ID: " + id);
+//
+//        return locationService.getLocationById(id);
+//    }
 
     @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
     public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {

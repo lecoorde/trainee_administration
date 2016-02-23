@@ -34,13 +34,13 @@ public class DepartmentController {
         return departmentService.getAllDepartments();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Department getSingleDepartment(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Abteilung mit der ID: " + id);
-
-        return departmentService.getDepartmentById(id);
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public Department getSingleDepartment(@PathVariable("id") Long id) {
+//
+//        logger.info("Anfrage: Abteilung mit der ID: " + id);
+//
+//        return departmentService.getDepartmentById(id);
+//    }
 
     @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
     public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
