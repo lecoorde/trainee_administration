@@ -89,8 +89,10 @@ public class TraineeService {
         trainee.setDepartment(departmentService.getDepartmentById(createTraineeDto.getDepartmentId()));
         trainee.setLocation(locationService.getLocationById(createTraineeDto.getLocationId()));
         Set<Skill> skillSet = new HashSet<>();
-        for (Long aLong : createTraineeDto.getSkillIds()) {
-            skillSet.add(skillService.getSkillById(aLong));
+        if (createTraineeDto.getSkillIds()!=null) {
+            for (Long aLong : createTraineeDto.getSkillIds()) {
+                skillSet.add(skillService.getSkillById(aLong));
+            }
         }
         trainee.setSkillList(skillSet);
         entityManager.persist(trainee);

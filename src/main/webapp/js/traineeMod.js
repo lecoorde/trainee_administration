@@ -58,8 +58,11 @@ angular.module('traineeMod', [])
             locationName: ''
         };
         self.createableTrainee = {
-            id: null
+            id: null,
+            departmentId: ''
         }
+        self.traineeDepartment={};
+        self.traineeLocation={};
 
         self.getSkillsByTraineeId = function (id) {
             TraineeService.getSkills(id).then(
@@ -108,6 +111,9 @@ angular.module('traineeMod', [])
             self.createableTrainee.birthday = new Date(1996, 10, 30);
             self.createableTrainee.start_of_training = new Date(2015, 9, 1);
         };
+        self.setDepartmentId=function(id){
+            self.createableTrainee.departmentId=id;
+        }
 
         self.reset();
         self.fetchAllTrainees();
