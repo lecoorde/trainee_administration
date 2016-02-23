@@ -3,7 +3,6 @@ package com.btc.lecoorde.trainee_administration.controller;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDetailDTO;
 import com.btc.lecoorde.trainee_administration.service.TraineeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,13 +23,21 @@ public class TraineeController {
     @Autowired
     private TraineeService traineeService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public TraineeDetailDTO getSingleTrainee(@PathVariable("id") Long id) {
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<TraineeDTO> getTraineeList() {
 
-        logger.info("Anfrage: Auszubildender mit der ID: " + id);
+        logger.info("Anfrage: Liste von Auszubildenden");
 
-        return traineeService.getTraineeById(id);
+        return traineeService.getAllTrainees();
     }
+
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public TraineeDTO getSingleTrainee(@PathVariable("id") Long id) {
+//
+//        logger.info("Anfrage: Auszubildender mit der ID: " + id);
+//
+//        return traineeService.getTraineeById(id);
+//    }
 
     @RequestMapping(value = "/skill_list/{id}", method = RequestMethod.GET)
     public List<SkillDTO> getSkillListById(@PathVariable("id") Long id) {
@@ -45,13 +52,5 @@ public class TraineeController {
         logger.info("Anfrage: Trainee Speichern.");
         traineeService.createTrainee(input);
         logger.info("Trainee gespeichert: " + input);
-    }
-
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeList() {
-
-        logger.info("Anfrage: Liste von Auszubildenden");
-
-        return traineeService.getAllTrainees();
     }
 }

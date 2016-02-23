@@ -1,19 +1,51 @@
 <div ng-controller="SkillCtrl as sctrl">
-    <table class="table">
+    <a href="#/skills/form" class="btn btn-default btn-sm">Skill hinzufügen</a><br></br>
+    <input type="checkbox" ng-model="filter">Filter aktivieren</input>
+
+    <table class="borderTable" ng-show="filter" title="Filter">
         <tr>
             <th>ID</th>
-            <th>Bezeichnung</th>
+            <th>Bezeichung</th>
             <th>Beschreibung</th>
-            <th></th>
         </tr>
-        <tr ng-repeat="skill in sctrl.skills">
+        <tr>
+            <td><input ng-model="filter_skill_id"/></td>
+            <td><input ng-model="filter_skill_name"/></td>
+            <td><input ng-model="filter_skill_description"/></td>
+    </table>
+
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Bezeichnung</th>
+            <th colspan="2">Beschreibung</th>
+            <th></th>
+
+        </tr>
+        <tr bgcolor="#add8e6" ng-repeat-start="skill in sctrl.skills | filter:{id: filter_skill_id, name: filter_skill_name,
+        description: filter_skill_description}">
+            <td>
+                <button class="button" ng-if="skill.expanded" ng-click="skill.expanded = false"> -</button>
+                <button class="button" ng-if="!skill.expanded" ng-click="skill.expanded = true"> +</button>
+            </td>
             <td>{{skill.id}}</td>
             <td>{{skill.name}}</td>
-            <td>{{skill.description}}</td>
-            <td><a href="" class="btn btn-default btn-sm"
-                   ng-click="sctrl.getSingleSkill(skill.id);">Details</a></td>
+            <td colspan="2">{{skill.description}}</td>
+            <td></td>
+        </tr>
+        <tr ng-if="skill.expanded" ng-init="sctrl.getTraineesBySkillId(skill.id)">
+            <td colspan="2" ><span class="table-row-title">Auszubildende</span></td>
+            <td colspan="1"><span class="table-row-title2">Id</span></td>
+            <td colspan="1"><span class="table-row-title2">Vorname</span></td>
+            <td colspan="1"><span class="table-row-title2">Nachname</span></td>
+        </tr>
+        <tr ng-if="skill.expanded" ng-repeat="trainee in sctrl.trainees" ng-repeat-end="">
+            <td colspan="1"></td>
+            <td align="right">►</td>
+            <td colspan="1">{{trainee.id}}</td>
+            <td colspan="1">{{trainee.forename}}</td>
+            <td colspan="1">{{trainee.lastName}}</td>
         </tr>
     </table>
-    <div ng-include="'/views/detail/skillDetail.html'">
-    </div>
 </div>

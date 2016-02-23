@@ -19,29 +19,39 @@ public class TraineeDTO {
 
     private Date start_of_training;
 
+    private String departmentName;
 
-    public TraineeDTO(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training) {
+    private String locationName;
+
+
+    public TraineeDTO(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training, String departmentName, String locationName) {
         this.id = id;
         this.lastName = lastName;
         this.forename = forename;
         this.jobName = jobName;
         this.birthday = birthday;
         this.start_of_training = start_of_training;
+        this.departmentName = departmentName;
+        this.locationName = locationName;
     }
 
     public TraineeDTO() {
     }
 
-    @Override
-    public String toString() {
-        return "TraineeDTO{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", forename='" + forename + '\'' +
-                ", jobName='" + jobName + '\'' +
-                ", birthday=" + birthday +
-                ", start_of_training=" + start_of_training +
-                '}';
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public Long getId() {
@@ -90,5 +100,17 @@ public class TraineeDTO {
 
     public void setStart_of_training(Date start_of_training) {
         this.start_of_training = start_of_training;
+    }
+
+    @Override
+    public String toString() {
+        return "TraineeDTO{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", forename='" + forename + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", birthday=" + birthday +
+                ", start_of_training=" + start_of_training +
+                '}';
     }
 }

@@ -1,7 +1,9 @@
 package com.btc.lecoorde.trainee_administration.service;
 
 import com.btc.lecoorde.trainee_administration.model.entity.Location;
+import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
 import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,15 +23,6 @@ public class LocationService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Location getLocationById(Long id) {
-
-        logger.info("Service lädt den Standort");
-
-        TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
-                "where l.id = " + id, Location.class); //TODO Detailansicht
-        return query.getSingleResult();
-    }
-
     public List<LocationDTO> getAllLocations() {
 
         logger.info("Service lädt die Liste von Standorten");
@@ -48,5 +41,33 @@ public class LocationService {
                     l.getCity()));
         }
         return locationDTOList;
+    }
+
+//    public Location getLocationById(Long id) {
+//
+//        logger.info("Service lädt den Standort");
+//
+//        TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
+//                "where l.id = " + id, Location.class);
+//        return query.getSingleResult();
+//    }
+
+    public List<TraineeDTO> getTraineeListForSkillId(Long id) {
+
+        logger.info("Service lädt die Liste von Auszubildenden für Standort-ID "+id);
+
+        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Location l " +
+                "join l.trainees t " +
+                "where l.id = " + id, Trainee.class);
+
+        List<Trainee> traineeList = query.getResultList();
+
+        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+
+        for (Trainee t : traineeList) {
+            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
+        }
+        return traineeDTOList;
+
     }
 }

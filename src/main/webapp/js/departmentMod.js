@@ -18,6 +18,15 @@ angular.module('departmentMod', [])
                     console.error('Error while fetching departments');
                     return $q.reject(errResponse);
                 });
+            },
+            getTraineesByDepartmentId: function(id){
+                return $http.get('http://localhost:7070/departments/trainee_list/' + id).then(function (response){
+                        return response.data;
+                    },
+                    function(errResponse){
+                        console.error('Error while fetching trainees');
+                        return $q.reject(errResponse)
+                    });
             }
         }
     }])
@@ -25,7 +34,13 @@ angular.module('departmentMod', [])
     .controller('DepartmentCtrl', ['$scope', 'DepartmentService', function ($scope, DepartmentService) {
         var self = this;
         self.departments = [];
+        self.trainees=[];
         self.department = {id: null, name: '', description: ''};
+
+        $scope.filter_department_id='';
+        $scope.filter_department_name='';
+        $scope.filter_department_description='';
+
         self.fetchAllDepartments = function () {
             DepartmentService.getDepartments().then(
                 function (d) {
@@ -45,7 +60,15 @@ angular.module('departmentMod', [])
                 }
             )
         };
+        self.getTraineesByDepartmentId = function (id) {
+            DepartmentService.getTraineesByDepartmentId(id).then(function (d) {
+                    self.trainees = d;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching trainees')
+                }
+            )
+        };
+
         self.fetchAllDepartments();
-
-
     }]);

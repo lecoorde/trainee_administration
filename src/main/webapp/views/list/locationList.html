@@ -1,25 +1,59 @@
 <div ng-controller="LocationCtrl as lctrl">
-    <table class="table">
+
+    <a href="#/locations/form" class="btn btn-default btn-sm">Standort hinzufügen</a><br></br>
+    <input type="checkbox" ng-model="filter">Filter aktivieren</input>
+
+    <table class="borderTable" ng-show="filter" title="Filter">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Straße</th>
-            <th>Hausnummer</th>
             <th>Postleitzahl</th>
             <th>Stadt</th>
-            <th></th>
         </tr>
-        <tr ng-repeat="location in lctrl.locations">
+        <tr>
+            <td><input ng-model="filter_location_id"/></td>
+            <td><input ng-model="filter_location_name"/></td>
+            <td><input ng-model="filter_location_street"/></td>
+            <td><input ng-model="filter_location_postCode"/></td>
+            <td><input ng-model="filter_location_city"/></td>
+    </table>
+
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Adresse</th>
+            <th>Postleitzahl</th>
+            <th>Stadt</th>
+
+        </tr>
+        <tr bgcolor="#add8e6" ng-repeat-start="location in lctrl.locations | filter:{id:filter_location_id, name: filter_location_name,
+        street:filter_location_street, postCode:filter_location_postCode, city:filter_location_city}">
+            <td>
+                <button class="button" ng-if="location.expanded" ng-click="location.expanded = false"> -</button>
+                <button class="button" ng-if="!location.expanded" ng-click="location.expanded = true"> +</button>
+            </td>
             <td>{{location.id}}</td>
             <td>{{location.name}}</td>
-            <td>{{location.street}}</td>
-            <td>{{location.houseNum}}</td>
+            <td>{{location.street}}{{' '+location.houseNum}}</td>
             <td>{{location.postCode}}</td>
             <td>{{location.city}}</td>
-            <td><a href="" class="btn btn-default btn-sm"
-                   ng-click="lctrl.getSingleLocation(location.id);">Details</a></td>
+
+        </tr>
+        <tr ng-if="location.expanded" ng-init="lctrl.getTraineesByLocationId(location.id)">
+            <td colspan="3"><span class="table-row-title">Auszubildende</span></td>
+            <td colspan="1"><span class="table-row-title2">Id</span></td>
+            <td colspan="1"><span class="table-row-title2">Vorname</span></td>
+            <td colspan="1"><span class="table-row-title2">Nachname</span></td>
+        </tr>
+        <tr ng-if="location.expanded" ng-repeat="trainee in lctrl.trainees" ng-repeat-end="">
+            <td colspan="2"></td>
+            <td align="right">►</td>
+            <td colspan="1">{{trainee.id}}</td>
+            <td colspan="1">{{trainee.forename}}</td>
+            <td colspan="1">{{trainee.lastName}}</td>
         </tr>
     </table>
-    <div ng-include="'/views/detail/locationDetail.html'">
-    </div>
 </div>

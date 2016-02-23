@@ -6,7 +6,6 @@ import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDetailDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,32 +36,31 @@ public class TraineeService {
     @Autowired
     SkillService skillService;
 
-    public TraineeDetailDTO getTraineeById(Long id) {
+//    public TraineeDetailDTO getTraineeById(Long id) {
+//
+//        logger.info("Service lädt den Auszubildenden");
+//
+//        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
+//                "where t.id = " + id, Trainee.class);
+//        Trainee trainee = query.getSingleResult();
+//
+//        TraineeDetailDTO traineeDetailDTO;
+//
+//        traineeDetailDTO = new TraineeDetailDTO(trainee.getId(),
+//                trainee.getLastName(),
+//                trainee.getForename(),
+//                trainee.getJob().getJobName(),
+//                trainee.getBirthday(),
+//                trainee.getStart_of_training(),
+//                trainee.getDepartment().getName(),
+//                trainee.getLocation().getName());
+//
+//        return traineeDetailDTO;
 
-        logger.info("Service lädt den Auszubildenden");
-
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
-                "where t.id = " + id, Trainee.class);
-        Trainee trainee = query.getSingleResult();
-
-        TraineeDetailDTO traineeDetailDTO;
-
-        traineeDetailDTO = new TraineeDetailDTO(trainee.getId(),
-                trainee.getLastName(),
-                trainee.getForename(),
-                trainee.getJob().getJobName(),
-                trainee.getBirthday(),
-                trainee.getStart_of_training(),
-                trainee.getDepartment().getName(),
-                trainee.getLocation().getName());
-
-        return traineeDetailDTO;
-
-    }
 
     public List<SkillDTO> getSkillListByTraineeId(Long id) {
 
-        logger.info("Service lädt die Liste von Skills");
+        logger.info("Service lädt die Liste von Skills für ID "+id);
 
         TypedQuery<Skill> query = this.entityManager.createQuery("select s from Trainee t " +
                 "join t.skillList s " +
@@ -80,6 +78,9 @@ public class TraineeService {
 
     @Transactional
     public void createTrainee(CreateTraineeDto createTraineeDto) {
+
+        logger.info("Auszubildender wird persistiert...");
+
         Trainee trainee = new Trainee();
         trainee.setLastName(createTraineeDto.getLastName());
         trainee.setForename(createTraineeDto.getForename());
@@ -115,7 +116,9 @@ public class TraineeService {
                     t.getForename(),
                     t.getJob().getJobName(),
                     t.getBirthday(),
-                    t.getStart_of_training()));
+                    t.getStart_of_training(),
+                    t.getDepartment().getName(),
+                    t.getLocation().getName()));
         }
         return traineeDTOList;
     }
