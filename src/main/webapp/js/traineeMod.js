@@ -77,14 +77,16 @@ angular.module('traineeMod', [])
         //$scope.min_age = new Date(0);
         //$scope.max_age = new Date(9999,11,31);
 
+        //$scope.ageFilter = function (trainee) {
+        //    return (trainee.birthday > $scope.min_age && trainee.birthday < $scope.max_age);
+        //};
+
         self.createableTrainee = {
             id: null
         };
 
 
-        $scope.ageFilter = function (trainee) {
-            return (trainee.birthday > $scope.min_age && trainee.birthday < $scope.max_age);
-        };
+
 
         self.getSkillsByTraineeId = function (id) {
             TraineeService.getSkills(id).then(

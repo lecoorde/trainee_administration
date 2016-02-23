@@ -4,15 +4,17 @@
 
     <table class="table" class="borderTable" ng-show="filter" title="Filter">
         <tr>
+            <th></th>
             <th>ID</th>
             <th>Name</th>
-            <th>Beschreibung</th>
+            <th colspan="3">Beschreibung</th>
 
         </tr>
         <tr>
+            <td></td>
             <td><input ng-model="filter_department_id"/></td>
             <td><input ng-model="filter_department_name"/></td>
-            <td><input ng-model="filter_department_description"/></td>
+            <td colspan="3"><input ng-model="filter_department_description"/></td>
 
     </table>
 

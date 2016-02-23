@@ -84,10 +84,10 @@ angular.module('departmentMod', [])
         self.reset=function(){
             self.department.name="Bitte Namen eingeben";
             self.department.description="Bitte Beschreibung eingeben"
-        }
+        };
         self.submit=function(){
             DepartmentService.createDepartment(self.department);
-        }
+        };
         self.reset();
         self.fetchAllDepartments();
     }]);
