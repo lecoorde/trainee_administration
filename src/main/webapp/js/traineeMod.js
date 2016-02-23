@@ -67,7 +67,7 @@ angular.module('traineeMod', [])
         //$scope.min_age = new Date(0);
         //$scope.max_age = new Date(9999,11,31);
 
-        self.creatableTrainee={
+        self.createableTrainee={
             id:null
         };
 
@@ -123,9 +123,6 @@ angular.module('traineeMod', [])
             self.createableTrainee.birthday = new Date(1996, 10, 30);
             self.createableTrainee.start_of_training = new Date(2015, 9, 1);
         };
-        self.setDepartmentId=function(id){
-            self.createableTrainee.departmentId=id;
-        }
 
         self.reset();
         self.fetchAllTrainees();
