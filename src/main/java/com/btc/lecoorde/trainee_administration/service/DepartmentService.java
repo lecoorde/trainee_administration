@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +23,15 @@ public class DepartmentService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Transactional
+    public void createDepartment(DepartmentDTO departmentDTO) {
+        Department department=new Department();
+        department.setName(departmentDTO.getName());
+        department.setDescription(departmentDTO.getDescription());
+        entityManager.persist(department);
+    }
+
 
     public List<DepartmentDTO> getAllDepartments() {
 

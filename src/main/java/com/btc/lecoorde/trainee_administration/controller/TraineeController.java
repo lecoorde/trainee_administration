@@ -7,6 +7,8 @@ import com.btc.lecoorde.trainee_administration.service.TraineeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,16 +50,22 @@ public class TraineeController {
     }
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
-    public void createUser(@RequestBody CreateTraineeDto input) {
-        logger.info("Anfrage: Auszubildenden speichern.");
-        traineeService.createTrainee(input);
-        logger.info("Service hat den Auszubildenden gespeichert: " + input);
-    }
+    public ResponseEntity<CreateTraineeDto> createUser(@RequestBody CreateTraineeDto input) {
+        logger.info("Anfrage: Auszubildenden speichern");
+        try {
+            traineeService.createTrainee(input);
+            logger.info("Service: Auszubildender gespeichert: " + input);
+            return new ResponseEntity<CreateTraineeDto>(HttpStatus.CREATED);
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public void deleteTrainee(@PathVariable Long id) {
-        logger.info("Anfrage: Auszubildenden löschen mit der ID: "+id);
-        traineeService.deleteTrainee(id);
-        logger.info("Service hat den Auszubildenden mit der ID: "+id+" gelöscht." );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<CreateTraineeDto>(HttpStatus.CONFLICT);
+        }
+        @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+        public void deleteTrainee(@PathVariable Long id) {
+            logger.info("Anfrage: Auszubildenden löschen mit der ID: "+id);
+            traineeService.deleteTrainee(id);
+            logger.info("Service hat den Auszubildenden mit der ID: "+id+" gelöscht." );
+        }
     }
 }
