@@ -1,7 +1,7 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.dto.LocationDto;
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.LocationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class LocationController {
     private LocationService locationService;
 
     @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
+    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
 
@@ -42,7 +42,7 @@ public class LocationController {
 //    }
 
     @RequestMapping(value = "/createLocation/", method = RequestMethod.POST)
-    public ResponseEntity createDepartment(@RequestBody LocationDTO input) {
+    public ResponseEntity createDepartment(@RequestBody LocationDto input) {
         logger.info("Anfrage: Location speichern.");
         try {
             locationService.createLocation(input);
@@ -71,7 +71,7 @@ public class LocationController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<LocationDTO> getLocationList() {
+    public List<LocationDto> getLocationList() {
 
         logger.info("Anfrage: Liste von Standorten");
 

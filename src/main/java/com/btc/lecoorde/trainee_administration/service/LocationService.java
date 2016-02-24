@@ -1,9 +1,9 @@
 package com.btc.lecoorde.trainee_administration.service;
 
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.entity.Location;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.dto.LocationDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,13 +26,13 @@ public class LocationService {
     private EntityManager entityManager;
 
     @Transactional
-    public void createLocation(LocationDTO locationDTO) {
+    public void createLocation(LocationDto locationDto) {
         Location location = new Location();
-        location.setName(locationDTO.getName());
-        location.setStreet(locationDTO.getStreet());
-        location.setCity(locationDTO.getCity());
-        location.setHouseNum(locationDTO.getHouseNum());
-        location.setPostCode(locationDTO.getPostCode());
+        location.setName(locationDto.getName());
+        location.setStreet(locationDto.getStreet());
+        location.setCity(locationDto.getCity());
+        location.setHouseNum(locationDto.getHouseNum());
+        location.setPostCode(locationDto.getPostCode());
         entityManager.persist(location);
     }
 
@@ -45,7 +45,7 @@ public class LocationService {
         return query.getSingleResult();
     }
 
-    public List<TraineeDTO> getTraineeListForSkillId(Long id) {
+    public List<TraineeDto> getTraineeListForSkillId(Long id) {
 
         logger.info("Service lädt die Liste von Auszubildenden für Standort-ID " + id);
 
@@ -57,7 +57,7 @@ public class LocationService {
 
         return traineeList
                 .stream()
-                .map(t -> new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
+                .map(t -> new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
                 .collect(Collectors.toCollection(LinkedList::new));
 
     }
@@ -67,7 +67,7 @@ public class LocationService {
         this.entityManager.remove(this.entityManager.find(Location.class, id));
     }
 
-    public List<LocationDTO> getAllLocations() {
+    public List<LocationDto> getAllLocations() {
 
         logger.info("Service lädt die Liste von Standorten");
 
@@ -76,7 +76,7 @@ public class LocationService {
         List<Location> locationList = query.getResultList();
         return locationList
                 .stream()
-                .map(l -> new LocationDTO(
+                .map(l -> new LocationDto(
                         l.getId(),
                         l.getName(),
                         l.getStreet(),

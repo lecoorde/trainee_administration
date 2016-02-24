@@ -1,7 +1,7 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.dto.DepartmentDto;
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
+    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Liste von Auszubildenden für Abteilung mit ID: " + id);
 
@@ -42,7 +42,7 @@ public class DepartmentController {
 //    }
 
     @RequestMapping(value = "/createDepartment/", method = RequestMethod.POST)
-    public ResponseEntity createDepartment(@RequestBody DepartmentDTO input) {
+    public ResponseEntity createDepartment(@RequestBody DepartmentDto input) {
         logger.info("Anfrage: Department speichern.");
         try {
             departmentService.createDepartment(input);
@@ -71,7 +71,7 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<DepartmentDTO> getDepartmentList() {
+    public List<DepartmentDto> getDepartmentList() {
 
         logger.info("Anfrage: Liste von Abteilungen");
 

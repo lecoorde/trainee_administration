@@ -1,11 +1,11 @@
 package com.btc.lecoorde.trainee_administration.service;
 
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.entity.JobType;
 import com.btc.lecoorde.trainee_administration.model.entity.Skill;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.dto.SkillDto;
+import com.btc.lecoorde.trainee_administration.model.dto.CreateTraineeDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class TraineeService {
 //        return traineeDetailDTO;
 
 
-    public List<SkillDTO> getSkillListByTraineeId(Long id) {
+    public List<SkillDto> getSkillListByTraineeId(Long id) {
 
         logger.info("Service lädt die Liste von Skills für ID " + id);
 
@@ -71,7 +71,7 @@ public class TraineeService {
 
         return skillList
                 .stream()
-                .map(s -> new SkillDTO(s.getId(), s.getName(), s.getDescription()))
+                .map(s -> new SkillDto(s.getId(), s.getName(), s.getDescription()))
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
@@ -107,7 +107,7 @@ public class TraineeService {
         this.entityManager.remove(this.entityManager.find(Trainee.class, id));
     }
 
-    public List<TraineeDTO> getAllTrainees() {
+    public List<TraineeDto> getAllTrainees() {
 
         logger.info("Service lädt die Liste von Auzubildenden");
 
@@ -116,7 +116,7 @@ public class TraineeService {
         List<Trainee> traineeList = query.getResultList();
         return traineeList
                 .stream()
-                .map(t -> new TraineeDTO(t.getId(),
+                .map(t -> new TraineeDto(t.getId(),
                         t.getLastName(),
                         t.getForename(),
                         t.getJob().getJobName(),

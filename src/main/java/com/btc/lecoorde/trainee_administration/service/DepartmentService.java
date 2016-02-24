@@ -1,9 +1,9 @@
 package com.btc.lecoorde.trainee_administration.service;
 
-import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
+import com.btc.lecoorde.trainee_administration.model.dto.DepartmentDto;
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +26,10 @@ public class DepartmentService {
     private EntityManager entityManager;
 
     @Transactional
-    public void createDepartment(DepartmentDTO departmentDTO) {
+    public void createDepartment(DepartmentDto departmentDto) {
         Department department = new Department();
-        department.setName(departmentDTO.getName());
-        department.setDescription(departmentDTO.getDescription());
+        department.setName(departmentDto.getName());
+        department.setDescription(departmentDto.getDescription());
         entityManager.persist(department);
     }
 
@@ -42,7 +42,7 @@ public class DepartmentService {
         return query.getSingleResult();
     }
 
-    public List<TraineeDTO> getTraineeListForDepartmentId(Long id) {
+    public List<TraineeDto> getTraineeListForDepartmentId(Long id) {
         logger.info("Service lädt die Liste von Auszubildenden für Abteilungs-ID " + id);
 
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Department d " +
@@ -53,7 +53,7 @@ public class DepartmentService {
 
         return traineeList
                 .stream()
-                .map(t -> new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
+                .map(t -> new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
@@ -62,7 +62,7 @@ public class DepartmentService {
         this.entityManager.remove(this.entityManager.find(Department.class, id));
     }
 
-    public List<DepartmentDTO> getAllDepartments() {
+    public List<DepartmentDto> getAllDepartments() {
 
         logger.info("Service lädt die Liste von Abteilungen");
 
@@ -71,7 +71,7 @@ public class DepartmentService {
         List<Department> departmentList = query.getResultList();
         return departmentList
                 .stream()
-                .map(d -> new DepartmentDTO(
+                .map(d -> new DepartmentDto(
                         d.getId(),
                         d.getName(),
                         d.getDescription()))

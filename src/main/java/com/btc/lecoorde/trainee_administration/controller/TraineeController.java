@@ -1,8 +1,8 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.dto.SkillDto;
+import com.btc.lecoorde.trainee_administration.model.dto.CreateTraineeDto;
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.TraineeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class TraineeController {
     private TraineeService traineeService;
 
     @RequestMapping(value = "/skill_list/{id}", method = RequestMethod.GET)
-    public List<SkillDTO> getSkillListById(@PathVariable("id") Long id) {
+    public List<SkillDto> getSkillListById(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Liste von Skills für Auszubildenden mit ID: " + id);
 
@@ -34,7 +34,7 @@ public class TraineeController {
     }
 
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    public TraineeDTO getSingleTrainee(@PathVariable("id") Long id) {
+//    public TraineeDto getSingleTrainee(@PathVariable("id") Long id) {
 //
 //        logger.info("Anfrage: Auszubildender mit der ID: " + id);
 //
@@ -70,7 +70,7 @@ public class TraineeController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeList() {
+    public List<TraineeDto> getTraineeList() {
 
         logger.info("Anfrage: Liste von Auszubildenden");
 

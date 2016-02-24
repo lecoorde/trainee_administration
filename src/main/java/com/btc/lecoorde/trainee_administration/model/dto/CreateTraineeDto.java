@@ -1,4 +1,4 @@
-package com.btc.lecoorde.trainee_administration.model.trainee.dto;
+package com.btc.lecoorde.trainee_administration.model.dto;
 
 import java.util.Date;
 import java.util.List;

@@ -1,9 +1,9 @@
-package com.btc.lecoorde.trainee_administration.model.department.dto;
+package com.btc.lecoorde.trainee_administration.model.dto;
 
 /**
  * Created by Denis Simon on 18.02.2016.
  */
-public class DepartmentDTO {
+public class SkillDto {
 
     private Long id;
 
@@ -11,23 +11,13 @@ public class DepartmentDTO {
 
     private String description;
 
-    public DepartmentDTO() {
+    public SkillDto() {
     }
 
-
-    public DepartmentDTO(Long id, String name, String description) {
+    public SkillDto(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "DepartmentDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 
     public Long getId() {

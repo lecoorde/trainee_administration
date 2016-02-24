@@ -1,9 +1,9 @@
 package com.btc.lecoorde.trainee_administration.service;
 
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.entity.Skill;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.dto.SkillDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class SkillService {
         return query.getSingleResult();
     }
 
-    public List<TraineeDTO> getTraineeListForSkillId(Long id) {
+    public List<TraineeDto> getTraineeListForSkillId(Long id) {
         logger.info("Service lädt die Liste von Auszubildenden für Skill-ID " + id);
 
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Skill s " +
@@ -47,7 +47,7 @@ public class SkillService {
 
         return traineeList
                 .stream()
-                .map(t -> new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
+                .map(t -> new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
                 .collect(Collectors.toCollection(LinkedList::new));
 
     }
@@ -58,7 +58,7 @@ public class SkillService {
     }
 
     @Transactional
-    public void createSkill(SkillDTO skillDto) {
+    public void createSkill(SkillDto skillDto) {
         Skill skill = new Skill();
         skill.setName(skillDto.getName());
         skill.setDescription(skillDto.getDescription());
@@ -66,7 +66,7 @@ public class SkillService {
         entityManager.persist(skill);
     }
 
-    public List<SkillDTO> getAllSkills() {
+    public List<SkillDto> getAllSkills() {
 
         logger.info("Service lädt die Liste von Skills");
 
@@ -75,7 +75,7 @@ public class SkillService {
         List<Skill> skillList = query.getResultList();
         return skillList
                 .stream()
-                .map(s -> new SkillDTO(
+                .map(s -> new SkillDto(
                         s.getId(),
                         s.getName(),
                         s.getDescription()))
