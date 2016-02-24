@@ -24,6 +24,17 @@ public class LocationService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
+    public void createLocation(LocationDTO locationDTO) {
+        Location location=new Location();
+        location.setName(locationDTO.getName());
+        location.setStreet(locationDTO.getStreet());
+        location.setCity(locationDTO.getCity());
+        location.setHouseNum(locationDTO.getHouseNum());
+        location.setPostCode(locationDTO.getPostCode());
+        entityManager.persist(location);
+    }
+
     public List<LocationDTO> getAllLocations() {
 
         logger.info("Service lädt die Liste von Standorten");

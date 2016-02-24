@@ -51,7 +51,7 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/createDepartment/", method = RequestMethod.POST)
-    public ResponseEntity<DepartmentDTO> createUser(@RequestBody DepartmentDTO input) {
+    public ResponseEntity<DepartmentDTO> createDepartment(@RequestBody DepartmentDTO input) {
         logger.info("Anfrage: Department speichern.");
         try {
             departmentService.createDepartment(input);

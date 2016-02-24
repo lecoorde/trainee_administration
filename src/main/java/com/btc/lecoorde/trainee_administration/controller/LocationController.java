@@ -9,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,6 +48,20 @@ public class LocationController {
         logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
 
         return locationService.getTraineeListForSkillId(id);
+    }
+    @RequestMapping(value = "/createLocation/", method = RequestMethod.POST)
+    public ResponseEntity createDepartment(@RequestBody LocationDTO input) {
+        logger.info("Anfrage: Location speichern.");
+        try {
+            locationService.createLocation(input);
+            logger.info("Location gespeichert: " + input);
+            return new ResponseEntity(HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)

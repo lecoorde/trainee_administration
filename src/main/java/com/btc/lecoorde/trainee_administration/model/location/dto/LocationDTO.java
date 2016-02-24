@@ -17,6 +17,9 @@ public class LocationDTO {
 
     private String city;
 
+    public LocationDTO() {
+    }
+
     public LocationDTO(Long id, String name, String street, int houseNum, int postCode, String city) {
         this.id = id;
         this.name = name;
