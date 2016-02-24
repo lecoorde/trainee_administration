@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Denis Simon on 18.02.2016.
@@ -54,12 +55,10 @@ public class LocationService {
 
         List<Trainee> traineeList = query.getResultList();
 
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
-
-        for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
-        }
-        return traineeDTOList;
+        return traineeList
+                .stream()
+                .map(t -> new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
+                .collect(Collectors.toCollection(LinkedList::new));
 
     }
 
@@ -75,16 +74,15 @@ public class LocationService {
         TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
                 "order by l.id", Location.class);
         List<Location> locationList = query.getResultList();
-        List<LocationDTO> locationDTOList = new LinkedList<>();
-        for (Location l : locationList) {
-            locationDTOList.add(new LocationDTO(
-                    l.getId(),
-                    l.getName(),
-                    l.getStreet(),
-                    l.getHouseNum(),
-                    l.getPostCode(),
-                    l.getCity()));
-        }
-        return locationDTOList;
+        return locationList
+                .stream()
+                .map(l -> new LocationDTO(
+                        l.getId(),
+                        l.getName(),
+                        l.getStreet(),
+                        l.getHouseNum(),
+                        l.getPostCode(),
+                        l.getCity()))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

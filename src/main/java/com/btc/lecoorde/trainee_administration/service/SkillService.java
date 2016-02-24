@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Denis Simon on 18.02.2016.
@@ -43,12 +44,11 @@ public class SkillService {
 
         List<Trainee> traineeList = query.getResultList();
 
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
 
-        for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
-        }
-        return traineeDTOList;
+        return traineeList
+                .stream()
+                .map(t -> new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
+                .collect(Collectors.toCollection(LinkedList::new));
 
     }
 
@@ -59,7 +59,7 @@ public class SkillService {
 
     @Transactional
     public void createSkill(SkillDTO skillDto) {
-        Skill skill=new Skill();
+        Skill skill = new Skill();
         skill.setName(skillDto.getName());
         skill.setDescription(skillDto.getDescription());
         skill.setTrainees(new HashSet<>());
@@ -73,13 +73,12 @@ public class SkillService {
         TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s " +
                 "order by s.id", Skill.class);
         List<Skill> skillList = query.getResultList();
-        List<SkillDTO> skillDTOList = new LinkedList<>();
-        for (Skill s : skillList) {
-            skillDTOList.add(new SkillDTO(
-                    s.getId(),
-                    s.getName(),
-                    s.getDescription()));
-        }
-        return skillDTOList;
+        return skillList
+                .stream()
+                .map(s -> new SkillDTO(
+                        s.getId(),
+                        s.getName(),
+                        s.getDescription()))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

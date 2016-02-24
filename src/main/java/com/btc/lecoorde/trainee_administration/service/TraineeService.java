@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Denis Simon on 16.02.2016.
@@ -68,12 +69,10 @@ public class TraineeService {
 
         List<Skill> skillList = query.getResultList();
 
-        List<SkillDTO> skillDTOList = new LinkedList<>();
-
-        for (Skill s : skillList) {
-            skillDTOList.add(new SkillDTO(s.getId(), s.getName(), s.getDescription()));
-        }
-        return skillDTOList;
+        return skillList
+                .stream()
+                .map(s -> new SkillDTO(s.getId(), s.getName(), s.getDescription()))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Transactional
@@ -91,9 +90,10 @@ public class TraineeService {
         trainee.setLocation(locationService.getLocationById(createTraineeDto.getLocationId()));
         Set<Skill> skillSet = new HashSet<>();
         if (createTraineeDto.getSkillIds() != null) {
-            for (Long aLong : createTraineeDto.getSkillIds()) {
-                skillSet.add(skillService.getSkillById(aLong));
-            }
+            skillSet.addAll(createTraineeDto.getSkillIds()
+                    .stream()
+                    .map(aLong -> skillService.getSkillById(aLong))
+                    .collect(Collectors.toList()));
         }
         trainee.setSkillList(skillSet);
         entityManager.persist(trainee);
@@ -114,17 +114,16 @@ public class TraineeService {
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
                 "order by t.id", Trainee.class);
         List<Trainee> traineeList = query.getResultList();
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
-        for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(),
-                    t.getLastName(),
-                    t.getForename(),
-                    t.getJob().getJobName(),
-                    t.getBirthday(),
-                    t.getStart_of_training(),
-                    t.getDepartment().getName(),
-                    t.getLocation().getName()));
-        }
-        return traineeDTOList;
+        return traineeList
+                .stream()
+                .map(t -> new TraineeDTO(t.getId(),
+                        t.getLastName(),
+                        t.getForename(),
+                        t.getJob().getJobName(),
+                        t.getBirthday(),
+                        t.getStart_of_training(),
+                        t.getDepartment().getName(),
+                        t.getLocation().getName()))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

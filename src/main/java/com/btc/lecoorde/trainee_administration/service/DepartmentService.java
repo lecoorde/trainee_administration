@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Denis Simon on 18.02.2016.
@@ -50,12 +51,10 @@ public class DepartmentService {
 
         List<Trainee> traineeList = query.getResultList();
 
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
-
-        for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
-        }
-        return traineeDTOList;
+        return traineeList
+                .stream()
+                .map(t -> new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Transactional
@@ -70,13 +69,12 @@ public class DepartmentService {
         TypedQuery<Department> query = this.entityManager.createQuery("select t from Department t " +
                 "order by t.id", Department.class);
         List<Department> departmentList = query.getResultList();
-        List<DepartmentDTO> departmentDTOList = new LinkedList<>();
-        for (Department d : departmentList) {
-            departmentDTOList.add(new DepartmentDTO(
-                    d.getId(),
-                    d.getName(),
-                    d.getDescription()));
-        }
-        return departmentDTOList;
+        return departmentList
+                .stream()
+                .map(d -> new DepartmentDTO(
+                        d.getId(),
+                        d.getName(),
+                        d.getDescription()))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

@@ -60,7 +60,7 @@ angular.module('skillMod', [])
         self.skill = {id: null, name: '', description: ''};
         self.createableSkill = {
             id: null
-    }
+        }
 
         $scope.filter_skill_id = '';
         $scope.filter_skill_name = '';
@@ -100,7 +100,7 @@ angular.module('skillMod', [])
                 SkillService.deleteSkill(id);
             }
         };
-        self.submitSkill=function(){
+        self.submitSkill = function () {
             SkillService.createSkill(self.createableSkill);
         };
         self.fetchAllSkills();

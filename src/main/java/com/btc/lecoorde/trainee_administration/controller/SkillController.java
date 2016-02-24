@@ -54,13 +54,6 @@ public class SkillController {
         }
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<SkillDTO> getSkillList() {
-
-        logger.info("Anfrage: Liste von Skills");
-
-        return skillService.getAllSkills();
-    }
     @RequestMapping(value = "/createSkill/", method = RequestMethod.POST)
     public ResponseEntity createSkill(@RequestBody SkillDTO input) {
         logger.info("Anfrage: Skill speichern.");
@@ -74,6 +67,14 @@ public class SkillController {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
 
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<SkillDTO> getSkillList() {
+
+        logger.info("Anfrage: Liste von Skills");
+
+        return skillService.getAllSkills();
     }
 }
 
