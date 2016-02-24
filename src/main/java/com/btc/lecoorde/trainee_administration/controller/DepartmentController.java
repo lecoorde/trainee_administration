@@ -1,8 +1,7 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.entity.Department;
-import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDto;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<DepartmentDTO> getDepartmentList() {
+    public List<DepartmentDto> getDepartmentList() {
 
         logger.info("Anfrage: Liste von Abteilungen");
 
@@ -43,7 +42,7 @@ public class DepartmentController {
 //    }
 
     @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
+    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Liste von Auszubildenden für Abteilung mit ID: " + id);
 
@@ -51,16 +50,16 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/createDepartment/", method = RequestMethod.POST)
-    public ResponseEntity<DepartmentDTO> createUser(@RequestBody DepartmentDTO input) {
+    public ResponseEntity<DepartmentDto> createUser(@RequestBody DepartmentDto input) {
         logger.info("Anfrage: Department speichern.");
         try {
             departmentService.createDepartment(input);
             logger.info("Department gespeichert: " + input);
-            return new ResponseEntity<DepartmentDTO>(HttpStatus.CREATED);
+            return new ResponseEntity<DepartmentDto>(HttpStatus.CREATED);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<DepartmentDTO>(HttpStatus.CONFLICT);
+            return new ResponseEntity<DepartmentDto>(HttpStatus.CONFLICT);
         }
 
     }

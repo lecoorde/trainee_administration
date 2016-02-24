@@ -94,7 +94,7 @@ angular.module('traineeMod', [])
             TraineeService.updateTrainee(self.createableTrainee);
             $scope.editingData[trainee.id] = false;
         };
-        $scope.cancel = function(trainee){
+        $scope.cancelUpdate = function(trainee){
             $scope.editingData[trainee.id] = false;
         };
 

@@ -1,8 +1,8 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
+import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.TraineeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class TraineeController {
     private TraineeService traineeService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeList() {
+    public List<TraineeDto> getTraineeList() {
 
         logger.info("Anfrage: Liste von Auszubildenden");
 
@@ -42,7 +42,7 @@ public class TraineeController {
 //    }
 
     @RequestMapping(value = "/skill_list/{id}", method = RequestMethod.GET)
-    public List<SkillDTO> getSkillListById(@PathVariable("id") Long id) {
+    public List<SkillDto> getSkillListById(@PathVariable("id") Long id) {
 
         logger.info("Anfrage: Liste von Skills für Auszubildenden mit ID: " + id);
 
@@ -50,29 +50,29 @@ public class TraineeController {
     }
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
-    public ResponseEntity<CreateTraineeDto> createTrainee(@RequestBody CreateTraineeDto input) {
+    public ResponseEntity createTrainee(@RequestBody CreateTraineeDto input) {
         logger.info("Anfrage: Auszubildenden speichern");
         try {
             traineeService.createTrainee(input);
             logger.info("Service: Auszubildender gespeichert: " + input);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity(HttpStatus.CREATED);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
     @RequestMapping(value="/updateTrainee/", method = RequestMethod.POST)
-    public ResponseEntity<CreateTraineeDto> updateTrainee(@RequestBody CreateTraineeDto input){
+    public ResponseEntity updateTrainee(@RequestBody CreateTraineeDto input){
         logger.info("Anfrage: Auszubildenden bearbeiten");
         try {
             traineeService.updateTrainee(input);
             logger.info("Service: Auszubildender erfolgreich bearbeitet: " + input);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity(HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
 

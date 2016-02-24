@@ -3,7 +3,7 @@ package com.btc.lecoorde.trainee_administration.model.department.dto;
 /**
  * Created by Denis Simon on 18.02.2016.
  */
-public class DepartmentDTO {
+public class DepartmentDto {
 
     private Long id;
 
@@ -11,12 +11,12 @@ public class DepartmentDTO {
 
     private String description;
 
-    public DepartmentDTO() {
+    public DepartmentDto() {
     }
 
     ;
 
-    public DepartmentDTO(Long id, String name, String description) {
+    public DepartmentDto(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

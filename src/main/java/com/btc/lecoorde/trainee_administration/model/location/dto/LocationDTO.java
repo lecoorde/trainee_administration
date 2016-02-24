@@ -3,7 +3,7 @@ package com.btc.lecoorde.trainee_administration.model.location.dto;
 /**
  * Created by Denis Simon on 18.02.2016.
  */
-public class LocationDTO {
+public class LocationDto {
 
     private Long id;
 
@@ -17,7 +17,7 @@ public class LocationDTO {
 
     private String city;
 
-    public LocationDTO(Long id, String name, String street, int houseNum, int postCode, String city) {
+    public LocationDto(Long id, String name, String street, int houseNum, int postCode, String city) {
         this.id = id;
         this.name = name;
         this.street = street;

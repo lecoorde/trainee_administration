@@ -2,8 +2,8 @@ package com.btc.lecoorde.trainee_administration.service;
 
 import com.btc.lecoorde.trainee_administration.model.entity.Skill;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDto;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,16 +24,16 @@ public class SkillService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<SkillDTO> getAllSkills() {
+    public List<SkillDto> getAllSkills() {
 
         logger.info("Service lädt die Liste von Skills");
 
         TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s " +
                 "order by s.id", Skill.class);
         List<Skill> skillList = query.getResultList();
-        List<SkillDTO> skillDTOList = new LinkedList<>();
+        List<SkillDto> skillDTOList = new LinkedList<>();
         for (Skill s : skillList) {
-            skillDTOList.add(new SkillDTO(
+            skillDTOList.add(new SkillDto(
                     s.getId(),
                     s.getName(),
                     s.getDescription()));
@@ -50,7 +50,7 @@ public class SkillService {
         return query.getSingleResult();
     }
 
-    public List<TraineeDTO> getTraineeListForSkillId(Long id) {
+    public List<TraineeDto> getTraineeListForSkillId(Long id) {
         logger.info("Service lädt die Liste von Auszubildenden für Skill-ID "+id);
 
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Skill s " +
@@ -59,10 +59,10 @@ public class SkillService {
 
         List<Trainee> traineeList = query.getResultList();
 
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+        List<TraineeDto> traineeDTOList = new LinkedList<>();
 
         for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
+            traineeDTOList.add(new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
         }
         return traineeDTOList;
 

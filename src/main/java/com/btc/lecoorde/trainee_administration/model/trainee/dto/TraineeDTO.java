@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by Denis Simon on 17.02.2016.
  */
-public class TraineeDTO {
+public class TraineeDto {
 
     private Long id;
 
@@ -24,7 +24,7 @@ public class TraineeDTO {
     private String locationName;
 
 
-    public TraineeDTO(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training, String departmentName, String locationName) {
+    public TraineeDto(Long id, String lastName, String forename, String jobName, Date birthday, Date start_of_training, String departmentName, String locationName) {
         this.id = id;
         this.lastName = lastName;
         this.forename = forename;
@@ -35,7 +35,7 @@ public class TraineeDTO {
         this.locationName = locationName;
     }
 
-    public TraineeDTO() {
+    public TraineeDto() {
     }
 
     public String getDepartmentName() {

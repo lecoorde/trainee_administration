@@ -3,9 +3,9 @@ package com.btc.lecoorde.trainee_administration.service;
 import com.btc.lecoorde.trainee_administration.model.entity.JobType;
 import com.btc.lecoorde.trainee_administration.model.entity.Skill;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
+import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,20 +59,23 @@ public class TraineeService {
 //        return traineeDetailDTO;
 
 
-    public List<SkillDTO> getSkillListByTraineeId(Long id) {
+    public List<SkillDto> getSkillListByTraineeId(Long id) {
 
+        String traineeIdParameterName = "traineeId";
         logger.info("Service lädt die Liste von Skills für ID " + id);
 
-        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Trainee t " +
+        TypedQuery<Skill> query = this.entityManager.createQuery(
+                "select s from Trainee t " +
                 "join t.skillList s " +
-                "where t.id = " + id, Skill.class);
+                "where t.id =:" + traineeIdParameterName, Skill.class);
 
+        query.setParameter(traineeIdParameterName,id);
         List<Skill> skillList = query.getResultList();
 
-        List<SkillDTO> skillDTOList = new LinkedList<>();
+        List<SkillDto> skillDTOList = new LinkedList<>();
 
         for (Skill s : skillList) {
-            skillDTOList.add(new SkillDTO(s.getId(), s.getName(), s.getDescription()));
+            skillDTOList.add(new SkillDto(s.getId(), s.getName(), s.getDescription()));
         }
         return skillDTOList;
     }
@@ -115,21 +118,25 @@ public class TraineeService {
         t.setLocation(locationService.getLocationById(input.getLocationId()));
         Set<Skill> skillSet = new HashSet<>();
         if (input.getSkillIds() != null) {
-            skillSet.addAll(input.getSkillIds().stream().map(aLong -> skillService.getSkillById(aLong)).collect(Collectors.toList()));
+            skillSet.addAll(input.getSkillIds()
+                    .stream()
+                    .map(aLong -> skillService.getSkillById(aLong))
+                    .collect(Collectors.toList()));
         }
         t.setSkillList(skillSet);
     }
 
-    public List<TraineeDTO> getAllTrainees() {
+    public List<TraineeDto> getAllTrainees() {
 
         logger.info("Service lädt die Liste von Auzubildenden");
 
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
+        TypedQuery<Trainee> query = this.entityManager.createQuery(
+                "select t from Trainee t " +
                 "order by t.id", Trainee.class);
         List<Trainee> traineeList = query.getResultList();
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+        List<TraineeDto> traineeDTOList = new LinkedList<>();
         for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(),
+            traineeDTOList.add(new TraineeDto(t.getId(),
                     t.getLastName(),
                     t.getForename(),
                     t.getJob().getJobName(),

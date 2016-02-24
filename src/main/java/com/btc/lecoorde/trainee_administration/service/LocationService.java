@@ -2,8 +2,8 @@ package com.btc.lecoorde.trainee_administration.service;
 
 import com.btc.lecoorde.trainee_administration.model.entity.Location;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDTO;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDto;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,16 +24,16 @@ public class LocationService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<LocationDTO> getAllLocations() {
+    public List<LocationDto> getAllLocations() {
 
         logger.info("Service lädt die Liste von Standorten");
 
         TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
                 "order by l.id", Location.class);
         List<Location> locationList = query.getResultList();
-        List<LocationDTO> locationDTOList = new LinkedList<>();
+        List<LocationDto> locationDTOList = new LinkedList<>();
         for (Location l : locationList) {
-            locationDTOList.add(new LocationDTO(
+            locationDTOList.add(new LocationDto(
                     l.getId(),
                     l.getName(),
                     l.getStreet(),
@@ -53,7 +53,7 @@ public class LocationService {
         return query.getSingleResult();
     }
 
-    public List<TraineeDTO> getTraineeListForSkillId(Long id) {
+    public List<TraineeDto> getTraineeListForSkillId(Long id) {
 
         logger.info("Service lädt die Liste von Auszubildenden für Standort-ID "+id);
 
@@ -63,17 +63,17 @@ public class LocationService {
 
         List<Trainee> traineeList = query.getResultList();
 
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+        List<TraineeDto> traineeDTOList = new LinkedList<>();
 
         for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
+            traineeDTOList.add(new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
         }
         return traineeDTOList;
 
     }
 
     @Transactional
-    public void deleteLocation(Long id) {
-        this.entityManager.remove(this.entityManager.find(Location.class, id));
+    public void deleteTrainee(Long id) {
+        this.entityManager.remove(this.entityManager.find(Trainee.class, id));
     }
 }

@@ -1,8 +1,8 @@
 package com.btc.lecoorde.trainee_administration.service;
 
-import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDTO;
+import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDto;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
+import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.entity.Department;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class DepartmentService {
     private EntityManager entityManager;
 
     @Transactional
-    public void createDepartment(DepartmentDTO departmentDTO) {
+    public void createDepartment(DepartmentDto departmentDTO) {
         Department department=new Department();
         department.setName(departmentDTO.getName());
         department.setDescription(departmentDTO.getDescription());
@@ -33,16 +33,16 @@ public class DepartmentService {
     }
 
 
-    public List<DepartmentDTO> getAllDepartments() {
+    public List<DepartmentDto> getAllDepartments() {
 
         logger.info("Service lädt die Liste von Abteilungen");
 
         TypedQuery<Department> query = this.entityManager.createQuery("select t from Department t " +
                 "order by t.id", Department.class);
         List<Department> departmentList = query.getResultList();
-        List<DepartmentDTO> departmentDTOList = new LinkedList<>();
+        List<DepartmentDto> departmentDTOList = new LinkedList<>();
         for (Department d : departmentList) {
-            departmentDTOList.add(new DepartmentDTO(
+            departmentDTOList.add(new DepartmentDto(
                     d.getId(),
                     d.getName(),
                     d.getDescription()));
@@ -59,7 +59,7 @@ public class DepartmentService {
         return query.getSingleResult();
     }
 
-    public List<TraineeDTO> getTraineeListForDepartmentId(Long id) {
+    public List<TraineeDto> getTraineeListForDepartmentId(Long id) {
         logger.info("Service lädt die Liste von Auszubildenden für Abteilungs-ID "+id);
 
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Department d " +
@@ -68,10 +68,10 @@ public class DepartmentService {
 
         List<Trainee> traineeList = query.getResultList();
 
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+        List<TraineeDto> traineeDTOList = new LinkedList<>();
 
         for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
+            traineeDTOList.add(new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
         }
         return traineeDTOList;
     }
