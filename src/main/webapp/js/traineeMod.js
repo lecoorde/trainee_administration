@@ -139,7 +139,6 @@ angular.module('traineeMod', [])
 
             if (confirm("Möchten Sie diesen Auszubildenden wirklich löschen?") == true) {
                 TraineeService.deleteTrainee(id);
-                alert("Auszubildender mit der ID:"+id+" wurde gelöscht!")
             }
         };
 
