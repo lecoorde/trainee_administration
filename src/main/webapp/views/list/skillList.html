@@ -1,6 +1,6 @@
 <div ng-controller="SkillCtrl as sctrl">
     <a href="#/skills/form" class="btn btn-default btn-sm">Skill hinzufügen</a>
-    <br/>
+    <br></br>
     <input type="checkbox" ng-model="filter">Filter aktivieren</input>
 
     <table class="table" ng-show="filter" title="Filter">
@@ -15,13 +15,12 @@
             <td><input ng-model="filter_skill_description"/></td>
     </table>
 
-    <table class="table">
+    <table style="table-layout:fixed;" class="table">
         <tr>
             <th></th>
             <th>ID</th>
             <th>Bezeichnung</th>
-            <th colspan="2">Beschreibung</th>
-            <th></th>
+            <th colspan="3">Beschreibung</th>
 
         </tr>
         <tr bgcolor="#add8e6" ng-repeat-start="skill in sctrl.skills | filter:{id: filter_skill_id, name: filter_skill_name,
@@ -32,24 +31,23 @@
             </td>
             <td>{{skill.id}}</td>
             <td>{{skill.name}}</td>
-            <td colspan="2">{{skill.description}}</td>
-            <td></td>
+            <td colspan="3">{{skill.description}}</td>
         </tr>
-        <tr ng-if="skill.expanded" ng-init="sctrl.getTraineesBySkillId(skill.id)">
-            <td colspan="2" ><span class="table-row-title">Auszubildende</span></td>
-            <td colspan="1"><span class="table-row-title2">Id</span></td>
-            <td colspan="1"><span class="table-row-title2">Vorname</span></td>
-            <td colspan="1"><span class="table-row-title2">Nachname</span></td>
+        <tr ng-if="skill.expanded" ng-init="sctrl.getTraineesBySkillId(skill.id)" ng-show="sctrl.trainees.length">
+            <th colspan="3">Auszubildende</th>
+            <th colspan="1">Id</th>
+            <th colspan="1">Vorname</th>
+            <th colspan="1">Nachname</th>
         </tr>
         <tr ng-if="skill.expanded" ng-repeat="trainee in sctrl.trainees" >
-            <td colspan="1"></td>
-            <td align="right">►</td>
+            <td colspan="2"></td>
+            <td align="right">•</td>
             <td colspan="1">{{trainee.id}}</td>
             <td colspan="1">{{trainee.forename}}</td>
             <td colspan="1">{{trainee.lastName}}</td>
         </tr>
         <tr ng-if="skill.expanded" ng-repeat-end="">
-            <td colspan="2"><a href="#/skills/update" ng-click="sctrl.updateSkillById(skill.id)"
+            <td colspan="3"><a href="#/skills/update" ng-click="sctrl.updateSkillById(skill.id)"
                                class="btn btn-default btn-sm">Skill bearbeiten</a></td>
             <td colspan="3"><a href="#/skills/list" ng-click="sctrl.confirmDelete(skill.id)"
                                class="btn btn-default btn-sm">Skill löschen</a></td>

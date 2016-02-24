@@ -39,6 +39,16 @@ angular.module('departmentMod', [])
                             return $q.reject(errResponse);
                         }
                     );
+            },
+            deleteDepartment: function (id) {
+                return $http.post('http://localhost:7070/departments/delete/' + id)
+                    .then(function (response) {
+                            return response.data
+                        }, function (errResponse) {
+                            console.error('Error while deleting department');
+                            return $q.reject(errResponse);
+                        }
+                    );
             }
         }
     }])
@@ -96,5 +106,12 @@ angular.module('departmentMod', [])
         self.submitDepartment=function() {
             DepartmentService.createDepartment(self.createableDepartment);
         };
+        self.confirmDelete = function confirmDelete(id) {
+
+            if (confirm("Möchten Sie diese Abteilung wirklich löschen?") == true) {
+                DepartmentService.deleteDepartment(id);
+            }
+        };
+        self.reset();
         self.fetchAllDepartments();
     }]);

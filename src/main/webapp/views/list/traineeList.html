@@ -1,9 +1,9 @@
 <div ng-controller="TraineeCtrl as tctrl">
     <a href="#/trainees/form" class="btn btn-default btn-sm">Auszubildenden hinzufügen</a>
-    <br/>
+    <br></br>
     <input type="checkbox" ng-model="filter">Filter aktivieren</input>
 
-    <table class="table" ng-show="filter" title="Filter">
+    <table  class="table" ng-show="filter" title="Filter">
         <tr>
             <th>ID</th>
             <th>Nachname</th>
@@ -59,19 +59,19 @@
             <td></td>
         </tr>
         <tr ng-if="trainee.expanded" ng-init="tctrl.getSkillsByTraineeId(trainee.id)">
-            <td colspan="3"><span class="table-row-title">Arbeitsplatz</span></td>
-            <td colspan="2"><span class="table-row-title2">Standort</span></td>
-            <td colspan="2"><span class="table-row-title2">Abteilung</span></td>
+            <th colspan="3">Arbeitsplatz</th>
+            <th colspan="2">Standort</th>
+            <th colspan="2">Abteilung</th>
         </tr>
         <tr ng-if="trainee.expanded">
             <td colspan="3"></td>
             <td colspan="2">{{trainee.locationName}}</td>
             <td colspan="2">{{trainee.departmentName}}</td>
         </tr>
-        <tr ng-if="trainee.expanded">
-            <td colspan="3"><span class="table-row-title">Skills</span></td>
-            <td colspan="2"><span class="table-row-title2">Bezeichnung</span></td>
-            <td colspan="3"><span class="table-row-title2">Beschreibung</span></td>
+        <tr ng-if="trainee.expanded" ng-show="tctrl.traineeskills.length">
+            <th colspan="3">Skills</th>
+            <th colspan="2">Bezeichnung</th>
+            <th colspan="3">Beschreibung</th>
         </tr>
         <tr ng-if="trainee.expanded" ng-repeat="skill in tctrl.traineeskills">
             <td colspan="2"></td>

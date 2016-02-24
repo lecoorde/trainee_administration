@@ -65,6 +65,20 @@ public class DepartmentController {
 
     }
 
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public ResponseEntity deleteDepartment(@PathVariable  Long id) {
+        logger.info("Anfrage: Department löschen");
+        try {
+            departmentService.deleteDepartment(id);
+            logger.info("Service: Abteilung mit ID: "+id+" wurde gelöscht!");
+            return new ResponseEntity(HttpStatus.OK);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+    }
+
 
 }
 

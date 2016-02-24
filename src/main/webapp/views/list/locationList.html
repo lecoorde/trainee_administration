@@ -1,9 +1,10 @@
 <div ng-controller="LocationCtrl as lctrl">
 
-    <a href="#/locations/form" class="btn btn-default btn-sm">Standort hinzufügen</a><br></br>
+    <a href="#/locations/form" class="btn btn-default btn-sm">Standort hinzufügen</a>
+    <br></br>
     <input type="checkbox" ng-model="filter">Filter aktivieren</input>
 
-    <table class="table" ng-show="filter" title="Filter">
+    <table style="table-layout:fixed;" class="table" ng-show="filter" title="Filter">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -19,7 +20,7 @@
             <td><input ng-model="filter_location_city"/></td>
     </table>
 
-    <table class="table">
+    <table class="table" style="table-layout:fixed;">
         <tr>
             <th></th>
             <th>ID</th>
@@ -42,18 +43,24 @@
             <td>{{location.city}}</td>
 
         </tr>
-        <tr ng-if="location.expanded" ng-init="lctrl.getTraineesByLocationId(location.id)">
-            <td colspan="3"><span class="table-row-title">Auszubildende</span></td>
-            <td colspan="1"><span class="table-row-title2">Id</span></td>
-            <td colspan="1"><span class="table-row-title2">Vorname</span></td>
-            <td colspan="1"><span class="table-row-title2">Nachname</span></td>
+        <tr ng-if="location.expanded" style="table-layout:fixed;" ng-init="lctrl.getTraineesByLocationId(location.id)" ng-show="lctrl.trainees.length">
+            <th colspan="3">Auszubildende</th>
+            <th colspan="1">Id</th>
+            <th colspan="1">Vorname</th>
+            <th colspan="1">Nachname</th>
         </tr>
-        <tr ng-if="location.expanded" ng-repeat="trainee in lctrl.trainees" ng-repeat-end="">
+        <tr ng-if="location.expanded" ng-repeat="trainee in lctrl.trainees" >
             <td colspan="2"></td>
-            <td align="right">►</td>
+            <td align="right">•</td>
             <td colspan="1">{{trainee.id}}</td>
             <td colspan="1">{{trainee.forename}}</td>
             <td colspan="1">{{trainee.lastName}}</td>
+        </tr>
+        <tr ng-if="location.expanded" ng-repeat-end="">
+            <td colspan="3"><a href="#/locations/update" ng-click="lctrl.updateLocationById(location.id)"
+                               class="btn btn-default btn-sm">Standort bearbeiten</a></td>
+            <td colspan="3"><a href="#/locations/list" ng-click="lctrl.confirmDelete(location.id)"
+                               class="btn btn-default btn-sm">Standort löschen</a></td>
         </tr>
     </table>
 </div>
