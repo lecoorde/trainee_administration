@@ -29,7 +29,7 @@ angular.module('departmentMod', [])
                     });
             },
             createDepartment: function(department){
-                return $http.post('http://localhost:7070/trainees/createDepartment/', department)
+                return $http.post('http://localhost:7070/departments/createDepartment/', department)
                     .then(
                         function (response) {
                             return response.data;
@@ -52,6 +52,9 @@ angular.module('departmentMod', [])
         $scope.filter_department_id='';
         $scope.filter_department_name='';
         $scope.filter_department_description='';
+        self.createableDepartment={
+            id:null
+        };
 
         self.fetchAllDepartments = function () {
             DepartmentService.getDepartments().then(
@@ -90,13 +93,8 @@ angular.module('departmentMod', [])
                 }
             )
         };
-        self.reset=function(){
-            self.department.name="Bitte Namen eingeben";
-            self.department.description="Bitte Beschreibung eingeben"
+        self.submitDepartment=function() {
+            DepartmentService.createDepartment(self.createableDepartment);
         };
-        self.submit=function(){
-            DepartmentService.createDepartment(self.department);
-        };
-        self.reset();
         self.fetchAllDepartments();
     }]);

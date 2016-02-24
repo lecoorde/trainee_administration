@@ -3,7 +3,7 @@
 <h2>Auszubildenden hinzufügen</h2>
 <div ng-controller="TraineeCtrl as ctrl">
 
-    <form name="traineeForm" ng-submit="ctrl.submit()" novalidate>
+    <form name="traineeForm" ng-submit="ctrl.submitTrainee()" novalidate>
         <table>
             <tr>
                 <td>Vorname:</td>
@@ -68,7 +68,7 @@
                             required>
                     <option value="">---Bitte Abteilung wählen---</option>
                 </select>
-                    </input>
+
                      <span style="color:red"
                            ng-show="traineeForm.selectedDepartmentId.$dirty && traineeForm.selectedDepartmentId.$invalid">
                         <span ng-show="traineeForm.selectedDepartmentId.$error.required">Bitte wählen Sie eine Abteilung aus</span>
@@ -92,7 +92,7 @@
                 <td>Skills:</td>
                 <td>
 
-                    <select class="form-control" ng-model="ctrl.createableTrainee.skillIds" multiple>
+                    <select name="selectSkills" class="form-control" ng-model="ctrl.createableTrainee.skillIds" multiple>
                         <option ng:repeat="skill in sctrl.skills" value="{{skill.id}}">{{skill.name}}</option>
                     </select>
 
@@ -101,11 +101,13 @@
 
             <tr>
                 <td>
-                    <button ng-click="ctrl.reset()">Zurücksetzen</button>
+
                 </td>
                 <td>
-                    <input type="submit"  value="Speichern" ng-disabled="traineeForm.$invalid">
-                    </input>
+
+                    <a href="#/trainees" type="submit" ng-click="ctrl.submitTrainee()" class="btn btn-default btn-sm" ng-disabled="traineeForm.$invalid">Speichern</a>
+
+
                 </td>
             </tr>
 
