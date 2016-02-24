@@ -57,8 +57,7 @@
             <td colspan="1">{{trainee.lastName}}</td>
         </tr>
         <tr ng-if="location.expanded" ng-repeat-end="">
-            <td colspan="3"><a href="#/locations/update" ng-click="lctrl.updateLocationById(location.id)"
-                               class="btn btn-default btn-sm">Standort bearbeiten</a></td>
+            <td colspan="3"><a href="#/locations/update" class="btn btn-default btn-sm">Standort bearbeiten</a></td>
             <td colspan="3"><a href="#/locations/list" ng-click="lctrl.confirmDelete(location.id)"
                                class="btn btn-default btn-sm">Standort löschen</a></td>
         </tr>

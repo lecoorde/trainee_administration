@@ -62,6 +62,19 @@ public class TraineeController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
+    @RequestMapping(value="/updateTrainee/", method = RequestMethod.POST)
+    public ResponseEntity<CreateTraineeDto> updateTrainee(@RequestBody CreateTraineeDto input){
+        logger.info("Anfrage: Auszubildenden bearbeiten");
+        try {
+            traineeService.updateTrainee(input);
+            logger.info("Service: Auszubildender erfolgreich bearbeitet: " + input);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity deleteTrainee(@PathVariable  Long id) {

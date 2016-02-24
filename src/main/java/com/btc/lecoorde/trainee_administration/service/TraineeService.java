@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Denis Simon on 16.02.2016.
@@ -101,6 +102,23 @@ public class TraineeService {
             skill.getTrainees().add(trainee);
         }
     }
+    @Transactional
+    public void updateTrainee(CreateTraineeDto input) {
+
+        Trainee t = this.entityManager.find(Trainee.class, input.getId());
+        t.setLastName(input.getLastName());
+        t.setForename(input.getForename());
+        t.setJob(JobType.values()[input.getJobOrdinal()]);
+        t.setBirthday(input.getBirthday());
+        t.setStart_of_training(input.getStart_of_training());
+        t.setDepartment(departmentService.getDepartmentById(input.getDepartmentId()));
+        t.setLocation(locationService.getLocationById(input.getLocationId()));
+        Set<Skill> skillSet = new HashSet<>();
+        if (input.getSkillIds() != null) {
+            skillSet.addAll(input.getSkillIds().stream().map(aLong -> skillService.getSkillById(aLong)).collect(Collectors.toList()));
+        }
+        t.setSkillList(skillSet);
+    }
 
     public List<TraineeDTO> getAllTrainees() {
 
@@ -127,4 +145,6 @@ public class TraineeService {
     public void deleteTrainee(Long id) {
         this.entityManager.remove(this.entityManager.find(Trainee.class, id));
     }
+
+
 }

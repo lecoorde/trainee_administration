@@ -20,3 +20,19 @@
     font-size: 13px;
     font-family: "Arial Black";
 }
+#wrapper {
+    border: 4px solid darkblue;
+}
+#div1 {
+    display: inline-block;
+    width:auto;
+    height:auto;
+    border: 1px solid aqua;
+}
+#div2 {
+    vertical-align: top;
+    display: inline-block;
+    width:auto;
+    height:auto;
+    border: 1px solid aqua;
+}
