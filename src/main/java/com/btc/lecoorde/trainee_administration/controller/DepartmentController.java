@@ -42,16 +42,16 @@ public class DepartmentController {
 //    }
 
     @RequestMapping(value = "/createDepartment/", method = RequestMethod.POST)
-    public ResponseEntity<DepartmentDTO> createDepartment(@RequestBody DepartmentDTO input) {
+    public ResponseEntity createDepartment(@RequestBody DepartmentDTO input) {
         logger.info("Anfrage: Department speichern.");
         try {
             departmentService.createDepartment(input);
             logger.info("Department gespeichert: " + input);
-            return new ResponseEntity<DepartmentDTO>(HttpStatus.CREATED);
+            return new ResponseEntity(HttpStatus.CREATED);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<DepartmentDTO>(HttpStatus.CONFLICT);
+            return new ResponseEntity(HttpStatus.CONFLICT);
         }
 
     }

@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,6 +55,15 @@ public class SkillService {
     @Transactional
     public void deleteSkill(Long id) {
         this.entityManager.remove(this.entityManager.find(Skill.class, id));
+    }
+
+    @Transactional
+    public void createSkill(SkillDTO skillDto) {
+        Skill skill=new Skill();
+        skill.setName(skillDto.getName());
+        skill.setDescription(skillDto.getDescription());
+        skill.setTrainees(new HashSet<>());
+        entityManager.persist(skill);
     }
 
     public List<SkillDTO> getAllSkills() {
