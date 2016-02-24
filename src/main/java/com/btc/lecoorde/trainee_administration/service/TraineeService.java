@@ -1,11 +1,11 @@
 package com.btc.lecoorde.trainee_administration.service;
 
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.entity.JobType;
 import com.btc.lecoorde.trainee_administration.model.entity.Skill;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
+import com.btc.lecoorde.trainee_administration.model.dto.SkillDto;
+import com.btc.lecoorde.trainee_administration.model.dto.CreateTraineeDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,12 +72,10 @@ public class TraineeService {
         query.setParameter(traineeIdParameterName,id);
         List<Skill> skillList = query.getResultList();
 
-        List<SkillDto> skillDTOList = new LinkedList<>();
-
-        for (Skill s : skillList) {
-            skillDTOList.add(new SkillDto(s.getId(), s.getName(), s.getDescription()));
-        }
-        return skillDTOList;
+        return skillList
+                .stream()
+                .map(s -> new SkillDto(s.getId(), s.getName(), s.getDescription()))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Transactional
@@ -95,9 +93,10 @@ public class TraineeService {
         trainee.setLocation(locationService.getLocationById(createTraineeDto.getLocationId()));
         Set<Skill> skillSet = new HashSet<>();
         if (createTraineeDto.getSkillIds() != null) {
-            for (Long aLong : createTraineeDto.getSkillIds()) {
-                skillSet.add(skillService.getSkillById(aLong));
-            }
+            skillSet.addAll(createTraineeDto.getSkillIds()
+                    .stream()
+                    .map(aLong -> skillService.getSkillById(aLong))
+                    .collect(Collectors.toList()));
         }
         trainee.setSkillList(skillSet);
         entityManager.persist(trainee);
@@ -134,24 +133,20 @@ public class TraineeService {
                 "select t from Trainee t " +
                 "order by t.id", Trainee.class);
         List<Trainee> traineeList = query.getResultList();
-        List<TraineeDto> traineeDTOList = new LinkedList<>();
-        for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDto(t.getId(),
-                    t.getLastName(),
-                    t.getForename(),
-                    t.getJob().getJobName(),
-                    t.getBirthday(),
-                    t.getStart_of_training(),
-                    t.getDepartment().getName(),
-                    t.getLocation().getName()));
-        }
-        return traineeDTOList;
+        return traineeList
+                .stream()
+                .map(t -> new TraineeDto(t.getId(),
+                        t.getLastName(),
+                        t.getForename(),
+                        t.getJob().getJobName(),
+                        t.getBirthday(),
+                        t.getStart_of_training(),
+                        t.getDepartment().getName(),
+                        t.getLocation().getName()))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
-
     @Transactional
     public void deleteTrainee(Long id) {
         this.entityManager.remove(this.entityManager.find(Trainee.class, id));
     }
-
-
 }

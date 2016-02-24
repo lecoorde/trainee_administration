@@ -1,17 +1,14 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
+import com.btc.lecoorde.trainee_administration.model.dto.LocationDto;
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.LocationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,12 +24,12 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<LocationDto> getLocationList() {
+    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
+    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
 
-        logger.info("Anfrage: Liste von Standorten");
+        logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
 
-        return locationService.getAllLocations();
+        return locationService.getTraineeListForSkillId(id);
     }
 
 
@@ -44,25 +41,40 @@ public class LocationController {
 //        return locationService.getLocationById(id);
 //    }
 
-    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
+    @RequestMapping(value = "/createLocation/", method = RequestMethod.POST)
+    public ResponseEntity createDepartment(@RequestBody LocationDto input) {
+        logger.info("Anfrage: Location speichern.");
+        try {
+            locationService.createLocation(input);
+            logger.info("Location gespeichert: " + input);
+            return new ResponseEntity(HttpStatus.CREATED);
 
-        logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
 
-        return locationService.getTraineeListForSkillId(id);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public ResponseEntity deleteLocation(@PathVariable  Long id) {
+    public ResponseEntity deleteLocation(@PathVariable Long id) {
         logger.info("Anfrage: Standort löschen");
         try {
             locationService.deleteLocation(id);
-            logger.info("Service: Standort mit ID: "+id+" wurde gelöscht!");
+            logger.info("Service: Standort mit ID: " + id + " wurde gelöscht!");
             return new ResponseEntity(HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<LocationDto> getLocationList() {
+
+        logger.info("Anfrage: Liste von Standorten");
+
+        return locationService.getAllLocations();
     }
 }

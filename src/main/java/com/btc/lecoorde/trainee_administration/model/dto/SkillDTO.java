@@ -1,9 +1,9 @@
-package com.btc.lecoorde.trainee_administration.model.skill.dto;
+package com.btc.lecoorde.trainee_administration.model.dto;
 
 /**
  * Created by Denis Simon on 18.02.2016.
  */
-public class SkillDTO {
+public class SkillDto {
 
     private Long id;
 
@@ -11,7 +11,10 @@ public class SkillDTO {
 
     private String description;
 
-    public SkillDTO(Long id, String name, String description) {
+    public SkillDto() {
+    }
+
+    public SkillDto(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

@@ -1,4 +1,4 @@
-package com.btc.lecoorde.trainee_administration.model.trainee.dto;
+package com.btc.lecoorde.trainee_administration.model.dto;
 
 import java.util.Date;
 
@@ -36,6 +36,18 @@ public class TraineeDto {
     }
 
     public TraineeDto() {
+    }
+
+    @Override
+    public String toString() {
+        return "TraineeDto{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", forename='" + forename + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", birthday=" + birthday +
+                ", start_of_training=" + start_of_training +
+                '}';
     }
 
     public String getDepartmentName() {
@@ -100,17 +112,5 @@ public class TraineeDto {
 
     public void setStart_of_training(Date start_of_training) {
         this.start_of_training = start_of_training;
-    }
-
-    @Override
-    public String toString() {
-        return "TraineeDTO{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", forename='" + forename + '\'' +
-                ", jobName='" + jobName + '\'' +
-                ", birthday=" + birthday +
-                ", start_of_training=" + start_of_training +
-                '}';
     }
 }

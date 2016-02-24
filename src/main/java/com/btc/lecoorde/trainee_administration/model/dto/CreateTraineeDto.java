@@ -1,4 +1,4 @@
-package com.btc.lecoorde.trainee_administration.model.trainee.dto;
+package com.btc.lecoorde.trainee_administration.model.dto;
 
 import java.util.Date;
 import java.util.List;
@@ -39,6 +39,22 @@ public class CreateTraineeDto {
     }
 
     public CreateTraineeDto() {
+    }
+
+    @Override
+    public String toString() {
+        return "CreateTraineeDto{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", forename='" + forename + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", birthday=" + birthday +
+                ", start_of_training=" + start_of_training +
+                ", locationId=" + locationId +
+                ", departmentId=" + departmentId +
+                ", jobOrdinal=" + jobOrdinal +
+                ", skillIds=" + skillIds +
+                '}';
     }
 
     public Long getId() {
@@ -97,7 +113,6 @@ public class CreateTraineeDto {
         this.jobOrdinal = jobOrdinal;
     }
 
-
     public long getLocationId() {
         return locationId;
     }
@@ -120,21 +135,5 @@ public class CreateTraineeDto {
 
     public void setSkillIds(List<Long> skillIds) {
         this.skillIds = skillIds;
-    }
-
-    @Override
-    public String toString() {
-        return "CreateTraineeDto{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", forename='" + forename + '\'' +
-                ", jobName='" + jobName + '\'' +
-                ", birthday=" + birthday +
-                ", start_of_training=" + start_of_training +
-                ", locationId=" + locationId +
-                ", departmentId=" + departmentId +
-                ", jobOrdinal=" + jobOrdinal +
-                ", skillIds=" + skillIds +
-                '}';
     }
 }

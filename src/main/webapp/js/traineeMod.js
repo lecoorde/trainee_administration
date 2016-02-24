@@ -32,9 +32,11 @@ angular.module('traineeMod', [])
                 return $http.post('http://localhost:7070/trainees/createTrainee/', trainee)
                     .then(
                         function (response) {
+
                             return response.data;
                         },
                         function (errResponse) {
+
                             console.error('Error while creating trainee');
                             return $q.reject(errResponse);
                         }
@@ -43,8 +45,10 @@ angular.module('traineeMod', [])
             deleteTrainee: function (id) {
                 return $http.post('http://localhost:7070/trainees/delete/' + id)
                     .then(function (response) {
-                            return response.data
+
+                            return response.data;
                         }, function (errResponse) {
+
                             console.error('Error while deleting trainee');
                             return $q.reject(errResponse);
                         }
@@ -65,7 +69,7 @@ angular.module('traineeMod', [])
         }
     }])
 
-    .controller('TraineeCtrl', ['$scope', 'TraineeService', function ($scope, TraineeService) {
+    .controller('TraineeCtrl', ['$scope', 'TraineeService','growl', function ($scope, TraineeService,growl) {
         var self = this;
         self.trainees = [];
         self.traineeskills = [];
@@ -116,8 +120,6 @@ angular.module('traineeMod', [])
         };
 
 
-
-
         self.getSkillsByTraineeId = function (id) {
             TraineeService.getSkills(id).then(
                 function (s) {
@@ -130,8 +132,15 @@ angular.module('traineeMod', [])
         };
 
         self.submitTrainee = function () {
-            TraineeService.createTrainee(self.createableTrainee)
-        };
+            TraineeService.createTrainee(self.createableTrainee).then(
+                function(){
+                    growl.success('Auszubildender wurde gespeichert.',{title: 'Erfolg'});
+                },
+                function(){
+                    growl.error('Speichern fehlgeschlagen!',{title:'Fehler!'});
+                }
+            )
+        }
         self.fetchAllTrainees = function () {
             TraineeService.getTrainees().then(
                 function (d) {
@@ -152,15 +161,20 @@ angular.module('traineeMod', [])
             )
         };
         self.reset = function () {
-            self.createableTrainee.forename = "TestVorname";
-            self.createableTrainee.lastName = "TestNachname";
             self.createableTrainee.birthday = new Date(1996, 10, 30);
             self.createableTrainee.start_of_training = new Date(2015, 9, 1);
         };
         self.confirmDelete = function confirmDelete(id) {
 
             if (confirm("Möchten Sie diesen Auszubildenden wirklich löschen?") == true) {
-                TraineeService.deleteTrainee(id);
+                TraineeService.deleteTrainee(id).then(
+                    function(){
+                        growl.success('Auszubildender wurde gelöscht.',{title:'Erfolg'});
+                    },
+                    function(){
+                        growl.error('Löschen fehlgeschlagen!',{title:'Fehler!'});
+                    }
+                );
             }
         };
 
