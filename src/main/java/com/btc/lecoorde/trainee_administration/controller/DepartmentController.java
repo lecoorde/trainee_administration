@@ -52,10 +52,10 @@ public class DepartmentController {
 
     @RequestMapping(value = "/createDepartment/", method = RequestMethod.POST)
     public ResponseEntity<DepartmentDTO> createUser(@RequestBody DepartmentDTO input) {
-        logger.info("Anfrage: Trainee Speichern.");
+        logger.info("Anfrage: Department speichern.");
         try {
             departmentService.createDepartment(input);
-            logger.info("Trainee gespeichert: " + input);
+            logger.info("Department gespeichert: " + input);
             return new ResponseEntity<DepartmentDTO>(HttpStatus.CREATED);
 
         } catch (Exception e) {

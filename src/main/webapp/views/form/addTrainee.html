@@ -3,7 +3,7 @@
 <h2>Auszubildenden hinzufügen</h2>
 <div ng-controller="TraineeCtrl as ctrl">
 
-    <form name="traineeForm" ng-submit="ctrl.submit()" novalidate>
+    <form name="traineeForm"  novalidate>
         <table>
             <tr>
                 <td>Vorname:</td>
@@ -101,7 +101,7 @@
 
             <tr>
                 <td>
-                    <button ng-click="ctrl.reset()">Zurücksetzen</button>
+
                 </td>
                 <td>
                     <input type="submit" value="Speichern" ng-disabled="traineeForm.$invalid">
