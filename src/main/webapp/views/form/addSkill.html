@@ -1,0 +1,38 @@
+<h2>Skill hinzufügen</h2>
+<div ng-controller="SkillCtrl as ctrl">
+    <form name="skillForm" ng-submit="ctrl.submitSkill()" novalidate>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input placeholder="Name" name="name" type="text" ng-model="ctrl.createableSkill.name"
+                           required>
+                     <span style="color:red" ng-show="skillForm.name.$dirty && skillForm.name.$invalid">
+                        <span ng-show="skillForm.name.$error.required">Bitte geben Sie einen Namen ein</span>
+                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td>Beschreibung:</td>
+                <td>
+                    <textarea placeholder="Beschreibung" name="description"
+                              ng-model="ctrl.createableSkill.description" required></textarea>
+                     <span style="color:red"
+                           ng-show="skillForm.description.$dirty && skillForm.description.$invalid">
+                        <span ng-show="skillForm.description.$error.required">Bitte geben Sie eine Beschreibung ein</span>
+                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <a href="#/skills" type="submit" ng-click="ctrl.submitSkill()"
+                       class="btn btn-default btn-sm" ng-disabled="skillForm.$invalid">Speichern</a>
+
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
