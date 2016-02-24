@@ -1,0 +1,62 @@
+<h2>Standort hinzufügen</h2>
+<div ng-controller="LocationCtrl as ctrl">
+    <form name="locationForm" ng-submit="ctrl.submitLocation()" novalidate>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input placeholder="Name" name="name" type="text" ng-model="ctrl.createableLocation.name" required>
+                     <span style="color:red" ng-show="locationForm.name.$dirty && locationForm.name.$invalid">
+                        <span ng-show="locationForm.name.$error.required">Bitte geben Sie einen Namen ein</span>
+                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td>Straße:</td>
+                <td>
+                    <input placeholder="Straße" name="street" type="text" ng-model="ctrl.createableLocation.street" required>
+                     <span style="color:red" ng-show="locationForm.street.$dirty && locationForm.street.$invalid">
+                        <span ng-show="locationForm.street.$error.required">Bitte geben Sie eine Straße ein</span>
+                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td>Hausnummer:</td>
+                <td>
+                    <input placeholder="123" name="houseNum" type="number" ng-model="ctrl.createableLocation.houseNum" required>
+                     <span style="color:red" ng-show="locationForm.houseNum.$dirty && locationForm.houseNum.$invalid">
+                        <span ng-show="locationForm.houseNum.$error.required">Bitte geben Sie eine Hausnummer ein</span>
+                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td>PLZ:</td>
+                <td>
+                    <input placeholder="123456" name="postCode" type="number" ng-model="ctrl.createableLocation.postCode" required>
+                     <span style="color:red" ng-show="locationForm.postCode.$dirty && locationForm.postCode.$invalid">
+                        <span ng-show="locationForm.postCode.$error.required">Bitte geben Sie eine Postleitzahl ein</span>
+                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td>Stadt:</td>
+                <td>
+                    <input placeholder="Stadt" name="city" type="text" ng-model="ctrl.createableLocation.city" required>
+                     <span style="color:red" ng-show="locationForm.city.$dirty && locationForm.city.$invalid">
+                        <span ng-show="locationForm.city.$error.required">Bitte geben Sie eine Stadt ein</span>
+                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <a href="#/locations"  type="submit" ng-click="ctrl.submitLocation()"  class="btn btn-default btn-sm" ng-disabled="locationForm.$invalid">Speichern</a>
+                    <!--<input type="submit"  value="Speichern" ng-disabled="departmentForm.$invalid">-->
+
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

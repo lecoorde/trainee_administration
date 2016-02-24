@@ -26,6 +26,18 @@ angular.module('locationMod', [])
                     console.error('Error while fetching trainees')
                 });
             },
+            createLocation: function(location){
+                return $http.post('http://localhost:7070/locations/createLocation/', location)
+                    .then(
+                        function (response) {
+                            return response.data;
+                        },
+                        function (errResponse) {
+                            console.error('Error while creating location');
+                            return $q.reject(errResponse);
+                        }
+                    );
+            },
             deleteLocation: function (id) {
                 return $http.post('http://localhost:7070/locations/delete/' + id)
                     .then(function (response) {
@@ -50,6 +62,9 @@ angular.module('locationMod', [])
         $scope.filter_location_street='';
         $scope.filter_location_postCode='';
         $scope.filter_location_city='';
+        self.createableLocation={
+            id: null
+        };
 
         self.fetchAllLocations = function () {
             LocationService.getLocations().then(
@@ -86,5 +101,8 @@ angular.module('locationMod', [])
                 LocationService.deleteLocation(id);
             }
         };
+        self.submitLocation=function(){
+            LocationService.createLocation(self.createableLocation)
+        }
         self.fetchAllLocations();
     }]);
