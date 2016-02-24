@@ -102,6 +102,11 @@ public class TraineeService {
         }
     }
 
+    @Transactional
+    public void deleteTrainee(Long id) {
+        this.entityManager.remove(this.entityManager.find(Trainee.class, id));
+    }
+
     public List<TraineeDTO> getAllTrainees() {
 
         logger.info("Service lädt die Liste von Auzubildenden");
@@ -121,10 +126,5 @@ public class TraineeService {
                     t.getLocation().getName()));
         }
         return traineeDTOList;
-    }
-
-    @Transactional
-    public void deleteTrainee(Long id) {
-        this.entityManager.remove(this.entityManager.find(Trainee.class, id));
     }
 }

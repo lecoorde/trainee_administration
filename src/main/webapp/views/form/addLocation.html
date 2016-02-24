@@ -14,7 +14,8 @@
             <tr>
                 <td>Straße:</td>
                 <td>
-                    <input placeholder="Straße" name="street" type="text" ng-model="ctrl.createableLocation.street" required>
+                    <input placeholder="Straße" name="street" type="text" ng-model="ctrl.createableLocation.street"
+                           required>
                      <span style="color:red" ng-show="locationForm.street.$dirty && locationForm.street.$invalid">
                         <span ng-show="locationForm.street.$error.required">Bitte geben Sie eine Straße ein</span>
                      </span>
@@ -23,7 +24,8 @@
             <tr>
                 <td>Hausnummer:</td>
                 <td>
-                    <input placeholder="123" name="houseNum" type="number" ng-model="ctrl.createableLocation.houseNum" required>
+                    <input placeholder="123" name="houseNum" type="number" ng-model="ctrl.createableLocation.houseNum"
+                           required>
                      <span style="color:red" ng-show="locationForm.houseNum.$dirty && locationForm.houseNum.$invalid">
                         <span ng-show="locationForm.houseNum.$error.required">Bitte geben Sie eine Hausnummer ein</span>
                      </span>
@@ -32,7 +34,8 @@
             <tr>
                 <td>PLZ:</td>
                 <td>
-                    <input placeholder="123456" name="postCode" type="number" ng-model="ctrl.createableLocation.postCode" required>
+                    <input placeholder="123456" name="postCode" type="number"
+                           ng-model="ctrl.createableLocation.postCode" required>
                      <span style="color:red" ng-show="locationForm.postCode.$dirty && locationForm.postCode.$invalid">
                         <span ng-show="locationForm.postCode.$error.required">Bitte geben Sie eine Postleitzahl ein</span>
                      </span>
@@ -52,7 +55,8 @@
 
                 </td>
                 <td>
-                    <a href="#/locations"  type="submit" ng-click="ctrl.submitLocation()"  class="btn btn-default btn-sm" ng-disabled="locationForm.$invalid">Speichern</a>
+                    <a href="#/locations" type="submit" ng-click="ctrl.submitLocation()" class="btn btn-default btn-sm"
+                       ng-disabled="locationForm.$invalid">Speichern</a>
                     <!--<input type="submit"  value="Speichern" ng-disabled="departmentForm.$invalid">-->
 
                 </td>

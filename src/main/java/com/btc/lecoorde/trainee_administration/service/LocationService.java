@@ -26,13 +26,46 @@ public class LocationService {
 
     @Transactional
     public void createLocation(LocationDTO locationDTO) {
-        Location location=new Location();
+        Location location = new Location();
         location.setName(locationDTO.getName());
         location.setStreet(locationDTO.getStreet());
         location.setCity(locationDTO.getCity());
         location.setHouseNum(locationDTO.getHouseNum());
         location.setPostCode(locationDTO.getPostCode());
         entityManager.persist(location);
+    }
+
+    public Location getLocationById(Long id) {
+
+        logger.info("Service lädt den Standort");
+
+        TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
+                "where l.id = " + id, Location.class);
+        return query.getSingleResult();
+    }
+
+    public List<TraineeDTO> getTraineeListForSkillId(Long id) {
+
+        logger.info("Service lädt die Liste von Auszubildenden für Standort-ID " + id);
+
+        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Location l " +
+                "join l.trainees t " +
+                "where l.id = " + id, Trainee.class);
+
+        List<Trainee> traineeList = query.getResultList();
+
+        List<TraineeDTO> traineeDTOList = new LinkedList<>();
+
+        for (Trainee t : traineeList) {
+            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
+        }
+        return traineeDTOList;
+
+    }
+
+    @Transactional
+    public void deleteLocation(Long id) {
+        this.entityManager.remove(this.entityManager.find(Location.class, id));
     }
 
     public List<LocationDTO> getAllLocations() {
@@ -53,38 +86,5 @@ public class LocationService {
                     l.getCity()));
         }
         return locationDTOList;
-    }
-
-    public Location getLocationById(Long id) {
-
-        logger.info("Service lädt den Standort");
-
-        TypedQuery<Location> query = this.entityManager.createQuery("select l from Location l " +
-                "where l.id = " + id, Location.class);
-        return query.getSingleResult();
-    }
-
-    public List<TraineeDTO> getTraineeListForSkillId(Long id) {
-
-        logger.info("Service lädt die Liste von Auszubildenden für Standort-ID "+id);
-
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Location l " +
-                "join l.trainees t " +
-                "where l.id = " + id, Trainee.class);
-
-        List<Trainee> traineeList = query.getResultList();
-
-        List<TraineeDTO> traineeDTOList = new LinkedList<>();
-
-        for (Trainee t : traineeList) {
-            traineeDTOList.add(new TraineeDTO(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null));
-        }
-        return traineeDTOList;
-
-    }
-
-    @Transactional
-    public void deleteLocation(Long id) {
-        this.entityManager.remove(this.entityManager.find(Location.class, id));
     }
 }

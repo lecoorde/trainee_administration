@@ -19,16 +19,16 @@ angular.module('departmentMod', [])
                     return $q.reject(errResponse);
                 });
             },
-            getTraineesByDepartmentId: function(id){
-                return $http.get('http://localhost:7070/departments/trainee_list/' + id).then(function (response){
+            getTraineesByDepartmentId: function (id) {
+                return $http.get('http://localhost:7070/departments/trainee_list/' + id).then(function (response) {
                         return response.data;
                     },
-                    function(errResponse){
+                    function (errResponse) {
                         console.error('Error while fetching trainees');
                         return $q.reject(errResponse)
                     });
             },
-            createDepartment: function(department){
+            createDepartment: function (department) {
                 return $http.post('http://localhost:7070/departments/createDepartment/', department)
                     .then(
                         function (response) {
@@ -56,14 +56,14 @@ angular.module('departmentMod', [])
     .controller('DepartmentCtrl', ['$scope', 'DepartmentService', function ($scope, DepartmentService) {
         var self = this;
         self.departments = [];
-        self.trainees=[];
+        self.trainees = [];
         self.department = {id: null, name: '', description: ''};
 
-        $scope.filter_department_id='';
-        $scope.filter_department_name='';
-        $scope.filter_department_description='';
-        self.createableDepartment={
-            id:null
+        $scope.filter_department_id = '';
+        $scope.filter_department_name = '';
+        $scope.filter_department_description = '';
+        self.createableDepartment = {
+            id: null
         };
 
         self.fetchAllDepartments = function () {
@@ -95,7 +95,7 @@ angular.module('departmentMod', [])
                 }
             )
         };
-        self.submitDepartment=function() {
+        self.submitDepartment = function () {
             DepartmentService.createDepartment(self.createableDepartment);
         };
         self.confirmDelete = function confirmDelete(id) {

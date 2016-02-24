@@ -24,23 +24,6 @@ public class SkillService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<SkillDTO> getAllSkills() {
-
-        logger.info("Service lädt die Liste von Skills");
-
-        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s " +
-                "order by s.id", Skill.class);
-        List<Skill> skillList = query.getResultList();
-        List<SkillDTO> skillDTOList = new LinkedList<>();
-        for (Skill s : skillList) {
-            skillDTOList.add(new SkillDTO(
-                    s.getId(),
-                    s.getName(),
-                    s.getDescription()));
-        }
-        return skillDTOList;
-    }
-
     public Skill getSkillById(Long id) {
 
         logger.info("Service lädt den Skill");
@@ -51,7 +34,7 @@ public class SkillService {
     }
 
     public List<TraineeDTO> getTraineeListForSkillId(Long id) {
-        logger.info("Service lädt die Liste von Auszubildenden für Skill-ID "+id);
+        logger.info("Service lädt die Liste von Auszubildenden für Skill-ID " + id);
 
         TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Skill s " +
                 "join s.trainees t " +
@@ -67,8 +50,26 @@ public class SkillService {
         return traineeDTOList;
 
     }
+
     @Transactional
     public void deleteSkill(Long id) {
         this.entityManager.remove(this.entityManager.find(Skill.class, id));
+    }
+
+    public List<SkillDTO> getAllSkills() {
+
+        logger.info("Service lädt die Liste von Skills");
+
+        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s " +
+                "order by s.id", Skill.class);
+        List<Skill> skillList = query.getResultList();
+        List<SkillDTO> skillDTOList = new LinkedList<>();
+        for (Skill s : skillList) {
+            skillDTOList.add(new SkillDTO(
+                    s.getId(),
+                    s.getName(),
+                    s.getDescription()));
+        }
+        return skillDTOList;
     }
 }

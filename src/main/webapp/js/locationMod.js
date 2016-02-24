@@ -19,14 +19,14 @@ angular.module('locationMod', [])
                     return $q.reject(errResponse);
                 });
             },
-            getTraineesByLocationId: function(id){
-                return $http.get('http://localhost:7070/locations/trainee_list/' + id).then(function(response){
+            getTraineesByLocationId: function (id) {
+                return $http.get('http://localhost:7070/locations/trainee_list/' + id).then(function (response) {
                     return response.data;
-                }, function (errResponse){
+                }, function (errResponse) {
                     console.error('Error while fetching trainees')
                 });
             },
-            createLocation: function(location){
+            createLocation: function (location) {
                 return $http.post('http://localhost:7070/locations/createLocation/', location)
                     .then(
                         function (response) {
@@ -57,12 +57,12 @@ angular.module('locationMod', [])
         self.trainees = [];
         self.location = {id: null, name: '', street: '', houseNum: '', postCode: '', city: ''};
 
-        $scope.filter_location_id='';
-        $scope.filter_location_name='';
-        $scope.filter_location_street='';
-        $scope.filter_location_postCode='';
-        $scope.filter_location_city='';
-        self.createableLocation={
+        $scope.filter_location_id = '';
+        $scope.filter_location_name = '';
+        $scope.filter_location_street = '';
+        $scope.filter_location_postCode = '';
+        $scope.filter_location_city = '';
+        self.createableLocation = {
             id: null
         };
 
@@ -76,12 +76,12 @@ angular.module('locationMod', [])
                 }
             );
         };
-        self.getTraineesByLocationId = function(id){
+        self.getTraineesByLocationId = function (id) {
             LocationService.getTraineesByLocationId(id).then(
-                function(d){
+                function (d) {
                     self.trainees = d;
                 },
-                function(errResponse){
+                function (errResponse) {
                     console.error('Error while fetching trainees');
                 }
             );
@@ -101,7 +101,7 @@ angular.module('locationMod', [])
                 LocationService.deleteLocation(id);
             }
         };
-        self.submitLocation=function(){
+        self.submitLocation = function () {
             LocationService.createLocation(self.createableLocation)
         }
         self.fetchAllLocations();

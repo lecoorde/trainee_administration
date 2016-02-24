@@ -25,12 +25,12 @@ public class TraineeController {
     @Autowired
     private TraineeService traineeService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeList() {
+    @RequestMapping(value = "/skill_list/{id}", method = RequestMethod.GET)
+    public List<SkillDTO> getSkillListById(@PathVariable("id") Long id) {
 
-        logger.info("Anfrage: Liste von Auszubildenden");
+        logger.info("Anfrage: Liste von Skills für Auszubildenden mit ID: " + id);
 
-        return traineeService.getAllTrainees();
+        return traineeService.getSkillListByTraineeId(id);
     }
 
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -40,14 +40,6 @@ public class TraineeController {
 //
 //        return traineeService.getTraineeById(id);
 //    }
-
-    @RequestMapping(value = "/skill_list/{id}", method = RequestMethod.GET)
-    public List<SkillDTO> getSkillListById(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Liste von Skills für Auszubildenden mit ID: " + id);
-
-        return traineeService.getSkillListByTraineeId(id);
-    }
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
     public ResponseEntity<CreateTraineeDto> createTrainee(@RequestBody CreateTraineeDto input) {
@@ -64,17 +56,25 @@ public class TraineeController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public ResponseEntity deleteTrainee(@PathVariable  Long id) {
+    public ResponseEntity deleteTrainee(@PathVariable Long id) {
         logger.info("Anfrage: Auszubildenden löschen");
         try {
             traineeService.deleteTrainee(id);
-            logger.info("Service: Auszubildender mit ID: "+id+" wurde gelöscht!");
+            logger.info("Service: Auszubildender mit ID: " + id + " wurde gelöscht!");
             return new ResponseEntity(HttpStatus.CREATED);
 
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<TraineeDTO> getTraineeList() {
+
+        logger.info("Anfrage: Liste von Auszubildenden");
+
+        return traineeService.getAllTrainees();
     }
 
 }

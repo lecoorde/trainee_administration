@@ -1,6 +1,5 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.entity.Skill;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import com.btc.lecoorde.trainee_administration.service.SkillService;
@@ -28,12 +27,12 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<SkillDTO> getSkillList() {
+    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
+    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
 
-        logger.info("Anfrage: Liste von Skills");
+        logger.info("Anfrage: Liste von Auszubildenden für Skill mit ID: " + id);
 
-        return skillService.getAllSkills();
+        return skillService.getTraineeListForSkillId(id);
     }
 
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -44,26 +43,26 @@ public class SkillController {
 //        return skillService.getSkillById(id);
 //    }
 
-    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Liste von Auszubildenden für Skill mit ID: " + id);
-
-        return skillService.getTraineeListForSkillId(id);
-    }
-
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public ResponseEntity deleteSkill(@PathVariable  Long id) {
+    public ResponseEntity deleteSkill(@PathVariable Long id) {
         logger.info("Anfrage: Skill löschen");
         try {
             skillService.deleteSkill(id);
-            logger.info("Service: Skill mit ID: "+id+" wurde gelöscht!");
+            logger.info("Service: Skill mit ID: " + id + " wurde gelöscht!");
             return new ResponseEntity(HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<SkillDTO> getSkillList() {
+
+        logger.info("Anfrage: Liste von Skills");
+
+        return skillService.getAllSkills();
     }
 }
 

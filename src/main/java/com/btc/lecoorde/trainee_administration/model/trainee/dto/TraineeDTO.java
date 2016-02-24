@@ -38,6 +38,18 @@ public class TraineeDTO {
     public TraineeDTO() {
     }
 
+    @Override
+    public String toString() {
+        return "TraineeDTO{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", forename='" + forename + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", birthday=" + birthday +
+                ", start_of_training=" + start_of_training +
+                '}';
+    }
+
     public String getDepartmentName() {
         return departmentName;
     }
@@ -100,17 +112,5 @@ public class TraineeDTO {
 
     public void setStart_of_training(Date start_of_training) {
         this.start_of_training = start_of_training;
-    }
-
-    @Override
-    public String toString() {
-        return "TraineeDTO{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", forename='" + forename + '\'' +
-                ", jobName='" + jobName + '\'' +
-                ", birthday=" + birthday +
-                ", start_of_training=" + start_of_training +
-                '}';
     }
 }

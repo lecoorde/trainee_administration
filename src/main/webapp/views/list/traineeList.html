@@ -3,7 +3,7 @@
     <br></br>
     <input type="checkbox" ng-model="filter">Filter aktivieren</input>
 
-    <table  class="table" ng-show="filter" title="Filter">
+    <table class="table" ng-show="filter" title="Filter">
         <tr>
             <th>ID</th>
             <th>Nachname</th>
@@ -82,7 +82,8 @@
         <tr ng-if="trainee.expanded" ng-repeat-end="">
             <td colspan="3"><a href="#/trainees/update" ng-click="tctrl.updateTraineeById(trainee.id)"
                                class="btn btn-default btn-sm">Auszubildenden bearbeiten</a></td>
-            <td colspan="3"><a href="#/trainees/list" ng-click="tctrl.confirmDelete(trainee.id)" class="btn btn-default btn-sm">Auszubildenden löschen</a></td>
+            <td colspan="3"><a href="#/trainees/list" ng-click="tctrl.confirmDelete(trainee.id)"
+                               class="btn btn-default btn-sm">Auszubildenden löschen</a></td>
         </tr>
     </table>
 </div>

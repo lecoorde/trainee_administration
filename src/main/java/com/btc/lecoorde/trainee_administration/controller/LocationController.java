@@ -1,6 +1,5 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.entity.Location;
 import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDTO;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDTO;
 import com.btc.lecoorde.trainee_administration.service.LocationService;
@@ -25,12 +24,12 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<LocationDTO> getLocationList() {
+    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
+    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
 
-        logger.info("Anfrage: Liste von Standorten");
+        logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
 
-        return locationService.getAllLocations();
+        return locationService.getTraineeListForSkillId(id);
     }
 
 
@@ -42,13 +41,6 @@ public class LocationController {
 //        return locationService.getLocationById(id);
 //    }
 
-    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDTO> getTraineeListById(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
-
-        return locationService.getTraineeListForSkillId(id);
-    }
     @RequestMapping(value = "/createLocation/", method = RequestMethod.POST)
     public ResponseEntity createDepartment(@RequestBody LocationDTO input) {
         logger.info("Anfrage: Location speichern.");
@@ -65,16 +57,24 @@ public class LocationController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public ResponseEntity deleteLocation(@PathVariable  Long id) {
+    public ResponseEntity deleteLocation(@PathVariable Long id) {
         logger.info("Anfrage: Standort löschen");
         try {
             locationService.deleteLocation(id);
-            logger.info("Service: Standort mit ID: "+id+" wurde gelöscht!");
+            logger.info("Service: Standort mit ID: " + id + " wurde gelöscht!");
             return new ResponseEntity(HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<LocationDTO> getLocationList() {
+
+        logger.info("Anfrage: Liste von Standorten");
+
+        return locationService.getAllLocations();
     }
 }

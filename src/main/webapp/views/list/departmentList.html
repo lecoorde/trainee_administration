@@ -35,7 +35,8 @@
             <td>{{department.name}}</td>
             <td colspan="3">{{department.description}}</td>
         </tr>
-        <tr ng-if="department.expanded" ng-init="dctrl.getTraineesByDepartmentId(department.id)" ng-show="dctrl.trainees.length">
+        <tr ng-if="department.expanded" ng-init="dctrl.getTraineesByDepartmentId(department.id)"
+            ng-show="dctrl.trainees.length">
             <th colspan="3">Auszubildende</th>
             <th colspan="1">Id</th>
             <th colspan="1">Vorname</th>

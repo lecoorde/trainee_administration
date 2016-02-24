@@ -86,8 +86,6 @@ angular.module('traineeMod', [])
         };
 
 
-
-
         self.getSkillsByTraineeId = function (id) {
             TraineeService.getSkills(id).then(
                 function (s) {

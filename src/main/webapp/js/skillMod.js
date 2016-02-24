@@ -19,14 +19,14 @@ angular.module('skillMod', [])
                     return $q.reject(errResponse);
                 });
             },
-            getTraineesBySkillId: function(id){
-                return $http.get('http://localhost:7070/skills/trainee_list/' + id).then(function (response){
-                    return response.data;
-                },
-                function(errResponse){
-                    console.error('Error while fetching trainees');
-                    return $q.reject(errResponse)
-                });
+            getTraineesBySkillId: function (id) {
+                return $http.get('http://localhost:7070/skills/trainee_list/' + id).then(function (response) {
+                        return response.data;
+                    },
+                    function (errResponse) {
+                        console.error('Error while fetching trainees');
+                        return $q.reject(errResponse)
+                    });
             },
             deleteSkill: function (id) {
                 return $http.post('http://localhost:7070/skills/delete/' + id)
@@ -47,9 +47,9 @@ angular.module('skillMod', [])
         self.trainees = [];
         self.skill = {id: null, name: '', description: ''};
 
-        $scope.filter_skill_id='';
-        $scope.filter_skill_name='';
-        $scope.filter_skill_description='';
+        $scope.filter_skill_id = '';
+        $scope.filter_skill_name = '';
+        $scope.filter_skill_description = '';
 
         self.fetchAllSkills = function () {
             SkillService.getSkills().then(
