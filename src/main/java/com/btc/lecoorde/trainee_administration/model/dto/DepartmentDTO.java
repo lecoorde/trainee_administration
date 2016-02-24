@@ -1,4 +1,4 @@
-package com.btc.lecoorde.trainee_administration.model.department.dto;
+package com.btc.lecoorde.trainee_administration.model.dto;
 
 /**
  * Created by Denis Simon on 18.02.2016.
@@ -14,12 +14,20 @@ public class DepartmentDto {
     public DepartmentDto() {
     }
 
-    ;
 
     public DepartmentDto(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "DepartmentDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     public Long getId() {
@@ -44,14 +52,5 @@ public class DepartmentDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "DepartmentDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 }

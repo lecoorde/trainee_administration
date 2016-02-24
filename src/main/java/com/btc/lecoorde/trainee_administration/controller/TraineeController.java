@@ -3,6 +3,9 @@ package com.btc.lecoorde.trainee_administration.controller;
 import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
+import com.btc.lecoorde.trainee_administration.model.dto.SkillDto;
+import com.btc.lecoorde.trainee_administration.model.dto.CreateTraineeDto;
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.TraineeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,22 +28,6 @@ public class TraineeController {
     @Autowired
     private TraineeService traineeService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<TraineeDto> getTraineeList() {
-
-        logger.info("Anfrage: Liste von Auszubildenden");
-
-        return traineeService.getAllTrainees();
-    }
-
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    public TraineeDTO getSingleTrainee(@PathVariable("id") Long id) {
-//
-//        logger.info("Anfrage: Auszubildender mit der ID: " + id);
-//
-//        return traineeService.getTraineeById(id);
-//    }
-
     @RequestMapping(value = "/skill_list/{id}", method = RequestMethod.GET)
     public List<SkillDto> getSkillListById(@PathVariable("id") Long id) {
 
@@ -48,6 +35,14 @@ public class TraineeController {
 
         return traineeService.getSkillListByTraineeId(id);
     }
+
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public TraineeDto getSingleTrainee(@PathVariable("id") Long id) {
+//
+//        logger.info("Anfrage: Auszubildender mit der ID: " + id);
+//
+//        return traineeService.getTraineeById(id);
+//    }
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
     public ResponseEntity createTrainee(@RequestBody CreateTraineeDto input) {
@@ -77,17 +72,25 @@ public class TraineeController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public ResponseEntity deleteTrainee(@PathVariable  Long id) {
+    public ResponseEntity deleteTrainee(@PathVariable Long id) {
         logger.info("Anfrage: Auszubildenden löschen");
         try {
             traineeService.deleteTrainee(id);
-            logger.info("Service: Auszubildender mit ID: "+id+" wurde gelöscht!");
+            logger.info("Service: Auszubildender mit ID: " + id + " wurde gelöscht!");
             return new ResponseEntity(HttpStatus.CREATED);
 
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<TraineeDto> getTraineeList() {
+
+        logger.info("Anfrage: Liste von Auszubildenden");
+
+        return traineeService.getAllTrainees();
     }
 
 }

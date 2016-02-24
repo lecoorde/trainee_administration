@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mainApp', ['ngRoute', 'traineeMod', 'locationMod', 'departmentMod', 'skillMod'])
+angular.module('mainApp', ['ngRoute', 'traineeMod', 'locationMod', 'departmentMod', 'skillMod', 'angular-growl','ngAnimate'])
     .config(function ($routeProvider) {
         $routeProvider
 
@@ -25,4 +25,9 @@ angular.module('mainApp', ['ngRoute', 'traineeMod', 'locationMod', 'departmentMo
             .when('/about', {template: 'Made by Lennard Coordes and Denis Simon'})
 
             .otherwise({redirectTo: '/trainees'});
-    });
+    }).config(['growlProvider', function (growlProvider) {
+    growlProvider.onlyUniqueMessages(false);
+    growlProvider.globalTimeToLive({success: 3000, error: -1, warning: -1, info: 4000});
+    growlProvider.globalReversedOrder(true);
+    growlProvider.globalDisableCountDown(true);
+}]);

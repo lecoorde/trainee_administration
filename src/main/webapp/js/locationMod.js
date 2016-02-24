@@ -19,12 +19,24 @@ angular.module('locationMod', [])
                     return $q.reject(errResponse);
                 });
             },
-            getTraineesByLocationId: function(id){
-                return $http.get('http://localhost:7070/locations/trainee_list/' + id).then(function(response){
+            getTraineesByLocationId: function (id) {
+                return $http.get('http://localhost:7070/locations/trainee_list/' + id).then(function (response) {
                     return response.data;
-                }, function (errResponse){
+                }, function (errResponse) {
                     console.error('Error while fetching trainees')
                 });
+            },
+            createLocation: function (location) {
+                return $http.post('http://localhost:7070/locations/createLocation/', location)
+                    .then(
+                        function (response) {
+                            return response.data;
+                        },
+                        function (errResponse) {
+                            console.error('Error while creating location');
+                            return $q.reject(errResponse);
+                        }
+                    );
             },
             deleteLocation: function (id) {
                 return $http.post('http://localhost:7070/locations/delete/' + id)
@@ -45,11 +57,14 @@ angular.module('locationMod', [])
         self.trainees = [];
         self.location = {id: null, name: '', street: '', houseNum: '', postCode: '', city: ''};
 
-        $scope.filter_location_id='';
-        $scope.filter_location_name='';
-        $scope.filter_location_street='';
-        $scope.filter_location_postCode='';
-        $scope.filter_location_city='';
+        $scope.filter_location_id = '';
+        $scope.filter_location_name = '';
+        $scope.filter_location_street = '';
+        $scope.filter_location_postCode = '';
+        $scope.filter_location_city = '';
+        self.createableLocation = {
+            id: null
+        };
 
         self.fetchAllLocations = function () {
             LocationService.getLocations().then(
@@ -61,12 +76,12 @@ angular.module('locationMod', [])
                 }
             );
         };
-        self.getTraineesByLocationId = function(id){
+        self.getTraineesByLocationId = function (id) {
             LocationService.getTraineesByLocationId(id).then(
-                function(d){
+                function (d) {
                     self.trainees = d;
                 },
-                function(errResponse){
+                function (errResponse) {
                     console.error('Error while fetching trainees');
                 }
             );
@@ -83,8 +98,25 @@ angular.module('locationMod', [])
         self.confirmDelete = function confirmDelete(id) {
 
             if (confirm("Möchten Sie diesen Standort wirklich löschen?") == true) {
-                LocationService.deleteLocation(id);
+                LocationService.deleteLocation(id).then(
+                    function(){
+                        growl.success('Standort wurde gelöscht.',{title:'Erfolg.'})
+                    },
+                    function(){
+                        growl.error('Löschen fehlgeschlagen!',{title:'Fehler!'})
+                    }
+                );
             }
         };
+        self.submitLocation = function () {
+            LocationService.createLocation(self.createableLocation).then(
+                function(){
+                    growl.success('Standort wurde gespeichert.',{title:'Erfolg.'})
+                },
+                function(){
+                    growl.error('Speichern fehlgeschlagen!',{title:'Fehler!'})
+                }
+            );
+        }
         self.fetchAllLocations();
     }]);

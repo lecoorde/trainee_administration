@@ -1,4 +1,4 @@
-package com.btc.lecoorde.trainee_administration.model.location.dto;
+package com.btc.lecoorde.trainee_administration.model.dto;
 
 /**
  * Created by Denis Simon on 18.02.2016.
@@ -16,6 +16,9 @@ public class LocationDto {
     private int postCode;
 
     private String city;
+
+    public LocationDto() {
+    }
 
     public LocationDto(Long id, String name, String street, int houseNum, int postCode, String city) {
         this.id = id;

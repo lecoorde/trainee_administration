@@ -19,14 +19,26 @@ angular.module('skillMod', [])
                     return $q.reject(errResponse);
                 });
             },
-            getTraineesBySkillId: function(id){
-                return $http.get('http://localhost:7070/skills/trainee_list/' + id).then(function (response){
-                    return response.data;
-                },
-                function(errResponse){
-                    console.error('Error while fetching trainees');
-                    return $q.reject(errResponse)
-                });
+            getTraineesBySkillId: function (id) {
+                return $http.get('http://localhost:7070/skills/trainee_list/' + id).then(function (response) {
+                        return response.data;
+                    },
+                    function (errResponse) {
+                        console.error('Error while fetching trainees');
+                        return $q.reject(errResponse)
+                    });
+            },
+            createSkill: function (skill) {
+                return $http.post('http://localhost:7070/skills/createSkill/', skill)
+                    .then(
+                        function (response) {
+                            return response.data;
+                        },
+                        function (errResponse) {
+                            console.error('Error while creating skill');
+                            return $q.reject(errResponse);
+                        }
+                    );
             },
             deleteSkill: function (id) {
                 return $http.post('http://localhost:7070/skills/delete/' + id)
@@ -46,10 +58,13 @@ angular.module('skillMod', [])
         self.skills = [];
         self.trainees = [];
         self.skill = {id: null, name: '', description: ''};
+        self.createableSkill = {
+            id: null
+        }
 
-        $scope.filter_skill_id='';
-        $scope.filter_skill_name='';
-        $scope.filter_skill_description='';
+        $scope.filter_skill_id = '';
+        $scope.filter_skill_name = '';
+        $scope.filter_skill_description = '';
 
         self.fetchAllSkills = function () {
             SkillService.getSkills().then(
@@ -82,8 +97,25 @@ angular.module('skillMod', [])
         self.confirmDelete = function confirmDelete(id) {
 
             if (confirm("Möchten Sie diesen Skill wirklich löschen?") == true) {
-                SkillService.deleteSkill(id);
+                SkillService.deleteSkill(id).then(
+                    function(){
+                        growl.success('Skill wurde gelöscht.',{title:'Erfolg.'})
+                    },
+                    function(){
+                        growl.error('Löschen fehlgeschlagen!',{title:'Fehler!'})
+                    }
+                );
             }
+        };
+        self.submitSkill = function () {
+            SkillService.createSkill(self.createableSkill).then(
+                function(){
+                    growl.success('Skill wurde gespeichert.',{title:'Erfolg.'})
+                },
+                function(){
+                    growl.error('Speichern fehlgeschlagen!',{title:'Fehler!'})
+                }
+            );
         };
         self.fetchAllSkills();
     }]);

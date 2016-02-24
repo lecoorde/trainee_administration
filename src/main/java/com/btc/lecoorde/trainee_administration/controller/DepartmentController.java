@@ -2,6 +2,8 @@ package com.btc.lecoorde.trainee_administration.controller;
 
 import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDto;
 import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
+import com.btc.lecoorde.trainee_administration.model.dto.DepartmentDto;
+import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +30,9 @@ public class DepartmentController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<DepartmentDto> getDepartmentList() {
 
-        logger.info("Anfrage: Liste von Abteilungen");
+        logger.info("Anfrage: Liste von Auszubildenden für Abteilung mit ID: " + id);
 
-        return departmentService.getAllDepartments();
+        return departmentService.getTraineeListForDepartmentId(id);
     }
 
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -50,32 +52,40 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/createDepartment/", method = RequestMethod.POST)
-    public ResponseEntity<DepartmentDto> createUser(@RequestBody DepartmentDto input) {
+    public ResponseEntity createDepartment(@RequestBody DepartmentDto input) {
         logger.info("Anfrage: Department speichern.");
         try {
             departmentService.createDepartment(input);
             logger.info("Department gespeichert: " + input);
-            return new ResponseEntity<DepartmentDto>(HttpStatus.CREATED);
+            return new ResponseEntity(HttpStatus.CREATED);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<DepartmentDto>(HttpStatus.CONFLICT);
+            return new ResponseEntity(HttpStatus.CONFLICT);
         }
 
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public ResponseEntity deleteDepartment(@PathVariable  Long id) {
+    public ResponseEntity deleteDepartment(@PathVariable Long id) {
         logger.info("Anfrage: Department löschen");
         try {
             departmentService.deleteDepartment(id);
-            logger.info("Service: Abteilung mit ID: "+id+" wurde gelöscht!");
+            logger.info("Service: Abteilung mit ID: " + id + " wurde gelöscht!");
             return new ResponseEntity(HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<DepartmentDto> getDepartmentList() {
+
+        logger.info("Anfrage: Liste von Abteilungen");
+
+        return departmentService.getAllDepartments();
     }
 
 

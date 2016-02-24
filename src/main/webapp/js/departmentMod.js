@@ -19,16 +19,16 @@ angular.module('departmentMod', [])
                     return $q.reject(errResponse);
                 });
             },
-            getTraineesByDepartmentId: function(id){
-                return $http.get('http://localhost:7070/departments/trainee_list/' + id).then(function (response){
+            getTraineesByDepartmentId: function (id) {
+                return $http.get('http://localhost:7070/departments/trainee_list/' + id).then(function (response) {
                         return response.data;
                     },
-                    function(errResponse){
+                    function (errResponse) {
                         console.error('Error while fetching trainees');
                         return $q.reject(errResponse)
                     });
             },
-            createDepartment: function(department){
+            createDepartment: function (department) {
                 return $http.post('http://localhost:7070/departments/createDepartment/', department)
                     .then(
                         function (response) {
@@ -56,14 +56,14 @@ angular.module('departmentMod', [])
     .controller('DepartmentCtrl', ['$scope', 'DepartmentService', function ($scope, DepartmentService) {
         var self = this;
         self.departments = [];
-        self.trainees=[];
+        self.trainees = [];
         self.department = {id: null, name: '', description: ''};
 
-        $scope.filter_department_id='';
-        $scope.filter_department_name='';
-        $scope.filter_department_description='';
-        self.createableDepartment={
-            id:null
+        $scope.filter_department_id = '';
+        $scope.filter_department_name = '';
+        $scope.filter_department_description = '';
+        self.createableDepartment = {
+            id: null
         };
 
         self.fetchAllDepartments = function () {
@@ -76,15 +76,7 @@ angular.module('departmentMod', [])
                 }
             );
         };
-        self.createDepartment = function (department) {
-            TraineeService.createTrainee(department)
-                .then(
-                    self.fetchAllDepartments(),
-                    function (errResponse) {
-                        console.error('Error while creating Department.');
-                    }
-                );
-        };
+
         self.getSingleDepartment = function (id) {
             DepartmentService.getDepartment(id).then(function (d) {
                     self.department = d;
@@ -103,13 +95,27 @@ angular.module('departmentMod', [])
                 }
             )
         };
-        self.submitDepartment=function() {
-            DepartmentService.createDepartment(self.createableDepartment);
+        self.submitDepartment = function () {
+            DepartmentService.createDepartment(self.createableDepartment).then(
+                function(){
+                    growl.success('Abteilung wurde gespeichert.',{title:'Erfolg.'})
+                },
+                function(){
+                    growl.error('Speichern fehlgeschlagen!',{title:'Fehler!'})
+                }
+            );
         };
         self.confirmDelete = function confirmDelete(id) {
 
             if (confirm("Möchten Sie diese Abteilung wirklich löschen?") == true) {
-                DepartmentService.deleteDepartment(id);
+                DepartmentService.deleteDepartment(id).then(
+                    function(){
+                        growl.success('Abteilung wurde gelöscht.',{title:'Erfolg.'})
+                    },
+                    function(){
+                        growl.error('Löschen fehlgeschlagen!',{title:'Fehler!'})
+                    }
+                );
             }
         };
         self.fetchAllDepartments();
