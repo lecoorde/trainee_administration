@@ -53,7 +53,7 @@ angular.module('skillMod', [])
         }
     }])
 
-    .controller('SkillCtrl', ['$scope', 'SkillService', function ($scope, SkillService) {
+    .controller('SkillCtrl', ['$scope', 'SkillService','growl', function ($scope, SkillService,growl) {
         var self = this;
         self.skills = [];
         self.trainees = [];
