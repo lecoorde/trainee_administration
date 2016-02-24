@@ -75,4 +75,9 @@ public class DepartmentService {
         }
         return traineeDTOList;
     }
+
+    @Transactional
+    public void deleteDepartment(Long id) {
+        this.entityManager.remove(this.entityManager.find(Department.class, id));
+    }
 }

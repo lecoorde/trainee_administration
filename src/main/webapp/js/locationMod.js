@@ -25,6 +25,16 @@ angular.module('locationMod', [])
                 }, function (errResponse){
                     console.error('Error while fetching trainees')
                 });
+            },
+            deleteLocation: function (id) {
+                return $http.post('http://localhost:7070/locations/delete/' + id)
+                    .then(function (response) {
+                            return response.data
+                        }, function (errResponse) {
+                            console.error('Error while deleting location');
+                            return $q.reject(errResponse);
+                        }
+                    );
             }
         }
     }])
@@ -69,6 +79,12 @@ angular.module('locationMod', [])
                     console.error('Error while fetching location');
                 }
             )
+        };
+        self.confirmDelete = function confirmDelete(id) {
+
+            if (confirm("Möchten Sie diesen Standort wirklich löschen?") == true) {
+                LocationService.deleteLocation(id);
+            }
         };
         self.fetchAllLocations();
     }]);
