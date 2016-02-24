@@ -41,12 +41,18 @@
             <td colspan="1"><span class="table-row-title2">Vorname</span></td>
             <td colspan="1"><span class="table-row-title2">Nachname</span></td>
         </tr>
-        <tr ng-if="skill.expanded" ng-repeat="trainee in sctrl.trainees" ng-repeat-end="">
+        <tr ng-if="skill.expanded" ng-repeat="trainee in sctrl.trainees" >
             <td colspan="1"></td>
             <td align="right">►</td>
             <td colspan="1">{{trainee.id}}</td>
             <td colspan="1">{{trainee.forename}}</td>
             <td colspan="1">{{trainee.lastName}}</td>
+        </tr>
+        <tr ng-if="skill.expanded" ng-repeat-end="">
+            <td colspan="2"><a href="#/skills/update" ng-click="sctrl.updateSkillById(skill.id)"
+                               class="btn btn-default btn-sm">Skill bearbeiten</a></td>
+            <td colspan="3"><a href="#/skills/list" ng-click="sctrl.confirmDelete(skill.id)"
+                               class="btn btn-default btn-sm">Skill löschen</a></td>
         </tr>
     </table>
 </div>

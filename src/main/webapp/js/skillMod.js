@@ -27,6 +27,16 @@ angular.module('skillMod', [])
                     console.error('Error while fetching trainees');
                     return $q.reject(errResponse)
                 });
+            },
+            deleteSkill: function (id) {
+                return $http.post('http://localhost:7070/skills/delete/' + id)
+                    .then(function (response) {
+                            return response.data
+                        }, function (errResponse) {
+                            console.error('Error while deleting skill');
+                            return $q.reject(errResponse);
+                        }
+                    );
             }
         }
     }])
@@ -68,6 +78,12 @@ angular.module('skillMod', [])
                     console.error('Error while fetching trainees')
                 }
             )
+        };
+        self.confirmDelete = function confirmDelete(id) {
+
+            if (confirm("Möchten Sie diesen Skill wirklich löschen?") == true) {
+                SkillService.deleteSkill(id);
+            }
         };
         self.fetchAllSkills();
     }]);
