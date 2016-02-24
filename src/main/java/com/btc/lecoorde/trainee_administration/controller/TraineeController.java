@@ -1,8 +1,5 @@
 package com.btc.lecoorde.trainee_administration.controller;
 
-import com.btc.lecoorde.trainee_administration.model.skill.dto.SkillDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.CreateTraineeDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.dto.SkillDto;
 import com.btc.lecoorde.trainee_administration.model.dto.CreateTraineeDto;
 import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;

@@ -1,12 +1,9 @@
 package com.btc.lecoorde.trainee_administration.service;
 
-import com.btc.lecoorde.trainee_administration.model.department.dto.DepartmentDto;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.dto.DepartmentDto;
 import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.entity.Department;
-import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

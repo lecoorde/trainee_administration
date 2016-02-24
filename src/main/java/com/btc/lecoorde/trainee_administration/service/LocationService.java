@@ -4,8 +4,6 @@ import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.model.entity.Location;
 import com.btc.lecoorde.trainee_administration.model.entity.Trainee;
 import com.btc.lecoorde.trainee_administration.model.dto.LocationDto;
-import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,8 +63,8 @@ public class LocationService {
     }
 
     @Transactional
-    public void deleteTrainee(Long id) {
-        this.entityManager.remove(this.entityManager.find(Trainee.class, id));
+    public void deleteLocation(Long id) {
+        this.entityManager.remove(this.entityManager.find(Location.class, id));
     }
 
     public List<LocationDto> getAllLocations() {

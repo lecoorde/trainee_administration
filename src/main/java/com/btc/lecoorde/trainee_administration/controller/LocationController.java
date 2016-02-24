@@ -2,8 +2,6 @@ package com.btc.lecoorde.trainee_administration.controller;
 
 import com.btc.lecoorde.trainee_administration.model.dto.LocationDto;
 import com.btc.lecoorde.trainee_administration.model.dto.TraineeDto;
-import com.btc.lecoorde.trainee_administration.model.location.dto.LocationDto;
-import com.btc.lecoorde.trainee_administration.model.trainee.dto.TraineeDto;
 import com.btc.lecoorde.trainee_administration.service.LocationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -53,11 +53,11 @@
             <td>{{trainee.id}}</td>
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.lastName}}</div>
-                <div ng-show="editingData[trainee.id]"><input type="text" placeholder="{{trainee.lastName}}" ng-model="ctrl.creatableTrainee.lastName" /></div>
+                <div ng-show="editingData[trainee.id]"><input type="text" placeholder="{{trainee.lastName}}" ng-model="tctrl.createableTrainee.lastName" /></div>
             </td>
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.forename}}</div>
-                <div ng-show="editingData[trainee.id]"><input type="text" placeholder="{{trainee.forename}}" ng-model="ctrl.creatableTrainee.forename" /></div>
+                <div ng-show="editingData[trainee.id]"><input type="text" placeholder="{{trainee.forename}}" ng-model="tctrl.createableTrainee.forename" /></div>
             </td>
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.birthday | date:'dd.MM.yyyy'}}</div>
