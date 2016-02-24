@@ -3,7 +3,7 @@
 <h2>Auszubildenden hinzufügen</h2>
 <div ng-controller="TraineeCtrl as ctrl">
 
-    <form name="traineeForm"  novalidate>
+    <form name="traineeForm" ng-submit="ctrl.submitTrainee()" novalidate>
         <table>
             <tr>
                 <td>Vorname:</td>
@@ -68,7 +68,7 @@
                             required>
                     <option value="">---Bitte Abteilung wählen---</option>
                 </select>
-                    </input>
+
                      <span style="color:red"
                            ng-show="traineeForm.selectedDepartmentId.$dirty && traineeForm.selectedDepartmentId.$invalid">
                         <span ng-show="traineeForm.selectedDepartmentId.$error.required">Bitte wählen Sie eine Abteilung aus</span>

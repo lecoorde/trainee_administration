@@ -107,7 +107,7 @@ angular.module('traineeMod', [])
                     }
                 );
         };
-        self.submit = function () {
+        self.submitTrainee = function () {
             self.createTrainee(self.createableTrainee)
         }
         self.fetchAllTrainees = function () {

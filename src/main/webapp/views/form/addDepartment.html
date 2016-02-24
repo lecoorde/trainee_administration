@@ -1,6 +1,6 @@
 <h2>Abteilung hinzufügen</h2>
 <div ng-controller="DepartmentCtrl as ctrl">
-    <form name="departmentForm"  novalidate>
+    <form name="departmentForm" ng-submit="ctrl.submitDepartment()"  novalidate>
         <table>
         <tr>
             <td>Name:</td>
@@ -16,7 +16,7 @@
             <td>
                 <textarea placeholder="Beschreibung" name="description"   ng-model="ctrl.department.description" required></textarea>
                      <span style="color:red" ng-show="departmentForm.description.$dirty && departmentForm.description.$invalid">
-                        <span ng-show="departmentForm.description.$error.required">Bitte geben Sie einen Namen ein</span>
+                        <span ng-show="departmentForm.description.$error.required">Bitte geben Sie eine Beschreibung ein</span>
                      </span>
             </td>
         </tr>
@@ -25,7 +25,8 @@
 
             </td>
             <td>
-                <input type="submit" value="Speichern" ng-disabled="departmentForm.$invalid">
+            <a href="#/departments"  class="btn btn-default btn-sm" ng-disabled="departmentForm.$invalid">Speichern</a>
+                <!--<input type="submit"  value="Speichern" ng-disabled="departmentForm.$invalid">-->
                 </input>
             </td>
         </tr>
