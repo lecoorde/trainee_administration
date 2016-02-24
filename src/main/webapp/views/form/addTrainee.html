@@ -5,7 +5,7 @@
         <table>
             <tr>
                 <td>Vorname:</td>
-                <td><input name="firstname" type="text" ng-model="ctrl.createableTrainee.forename" required >
+                <td><input placeholder="Vorname" name="firstname" type="text" ng-model="ctrl.createableTrainee.forename" required >
                      <span style="color:red" ng-show="traineeForm.firstname.$dirty && traineeForm.firstname.$invalid">
                         <span ng-show="traineeForm.firstname.$error.required">Bitte geben Sie einen Vornamen ein</span>
                      </span>
@@ -14,7 +14,7 @@
 
             <tr>
                 <td>Nachname:</td>
-                <td><input name="lastname" type="text" class="text" ng-model="ctrl.createableTrainee.lastName" required>
+                <td><input placeholder="Nachname" name="lastname" type="text" class="text" ng-model="ctrl.createableTrainee.lastName" required>
                      <span style="color:red" ng-show="traineeForm.lastname.$dirty && traineeForm.lastname.$invalid">
                         <span ng-show="traineeForm.lastname.$error.required">Bitte geben Sie einen Nachnamen ein</span>
                      </span>
@@ -103,7 +103,7 @@
 
                 </td>
                 <td>
-
+                    <!--<input type="submit" ng-disabled="traineeForm.$invalid">-->
                     <a href="#/trainees" type="submit" ng-click="ctrl.submitTrainee()" class="btn btn-default btn-sm"
                        ng-disabled="traineeForm.$invalid">Speichern</a>
 

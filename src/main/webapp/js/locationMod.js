@@ -98,11 +98,25 @@ angular.module('locationMod', [])
         self.confirmDelete = function confirmDelete(id) {
 
             if (confirm("Möchten Sie diesen Standort wirklich löschen?") == true) {
-                LocationService.deleteLocation(id);
+                LocationService.deleteLocation(id).then(
+                    function(){
+                        growl.success('Standort wurde gelöscht.',{title:'Erfolg.'})
+                    },
+                    function(){
+                        growl.error('Löschen fehlgeschlagen!',{title:'Fehler!'})
+                    }
+                );
             }
         };
         self.submitLocation = function () {
-            LocationService.createLocation(self.createableLocation)
+            LocationService.createLocation(self.createableLocation).then(
+                function(){
+                    growl.success('Standort wurde gespeichert.',{title:'Erfolg.'})
+                },
+                function(){
+                    growl.error('Speichern fehlgeschlagen!',{title:'Fehler!'})
+                }
+            );
         }
         self.fetchAllLocations();
     }]);

@@ -97,11 +97,25 @@ angular.module('skillMod', [])
         self.confirmDelete = function confirmDelete(id) {
 
             if (confirm("Möchten Sie diesen Skill wirklich löschen?") == true) {
-                SkillService.deleteSkill(id);
+                SkillService.deleteSkill(id).then(
+                    function(){
+                        growl.success('Skill wurde gelöscht.',{title:'Erfolg.'})
+                    },
+                    function(){
+                        growl.error('Löschen fehlgeschlagen!',{title:'Fehler!'})
+                    }
+                );
             }
         };
         self.submitSkill = function () {
-            SkillService.createSkill(self.createableSkill);
+            SkillService.createSkill(self.createableSkill).then(
+                function(){
+                    growl.success('Skill wurde gespeichert.',{title:'Erfolg.'})
+                },
+                function(){
+                    growl.error('Speichern fehlgeschlagen!',{title:'Fehler!'})
+                }
+            );
         };
         self.fetchAllSkills();
     }]);

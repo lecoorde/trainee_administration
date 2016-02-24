@@ -96,12 +96,26 @@ angular.module('departmentMod', [])
             )
         };
         self.submitDepartment = function () {
-            DepartmentService.createDepartment(self.createableDepartment);
+            DepartmentService.createDepartment(self.createableDepartment).then(
+                function(){
+                    growl.success('Abteilung wurde gespeichert.',{title:'Erfolg.'})
+                },
+                function(){
+                    growl.error('Speichern fehlgeschlagen!',{title:'Fehler!'})
+                }
+            );
         };
         self.confirmDelete = function confirmDelete(id) {
 
             if (confirm("Möchten Sie diese Abteilung wirklich löschen?") == true) {
-                DepartmentService.deleteDepartment(id);
+                DepartmentService.deleteDepartment(id).then(
+                    function(){
+                        growl.success('Abteilung wurde gelöscht.',{title:'Erfolg.'})
+                    },
+                    function(){
+                        growl.error('Löschen fehlgeschlagen!',{title:'Fehler!'})
+                    }
+                );
             }
         };
         self.fetchAllDepartments();
