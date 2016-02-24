@@ -112,6 +112,5 @@ angular.module('departmentMod', [])
                 DepartmentService.deleteDepartment(id);
             }
         };
-        self.reset();
         self.fetchAllDepartments();
     }]);

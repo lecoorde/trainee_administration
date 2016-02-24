@@ -49,9 +49,9 @@
             <td colspan="1">{{trainee.lastName}}</td>
         </tr>
         <tr ng-if="department.expanded" ng-repeat-end="">
-            <td colspan="3"><a href="#/departments/update" ng-click="dctrl.updateDepartmentById(department.id)"
+            <td colspan="2"><a href="#/departments/update" ng-click="dctrl.updateDepartmentById(department.id)"
                                class="btn btn-default btn-sm">Abteilung bearbeiten</a></td>
-            <td colspan="3"><a href="#/departments/list" ng-click="dctrl.confirmDelete(department.id)"
+            <td colspan="4"><a href="#/departments/list" ng-click="dctrl.confirmDelete(department.id)"
                                class="btn btn-default btn-sm">Abteilung löschen</a></td>
         </tr>
     </table>
