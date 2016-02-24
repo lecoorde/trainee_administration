@@ -51,7 +51,7 @@ angular.module('locationMod', [])
         }
     }])
 
-    .controller('LocationCtrl', ['$scope', 'LocationService', function ($scope, LocationService) {
+    .controller('LocationCtrl', ['$scope', 'LocationService','growl', function ($scope, LocationService,growl) {
         var self = this;
         self.locations = [];
         self.trainees = [];
