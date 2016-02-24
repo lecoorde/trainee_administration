@@ -11,6 +11,11 @@ public class DepartmentDTO {
 
     private String description;
 
+    public DepartmentDTO() {
+    }
+
+    ;
+
     public DepartmentDTO(Long id, String name, String description) {
         this.id = id;
         this.name = name;
@@ -39,5 +44,14 @@ public class DepartmentDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "DepartmentDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

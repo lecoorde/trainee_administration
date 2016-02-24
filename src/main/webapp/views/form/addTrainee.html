@@ -92,7 +92,7 @@
                 <td>Skills:</td>
                 <td>
 
-                    <select class="form-control" ng-model="ctrl.createableTrainee.skillIds" multiple>
+                    <select name="selectSkills" class="form-control" ng-model="ctrl.createableTrainee.skillIds" multiple>
                         <option ng:repeat="skill in sctrl.skills" value="{{skill.id}}">{{skill.name}}</option>
                     </select>
 
@@ -104,8 +104,10 @@
 
                 </td>
                 <td>
-                    <input type="submit"  value="Speichern" ng-disabled="traineeForm.$invalid">
-                    </input>
+
+                    <a href="#/trainees" type="submit" ng-click="ctrl.submitTrainee()" class="btn btn-default btn-sm" ng-disabled="traineeForm.$invalid">Speichern</a>
+
+
                 </td>
             </tr>
 

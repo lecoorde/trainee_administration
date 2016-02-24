@@ -98,17 +98,9 @@ angular.module('traineeMod', [])
                 }
             );
         };
-        self.createTrainee = function (trainee) {
-            TraineeService.createTrainee(trainee)
-                .then(
-                    self.fetchAllTrainees(),
-                    function (errResponse) {
-                        console.error('Error while creating User.');
-                    }
-                );
-        };
+
         self.submitTrainee = function () {
-            self.createTrainee(self.createableTrainee)
+            TraineeService.createTrainee(self.createableTrainee)
         }
         self.fetchAllTrainees = function () {
             TraineeService.getTrainees().then(

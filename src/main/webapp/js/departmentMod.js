@@ -94,16 +94,7 @@ angular.module('departmentMod', [])
             )
         };
         self.submitDepartment=function() {
-            self.createDepartment(self.createableDepartment);
-        };
-        self.createDepartment = function (department) {
-            DepartmentService.createTrainee(department)
-                .then(
-                    self.fetchAllDepartments(),
-                    function (errResponse) {
-                        console.error('Error while creating Department.');
-                    }
-                );
+            DepartmentService.createDepartment(self.createableDepartment);
         };
         self.fetchAllDepartments();
     }]);
