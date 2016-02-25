@@ -67,15 +67,12 @@
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.jobName}}</div>
                 <div ng-show="editingData[trainee.id]"><select name="jobName"
+                                                               ng-options="job.id as job.name for job in tctrl.joblist"
                                                                ng-model="tctrl.createableTrainee.jobOrdinal"
                                                                required>
-                    <option value="0">Dualer Student - Anwendungsentwicklung</option>
-                    <option value="1">Dualer Student - BWL</option>
-                    <option value="2">Dualer Student - Systemintegration</option>
-                    <option value="3">Fachinformatiker - Anwendungsentwicklung</option>
-                    <option value="4">Fachinformatiker Systemintegration</option>
-                    <option value="5">IT-Systemkaufmann</option>
-                </select></div>
+
+                </select>
+                </div>
             </td>
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.start_of_training | date:'dd.MM.yyyy'}}</div>

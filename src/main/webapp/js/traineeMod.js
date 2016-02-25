@@ -114,6 +114,14 @@ angular.module('traineeMod', [])
         self.createableTrainee = {
             id: null
         };
+        self.joblist=[
+            {id:0,name:"Dualer Student - Anwendungsentwicklung"},
+            {id:1,name:"Dualer Student - BWL"},
+            {id:2,name:"Dualer Student - Systemintegration"},
+            {id:3,name:"Fachinformatiker - Anwendungsentwicklung"},
+            {id:4,name:"Fachinformatiker Systemintegration"},
+            {id:5,name:"IT-Systemkaufmann"}
+        ]
 
 
         self.submitTrainee = function () {
