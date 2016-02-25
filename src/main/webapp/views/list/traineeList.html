@@ -21,9 +21,9 @@
         <!--<tr>-->
         <!--<th>Mindestalter</th>-->
         <!--<th>Höchstalter</th>-->
-        <!--<th>Ausbildungsanfang</th>-->
+        <!--<th>Ausb
+        <!--<tr>-->ildungsanfang</th>-->
         <!--</tr>-->
-        <!--<tr>-->
         <!--<td><input type="date" ng-model="min_age"/></td>-->
         <!--<td><input type="date" ng-model="max_age"/></td>-->
         <!--<td><input type="date" ng-model="filter_start_of_training"/></td>-->
@@ -132,7 +132,7 @@
         <tr ng-if="trainee.expanded" ng-repeat-end="">
             <td colspan="3"><a ng-hide="editingData[trainee.id]" ng-click="modify(trainee)"
                                class="btn btn-default btn-sm">Bearbeiten</a>
-                <a href="#/trainees" ng-show="editingData[trainee.id]" ng-click="update(trainee,trainee.id)"
+                <a href="#/trainees/list" ng-show="editingData[trainee.id]" ng-click="update(trainee,trainee.id)"
                    class="btn btn-default btn-sm">Änderung speichern</a>
                 <a ng-show="editingData[trainee.id]" ng-click="cancelUpdate(trainee)"
                    class="btn btn-default btn-sm">Abbrechen</a>
