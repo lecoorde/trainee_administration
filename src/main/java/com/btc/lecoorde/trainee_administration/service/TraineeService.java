@@ -61,12 +61,15 @@ public class TraineeService {
 
     public List<SkillDto> getSkillListByTraineeId(Long id) {
 
+        String traineeIdParameterName = "traineeId";
         logger.info("Service lädt die Liste von Skills für ID " + id);
 
-        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Trainee t " +
+        TypedQuery<Skill> query = this.entityManager.createQuery(
+                "select s from Trainee t " +
                 "join t.skillList s " +
-                "where t.id = " + id, Skill.class);
+                "where t.id =:" + traineeIdParameterName, Skill.class);
 
+        query.setParameter(traineeIdParameterName,id);
         List<Skill> skillList = query.getResultList();
 
         return skillList
@@ -101,17 +104,33 @@ public class TraineeService {
             skill.getTrainees().add(trainee);
         }
     }
-
     @Transactional
-    public void deleteTrainee(Long id) {
-        this.entityManager.remove(this.entityManager.find(Trainee.class, id));
+    public void updateTrainee(CreateTraineeDto input) {
+
+        Trainee t = this.entityManager.find(Trainee.class, input.getId());
+        t.setLastName(input.getLastName());
+        t.setForename(input.getForename());
+        t.setJob(JobType.values()[input.getJobOrdinal()]);
+        t.setBirthday(input.getBirthday());
+        t.setStart_of_training(input.getStart_of_training());
+        t.setDepartment(departmentService.getDepartmentById(input.getDepartmentId()));
+        t.setLocation(locationService.getLocationById(input.getLocationId()));
+        Set<Skill> skillSet = new HashSet<>();
+        if (input.getSkillIds() != null) {
+            skillSet.addAll(input.getSkillIds()
+                    .stream()
+                    .map(aLong -> skillService.getSkillById(aLong))
+                    .collect(Collectors.toList()));
+        }
+        t.setSkillList(skillSet);
     }
 
     public List<TraineeDto> getAllTrainees() {
 
         logger.info("Service lädt die Liste von Auzubildenden");
 
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Trainee t " +
+        TypedQuery<Trainee> query = this.entityManager.createQuery(
+                "select t from Trainee t " +
                 "order by t.id", Trainee.class);
         List<Trainee> traineeList = query.getResultList();
         return traineeList
@@ -125,5 +144,9 @@ public class TraineeService {
                         t.getDepartment().getName(),
                         t.getLocation().getName()))
                 .collect(Collectors.toCollection(LinkedList::new));
+    }
+    @Transactional
+    public void deleteTrainee(Long id) {
+        this.entityManager.remove(this.entityManager.find(Trainee.class, id));
     }
 }

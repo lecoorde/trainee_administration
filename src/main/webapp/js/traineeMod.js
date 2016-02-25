@@ -53,6 +53,18 @@ angular.module('traineeMod', [])
                             return $q.reject(errResponse);
                         }
                     );
+            },
+            updateTrainee: function(trainee){
+                return $http.post('http://localhost:7070/trainees/updateTrainee/', trainee)
+                    .then(
+                        function (response) {
+                            return response.data;
+                        },
+                        function (errResponse) {
+                            console.error('Error while updating Trainee');
+                            return $q.reject(errResponse);
+                        }
+                    );
             }
         }
     }])
@@ -70,6 +82,24 @@ angular.module('traineeMod', [])
             start_of_training: '',
             departmentName: '',
             locationName: ''
+        };
+        $scope.editingData = {};
+
+        for (var i = 0, length = self.trainees.length; i < length; i++) {
+            $scope.editingData[self.trainees[i].id] = false;
+        }
+
+        $scope.modify = function(trainee){
+            $scope.editingData[trainee.id] = true;
+        };
+
+        $scope.update = function(trainee,id){
+            self.createableTrainee.id=id;
+            TraineeService.updateTrainee(self.createableTrainee);
+            $scope.editingData[trainee.id] = false;
+        };
+        $scope.cancelUpdate = function(trainee){
+            $scope.editingData[trainee.id] = false;
         };
 
         $scope.trainee_id = "";

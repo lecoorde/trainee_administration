@@ -47,8 +47,7 @@
             <td colspan="1">{{trainee.lastName}}</td>
         </tr>
         <tr ng-if="skill.expanded" ng-repeat-end="">
-            <td colspan="3"><a href="#/skills/update" ng-click="sctrl.updateSkillById(skill.id)"
-                               class="btn btn-default btn-sm">Skill bearbeiten</a></td>
+            <td colspan="3"><a href="#/skills/update" class="btn btn-default btn-sm">Skill bearbeiten</a></td>
             <td colspan="3"><a href="#/skills/list" ng-click="sctrl.confirmDelete(skill.id)"
                                class="btn btn-default btn-sm">Skill löschen</a></td>
         </tr>

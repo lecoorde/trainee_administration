@@ -42,16 +42,29 @@ public class TraineeController {
 //    }
 
     @RequestMapping(value = "/createTrainee/", method = RequestMethod.POST)
-    public ResponseEntity<CreateTraineeDto> createTrainee(@RequestBody CreateTraineeDto input) {
+    public ResponseEntity createTrainee(@RequestBody CreateTraineeDto input) {
         logger.info("Anfrage: Auszubildenden speichern");
         try {
             traineeService.createTrainee(input);
             logger.info("Service: Auszubildender gespeichert: " + input);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity(HttpStatus.CREATED);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+    }
+    @RequestMapping(value="/updateTrainee/", method = RequestMethod.POST)
+    public ResponseEntity updateTrainee(@RequestBody CreateTraineeDto input){
+        logger.info("Anfrage: Auszubildenden bearbeiten");
+        try {
+            traineeService.updateTrainee(input);
+            logger.info("Service: Auszubildender erfolgreich bearbeitet: " + input);
+            return new ResponseEntity(HttpStatus.OK);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
 

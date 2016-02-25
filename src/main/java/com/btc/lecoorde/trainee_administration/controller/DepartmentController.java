@@ -25,13 +25,6 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Liste von Auszubildenden für Abteilung mit ID: " + id);
-
-        return departmentService.getTraineeListForDepartmentId(id);
-    }
 
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 //    public Department getSingleDepartment(@PathVariable("id") Long id) {
@@ -40,6 +33,14 @@ public class DepartmentController {
 //
 //        return departmentService.getDepartmentById(id);
 //    }
+
+    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
+    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
+
+        logger.info("Anfrage: Liste von Auszubildenden für Abteilung mit ID: " + id);
+
+        return departmentService.getTraineeListForDepartmentId(id);
+    }
 
     @RequestMapping(value = "/createDepartment/", method = RequestMethod.POST)
     public ResponseEntity createDepartment(@RequestBody DepartmentDto input) {
