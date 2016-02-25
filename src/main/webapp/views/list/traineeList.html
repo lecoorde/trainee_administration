@@ -44,7 +44,7 @@
                         ng-click="trainee.expanded = false;cancelUpdate(trainee)">-
                 </button>
                 <button class="button" ng-if="!trainee.expanded"
-                        ng-click="trainee.expanded = true">+
+                        ng-click="trainee.expanded = true;" >+
                 </button>
             </td>
             <td>{{trainee.id}}</td>
@@ -137,6 +137,7 @@
             <td colspan="3">
                 <a ng-hide="editingData[trainee.id]"
                    ng-click="modify(trainee)"
+                   ng-disabled="atUpdate"
                    class="btn btn-default btn-sm">Bearbeiten</a>
 
                 <a href="#/trainees/list"

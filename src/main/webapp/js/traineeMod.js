@@ -68,15 +68,15 @@ angular.module('traineeMod', [])
             forename: '',
             lastName: '',
             jobName: '',
-            jobOrdinal:'',
+            jobOrdinal: '',
             birthday: '',
             start_of_training: '',
             departmentName: '',
-            departmentId:'',
+            departmentId: '',
             locationName: '',
-            locationId:''
+            locationId: ''
         };
-
+        $scope.atUpdate = false;
         $scope.editingData = {};
 
 
@@ -85,20 +85,23 @@ angular.module('traineeMod', [])
         }
 
         $scope.modify = function (trainee) {
-                self.createableTrainee.forename = trainee.forename;
-                self.createableTrainee.lastName = trainee.lastName;
-                self.createableTrainee.birthday = new Date(trainee.birthday);
-                self.createableTrainee.start_of_training = new Date(trainee.start_of_training);
-                self.createableTrainee.jobOrdinal = trainee.jobOrdinal;
-                self.createableTrainee.locationId = trainee.locationId;
-                self.createableTrainee.departmentId = trainee.departmentId;
-                self.createableTrainee.skillIds = trainee.skillIds;
-                $scope.editingData[trainee.id] = true;
+            self.createableTrainee.forename = trainee.forename;
+            self.createableTrainee.lastName = trainee.lastName;
+            self.createableTrainee.birthday = new Date(trainee.birthday);
+            self.createableTrainee.start_of_training = new Date(trainee.start_of_training);
+            self.createableTrainee.jobOrdinal = trainee.jobOrdinal;
+            self.createableTrainee.locationId = trainee.locationId;
+            self.createableTrainee.departmentId = trainee.departmentId;
+            self.createableTrainee.skillIds = trainee.skillIds;
+            $scope.editingData[trainee.id] = true;
+            $scope.atUpdate = true;
         };
+
 
         $scope.update = function (trainee, id) {
             self.createableTrainee.id = id;
             $scope.editingData[trainee.id] = false;
+
             TraineeService.updateTrainee(self.createableTrainee).then(
                 function () {
                     growl.success('Auszubildender wurde aktualisiert.', {title: 'Erfolg'});
@@ -106,13 +109,15 @@ angular.module('traineeMod', [])
                 function () {
                     growl.error('Aktualisieren fehlgeschlagen!', {title: 'Fehler!'});
                 }
-
             );
+            $scope.atUpdate = false;
+            self.listExpanded = false;
 
 
         };
-        self.cancelUpdate = function (trainee) {
+        $scope.cancelUpdate = function (trainee) {
             $scope.editingData[trainee.id] = false;
+            $scope.atUpdate = false;
         };
 
         $scope.trainee_id = "";
@@ -124,13 +129,13 @@ angular.module('traineeMod', [])
         self.createableTrainee = {
             id: null
         };
-        self.joblist=[
-            {id:0,name:"Dualer Student - Anwendungsentwicklung"},
-            {id:1,name:"Dualer Student - BWL"},
-            {id:2,name:"Dualer Student - Systemintegration"},
-            {id:3,name:"Fachinformatiker - Anwendungsentwicklung"},
-            {id:4,name:"Fachinformatiker Systemintegration"},
-            {id:5,name:"IT-Systemkaufmann"}
+        self.joblist = [
+            {id: 0, name: "Dualer Student - Anwendungsentwicklung"},
+            {id: 1, name: "Dualer Student - BWL"},
+            {id: 2, name: "Dualer Student - Systemintegration"},
+            {id: 3, name: "Fachinformatiker - Anwendungsentwicklung"},
+            {id: 4, name: "Fachinformatiker Systemintegration"},
+            {id: 5, name: "IT-Systemkaufmann"}
         ];
 
         self.submitTrainee = function () {
