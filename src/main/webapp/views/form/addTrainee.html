@@ -80,9 +80,10 @@
             <label for="selectSkills" class="col-sm-2 control-label">Skills</label>
             <div class="col-sm-5">
                 <select id="selectSkills" class="form-control" name="skills" ng-model="ctrl.createableTrainee.skillIds"
-                        ng-options="skill.id as skill.name for skill in sctrl.skills" required multiple>
+                        ng-options="skill.id as skill.name for skill in sctrl.skills" required multiple="multiple">
                 </select>
             </div>
+
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-5">
@@ -90,5 +91,8 @@
                    ng-disabled="traineeForm.$invalid">Speichern</a>
             </div>
         </div>
+
+
+
     </form>
 </div>

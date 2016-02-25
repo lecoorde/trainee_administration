@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mainApp', ['ngRoute', 'traineeMod', 'locationMod', 'departmentMod', 'skillMod', 'angular-growl','ngAnimate'])
+angular.module('mainApp', ['ngRoute', 'traineeMod', 'locationMod', 'departmentMod', 'skillMod', 'angular-growl', 'ngAnimate'])
     .config(function ($routeProvider) {
         $routeProvider
 
