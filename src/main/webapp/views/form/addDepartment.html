@@ -1,39 +1,24 @@
 <h2>Abteilung hinzufügen</h2>
 <div ng-controller="DepartmentCtrl as ctrl">
-    <form name="departmentForm" ng-submit="ctrl.submitDepartment()" novalidate>
-        <table>
-            <tr>
-                <td>Name:</td>
-                <td>
-                    <input placeholder="Name" name="name" type="text" ng-model="ctrl.createableDepartment.name"
-                           required>
-                     <span style="color:red" ng-show="departmentForm.name.$dirty && departmentForm.name.$invalid">
-                        <span ng-show="departmentForm.name.$error.required">Bitte geben Sie einen Namen ein</span>
-                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>Beschreibung:</td>
-                <td>
-                    <textarea placeholder="Beschreibung" name="description"
-                              ng-model="ctrl.createableDepartment.description" required></textarea>
-                     <span style="color:red"
-                           ng-show="departmentForm.description.$dirty && departmentForm.description.$invalid">
-                        <span ng-show="departmentForm.description.$error.required">Bitte geben Sie eine Beschreibung ein</span>
-                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-
-                </td>
-                <td>
-                    <a href="#/departments" type="submit" ng-click="ctrl.submitDepartment()"
-                       class="btn btn-default btn-sm" ng-disabled="departmentForm.$invalid">Speichern</a>
-                    <!--<input type="submit"  value="Speichern" ng-disabled="departmentForm.$invalid">-->
-
-                </td>
-            </tr>
-        </table>
+    <form  class="form-horizontal " name="departmentForm" ng-submit="ctrl.submitDepartment()" novalidate>
+        <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="name" id="inputName" ng-model="ctrl.createableDepartment.name" aria-describedby="helpBlock2" placeholder="Name" required>
+                <span style="color: red" ng-show="departmentForm.name.$dirty&&departmentForm.name.$error.required" id="helpBlock2" class="help-block ">Bitte geben Sie einen Namen ein!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDescription" class="col-sm-2 control-label">Beschreibung</label>
+            <div class="col-sm-5">
+                <textarea type="text" name="description" class="form-control" id="inputDescription" placeholder="Beschreibung" ng-model="ctrl.createableDepartment.description" aria-describedby="descError" required></textarea>
+                <span style="color: red" ng-show="departmentForm.description.$dirty&&departmentForm.description.$error.required" id="descError" class="help-block ">Bitte geben Sie eine Beschreibung ein!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-5">
+                <a href="#/departments" type="submit" ng-click="ctrl.submitDepartment()"class="btn btn-default btn-sm" ng-disabled="departmentForm.$invalid">Speichern</a>
+            </div>
+        </div>
     </form>
 </div>
