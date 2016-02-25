@@ -127,8 +127,8 @@
             <td colspan="6">
                 <select name="selectSkills"
                         ng-model="tctrl.createableTrainee.skillIds"
-                        required multiple>
-                    <option ng:repeat="skill in sctrl.skills" value="{{skill.id}}">{{skill.name}}</option>
+                        required multiple ng-options="skill.id as skill.name for skill in sctrl.skills">
+
                 </select>
             </td>
         </tr>
