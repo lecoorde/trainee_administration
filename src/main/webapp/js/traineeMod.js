@@ -79,20 +79,21 @@ angular.module('traineeMod', [])
 
         $scope.editingData = {};
 
+
         for (var i = 0, length = self.trainees.length; i < length; i++) {
             $scope.editingData[self.trainees[i].id] = false;
         }
 
         $scope.modify = function (trainee) {
-            self.createableTrainee.forename = trainee.forename;
-            self.createableTrainee.lastName = trainee.lastName;
-            self.createableTrainee.birthday = new Date(trainee.birthday);
-            self.createableTrainee.start_of_training = new Date(trainee.start_of_training);
-            self.createableTrainee.jobOrdinal=trainee.jobOrdinal;
-            self.createableTrainee.locationId=trainee.locationId;
-            self.createableTrainee.departmentId=trainee.departmentId;
-            self.createableTrainee.skillIds=trainee.skillIds;
-            $scope.editingData[trainee.id] = true;
+                self.createableTrainee.forename = trainee.forename;
+                self.createableTrainee.lastName = trainee.lastName;
+                self.createableTrainee.birthday = new Date(trainee.birthday);
+                self.createableTrainee.start_of_training = new Date(trainee.start_of_training);
+                self.createableTrainee.jobOrdinal = trainee.jobOrdinal;
+                self.createableTrainee.locationId = trainee.locationId;
+                self.createableTrainee.departmentId = trainee.departmentId;
+                self.createableTrainee.skillIds = trainee.skillIds;
+                $scope.editingData[trainee.id] = true;
         };
 
         $scope.update = function (trainee, id) {
@@ -105,10 +106,12 @@ angular.module('traineeMod', [])
                 function () {
                     growl.error('Aktualisieren fehlgeschlagen!', {title: 'Fehler!'});
                 }
+
             );
 
+
         };
-        $scope.cancelUpdate = function (trainee) {
+        self.cancelUpdate = function (trainee) {
             $scope.editingData[trainee.id] = false;
         };
 
@@ -128,8 +131,7 @@ angular.module('traineeMod', [])
             {id:3,name:"Fachinformatiker - Anwendungsentwicklung"},
             {id:4,name:"Fachinformatiker Systemintegration"},
             {id:5,name:"IT-Systemkaufmann"}
-        ]
-
+        ];
 
         self.submitTrainee = function () {
             TraineeService.createTrainee(self.createableTrainee).then(
