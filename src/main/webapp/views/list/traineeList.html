@@ -72,7 +72,6 @@
                 <div ng-hide="editingData[trainee.id]">{{trainee.jobName}}</div>
                 <div ng-show="editingData[trainee.id]"><select name="jobName"
                                                                ng-model="tctrl.createableTrainee.jobOrdinal" required>
-                    <option value="">---Bitte Job wählen---</option>
                     <option value="0">Dualer Student - Anwendungsentwicklung</option>
                     <option value="1">Dualer Student - BWL</option>
                     <option value="2">Dualer Student - Systemintegration</option>
@@ -103,7 +102,6 @@
                 <select ng-show="editingData[trainee.id]" ng-controller="DepartmentCtrl as dctrl"
                         ng-options="department.id as department.name for department in dctrl.departments"
                         name="selectedDepartmentId" ng-model="tctrl.createableTrainee.departmentId" required>
-                    <option value="">---Bitte Abteilung wählen---</option>
                 </select>
             </td>
             <td colspan="2">
@@ -112,7 +110,6 @@
                 <select ng-show="editingData[trainee.id]" ng-controller="LocationCtrl as lctrl"
                         name="selectedLocationId" ng-model="tctrl.createableTrainee.locationId"
                         ng-options="location.id as location.name for location in lctrl.locations" required>
-                    <option value="">---Bitte Standort wählen---</option>
                 </select>
             </td>
         </tr>
