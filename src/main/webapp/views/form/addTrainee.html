@@ -35,7 +35,7 @@
             <label for="inputStart_of_training" class="col-sm-2 control-label">Ausbildungsanfang</label>
             <div class="col-sm-5">
                 <input type="date" class="form-control" name="start_of_training" id="inputStart_of_training"
-                       ng-model="ctrl.createableTrainee.birthday" aria-describedby="startErr" required>
+                       ng-model="ctrl.createableTrainee.start_of_training" aria-describedby="startErr" required>
                 <span style="color: red"
                       ng-show="skillForm.start_of_training.$dirty&&skillForm.start_of_training.$error.required"
                       id="startErr" class="help-block ">Bitte geben Sie ein Anfangsdatum ein!</span>
@@ -72,7 +72,7 @@
                 <select id="selectLocation" class="form-control" name="location"
                         ng-model="ctrl.createableTrainee.locationId"
                         ng-options="location.id as location.name for location in lctrl.locations" required>
-                    <option value="">---Bitte Abteilung wählen---</option>
+                    <option value="">---Bitte Standort wählen---</option>
                 </select>
             </div>
         </div>
