@@ -53,7 +53,7 @@ angular.module('departmentMod', [])
         }
     }])
 
-    .controller('DepartmentCtrl', ['$scope', 'DepartmentService', function ($scope, DepartmentService) {
+    .controller('DepartmentCtrl', ['$scope', 'DepartmentService','growl', function ($scope, DepartmentService,growl) {
         var self = this;
         self.departments = [];
         self.trainees = [];
