@@ -21,9 +21,9 @@
         <!--<tr>-->
         <!--<th>Mindestalter</th>-->
         <!--<th>Höchstalter</th>-->
-        <!--<th>Ausbildungsanfang</th>-->
-        <!--</tr>-->
+        <!--<th>Ausb
         <!--<tr>-->
+        <!--</tr>-->
         <!--<td><input type="date" ng-model="min_age"/></td>-->
         <!--<td><input type="date" ng-model="max_age"/></td>-->
         <!--<td><input type="date" ng-model="filter_start_of_training"/></td>-->
@@ -47,25 +47,31 @@
             locationName: trainee_location}">
 
             <td>
-                <button class="button" ng-if="trainee.expanded" ng-click="trainee.expanded = false;cancelUpdate(trainee)">-</button>
+                <button class="button" ng-if="trainee.expanded"
+                        ng-click="trainee.expanded = false;cancelUpdate(trainee)">-
+                </button>
                 <button class="button" ng-if="!trainee.expanded" ng-click="trainee.expanded = true">+</button>
             </td>
             <td>{{trainee.id}}</td>
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.lastName}}</div>
-                <div ng-show="editingData[trainee.id]"><input type="text" placeholder="{{trainee.lastName}}" ng-model="tctrl.createableTrainee.lastName" /></div>
+                <div ng-show="editingData[trainee.id]"><input type="text" placeholder="{{trainee.lastName}}"
+                                                              ng-model="tctrl.createableTrainee.lastName"/></div>
             </td>
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.forename}}</div>
-                <div ng-show="editingData[trainee.id]"><input type="text" placeholder="{{trainee.forename}}" ng-model="tctrl.createableTrainee.forename" /></div>
+                <div ng-show="editingData[trainee.id]"><input type="text" placeholder="{{trainee.forename}}"
+                                                              ng-model="tctrl.createableTrainee.forename"/></div>
             </td>
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.birthday | date:'dd.MM.yyyy'}}</div>
-                <div ng-show="editingData[trainee.id]"><input type="date"  ng-model="tctrl.creatableTrainee.birthday" /></div>
+                <div ng-show="editingData[trainee.id]"><input type="date" ng-model="tctrl.createableTrainee.birthday"/>
+                </div>
             </td>
-            <td >
+            <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.jobName}}</div>
-                <div ng-show="editingData[trainee.id]"><select name="jobName" ng-model="tctrl.createableTrainee.jobOrdinal" required>
+                <div ng-show="editingData[trainee.id]"><select name="jobName"
+                                                               ng-model="tctrl.createableTrainee.jobOrdinal" required>
                     <option value="">---Bitte Job wählen---</option>
                     <option value="0">Dualer Student - Anwendungsentwicklung</option>
                     <option value="1">Dualer Student - BWL</option>
@@ -77,21 +83,24 @@
             </td>
             <td>
                 <div ng-hide="editingData[trainee.id]">{{trainee.start_of_training | date:'dd.MM.yyyy'}}</div>
-                <div ng-show="editingData[trainee.id]"><input type="date" ng-model="tctrl.creatableTrainee.start_of_training"/></div>
+                <div ng-show="editingData[trainee.id]"><input type="date"
+                                                              ng-model="tctrl.createableTrainee.start_of_training"/>
+                </div>
             </td>
             <td></td>
         </tr>
-        <tr ng-if="trainee.expanded" ng-init="tctrl.getSkillsByTraineeId(trainee.id)">
+        <tr ng-if="trainee.expanded">
             <th colspan="3" ng-hide="editingData[trainee.id]">Arbeitsplatz</th>
             <th colspan="3" ng-show="editingData[trainee.id]">Eingabe: Arbeitsplatz</th>
             <th colspan="2">Standort</th>
             <th colspan="2">Abteilung</th>
         </tr>
-        <tr ng-if="trainee.expanded" >
+        <tr ng-if="trainee.expanded">
             <td colspan="3"></td>
             <td colspan="2">
                 <div ng-hide="editingData[trainee.id]">{{trainee.locationName}}</div>
-                <select ng-controller="DepartmentCtrl as dctrl" ng-show="editingData[trainee.id]"
+
+                <select ng-show="editingData[trainee.id]" ng-controller="DepartmentCtrl as dctrl"
                         ng-options="department.id as department.name for department in dctrl.departments"
                         name="selectedDepartmentId" ng-model="tctrl.createableTrainee.departmentId" required>
                     <option value="">---Bitte Abteilung wählen---</option>
@@ -99,31 +108,30 @@
             </td>
             <td colspan="2">
                 <div ng-hide="editingData[trainee.id]">{{trainee.departmentName}}</div>
-                <select ng-controller="LocationCtrl as lctrl" ng-show="editingData[trainee.id]"
+
+                <select ng-show="editingData[trainee.id]" ng-controller="LocationCtrl as lctrl"
                         name="selectedLocationId" ng-model="tctrl.createableTrainee.locationId"
                         ng-options="location.id as location.name for location in lctrl.locations" required>
                     <option value="">---Bitte Standort wählen---</option>
                 </select>
             </td>
         </tr>
-        <tr ng-if="trainee.expanded" ng-show="tctrl.traineeskills.length">
+        <tr ng-if="trainee.expanded" ng-show="trainee.skillNames.length">
             <th ng-hide="editingData[trainee.id]" colspan="3">Skills</th>
-            <th ng-hide="editingData[trainee.id]" colspan="2">Bezeichnung</th>
-            <th ng-hide="editingData[trainee.id]" colspan="3">Beschreibung</th>
+            <th ng-hide="editingData[trainee.id]" colspan="5">Bezeichnung</th>
         </tr>
         <tr ng-if="trainee.expanded" ng-show="editingData[trainee.id]">
             <th ng-show="editingData[trainee.id]" colspan="8">Eingabe: Skills</th>
         </tr>
 
-        <tr ng-if="trainee.expanded" ng-hide="editingData[trainee.id]"  ng-repeat="skill in tctrl.traineeskills">
+        <tr ng-if="trainee.expanded" ng-hide="editingData[trainee.id]" ng-repeat="skillName in trainee.skillNames">
             <td colspan="2"></td>
             <td align="right">•</td>
-            <td colspan="2">{{skill.name}}</td>
-            <td colspan="3">{{skill.description}}</td>
+            <td colspan="5">{{skillName}}</td>
         </tr>
         <tr ng-if="trainee.expanded" ng-show="editingData[trainee.id]" ng-controller="SkillCtrl as sctrl">
             <td colspan="2">Skillauswahl:</td>
-            <td colspan="6"><select name="selectSkills"  ng-model="tctrl.createableTrainee.skillIds" required multiple>
+            <td colspan="6"><select name="selectSkills" ng-model="tctrl.createableTrainee.skillIds" required multiple>
                 <option ng:repeat="skill in sctrl.skills" value="{{skill.id}}">{{skill.name}}</option>
             </select>
             </td>
@@ -132,25 +140,14 @@
         <tr ng-if="trainee.expanded" ng-repeat-end="">
             <td colspan="3"><a ng-hide="editingData[trainee.id]" ng-click="modify(trainee)"
                                class="btn btn-default btn-sm">Bearbeiten</a>
-                <a href="#/trainees" ng-show="editingData[trainee.id]" ng-click="update(trainee,trainee.id)"
+                <a href="#/trainees/list" ng-show="editingData[trainee.id]" ng-click="update(trainee,trainee.id)"
                    class="btn btn-default btn-sm">Änderung speichern</a>
                 <a ng-show="editingData[trainee.id]" ng-click="cancelUpdate(trainee)"
                    class="btn btn-default btn-sm">Abbrechen</a>
             </td>
 
-            <td colspan="3"><a href="#/trainees/list" ng-click="tctrl.confirmDelete(trainee.id)"
+            <td colspan="3"><a href="#/trainees" ng-click="tctrl.confirmDelete(trainee.id)"
                                class="btn btn-default btn-sm">Auszubildenden löschen</a></td>
         </tr>
     </table>
 </div>
-
-
-
-
-
-
-
-
-
-
-

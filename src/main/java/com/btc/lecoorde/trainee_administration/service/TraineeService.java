@@ -14,10 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -133,17 +130,46 @@ public class TraineeService {
                 "select t from Trainee t " +
                 "order by t.id", Trainee.class);
         List<Trainee> traineeList = query.getResultList();
-        return traineeList
-                .stream()
-                .map(t -> new TraineeDto(t.getId(),
-                        t.getLastName(),
-                        t.getForename(),
-                        t.getJob().getJobName(),
-                        t.getBirthday(),
-                        t.getStart_of_training(),
-                        t.getDepartment().getName(),
-                        t.getLocation().getName()))
-                .collect(Collectors.toCollection(LinkedList::new));
+
+        List<TraineeDto> dtoList = new LinkedList<>();
+        for (Trainee t: traineeList){
+            LinkedList<Long> skillIds = t.getSkillList().stream().map(Skill::getId).collect(Collectors.toCollection(LinkedList::new));
+            LinkedList<String> skillNames = t.getSkillList().stream().map(Skill::getName).collect(Collectors.toCollection(LinkedList::new));
+            dtoList.add(new TraineeDto(
+                    t.getId(),
+                    t.getLastName(),
+                    t.getForename(),
+                    t.getJob().getJobName(),
+                    t.getBirthday(),
+                    t.getStart_of_training(),
+                    t.getJob().ordinal(),
+                    t.getDepartment().getName(),
+                    t.getDepartment().getId(),
+                    t.getLocation().getName(),
+                    t.getLocation().getId(),
+                    skillNames,
+                    skillIds
+            ));
+        }
+
+        return dtoList;
+//        return traineeList
+//                .stream()
+//                .map(t -> new TraineeDto(t.getId(),
+//                        t.getLastName(),
+//                        t.getForename(),
+//                        t.getJob().getJobName(),
+//                        t.getJob().ordinal(),
+//                        t.getBirthday(),
+//                        t.getStart_of_training(),
+//                        t.getDepartment().getName(),
+//                        t.getDepartment().getId(),
+//                        t.getLocation().getName(),
+//                        t.getLocation().getId(),
+//                        t.getSkillList().stream().map(Skill::getId).collect(Collectors.toSet(HashSet<Long>::new)),
+//                        t.getSkillList().stream().map(Skill::getName).collect(Collectors.toCollection(LinkedList<String>::new))
+//                        ))
+//                .collect(Collectors.toCollection(LinkedList::new));
     }
     @Transactional
     public void deleteTrainee(Long id) {

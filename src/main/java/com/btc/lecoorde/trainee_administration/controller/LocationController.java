@@ -24,13 +24,13 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
-    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
-
-        return locationService.getTraineeListForSkillId(id);
-    }
+//    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
+//    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
+//
+//        logger.info("Anfrage: Liste von Auszubildenden für Standort mit ID: " + id);
+//
+//        return locationService.getTraineeListForSkillId(id);
+//    }
 
 
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)

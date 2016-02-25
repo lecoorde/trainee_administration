@@ -24,13 +24,13 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
-    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
-
-        logger.info("Anfrage: Liste von Auszubildenden für Skill mit ID: " + id);
-
-        return skillService.getTraineeListForSkillId(id);
-    }
+//    @RequestMapping(value = "/trainee_list/{id}", method = RequestMethod.GET)
+//    public List<TraineeDto> getTraineeListById(@PathVariable("id") Long id) {
+//
+//        logger.info("Anfrage: Liste von Auszubildenden für Skill mit ID: " + id);
+//
+//        return skillService.getTraineeListForSkillId(id);
+//    }
 
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 //    public Skill getSkill(@PathVariable("id") Long id) {
