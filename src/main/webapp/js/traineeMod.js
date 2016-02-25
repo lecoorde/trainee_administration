@@ -98,7 +98,14 @@ angular.module('traineeMod', [])
         $scope.update = function (trainee, id) {
             self.createableTrainee.id = id;
             $scope.editingData[trainee.id] = false;
-            TraineeService.updateTrainee(self.createableTrainee);
+            TraineeService.updateTrainee(self.createableTrainee).then(
+                function () {
+                    growl.success('Auszubildender wurde aktualisiert.', {title: 'Erfolg'});
+                },
+                function () {
+                    growl.error('Aktualisieren fehlgeschlagen!', {title: 'Fehler!'});
+                }
+            );
 
         };
         $scope.cancelUpdate = function (trainee) {
