@@ -79,14 +79,12 @@ angular.module('traineeMod', [])
 
         $scope.editingData = {};
 
-        self.editing=false;
 
         for (var i = 0, length = self.trainees.length; i < length; i++) {
             $scope.editingData[self.trainees[i].id] = false;
         }
 
         $scope.modify = function (trainee) {
-            if(self.editing==false) {
                 self.createableTrainee.forename = trainee.forename;
                 self.createableTrainee.lastName = trainee.lastName;
                 self.createableTrainee.birthday = new Date(trainee.birthday);
@@ -96,10 +94,6 @@ angular.module('traineeMod', [])
                 self.createableTrainee.departmentId = trainee.departmentId;
                 self.createableTrainee.skillIds = trainee.skillIds;
                 $scope.editingData[trainee.id] = true;
-                self.editing=true;
-            }else {
-                trainee.expanded=false;
-            }
         };
 
         $scope.update = function (trainee, id) {
@@ -112,14 +106,13 @@ angular.module('traineeMod', [])
                 function () {
                     growl.error('Aktualisieren fehlgeschlagen!', {title: 'Fehler!'});
                 }
-            self.editing=false;
+
             );
 
 
         };
         self.cancelUpdate = function (trainee) {
             $scope.editingData[trainee.id] = false;
-            self.editing=false;
         };
 
         $scope.trainee_id = "";
@@ -138,9 +131,7 @@ angular.module('traineeMod', [])
             {id:3,name:"Fachinformatiker - Anwendungsentwicklung"},
             {id:4,name:"Fachinformatiker Systemintegration"},
             {id:5,name:"IT-Systemkaufmann"}
-        ]
-
-
+        ];
 
         self.submitTrainee = function () {
             TraineeService.createTrainee(self.createableTrainee).then(
