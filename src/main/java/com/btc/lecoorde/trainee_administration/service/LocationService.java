@@ -45,22 +45,22 @@ public class LocationService {
         return query.getSingleResult();
     }
 
-    public List<TraineeDto> getTraineeListForSkillId(Long id) {
-
-        logger.info("Service lädt die Liste von Auszubildenden für Standort-ID " + id);
-
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Location l " +
-                "join l.trainees t " +
-                "where l.id = " + id, Trainee.class);
-
-        List<Trainee> traineeList = query.getResultList();
-
-        return traineeList
-                .stream()
-                .map(t -> new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
-                .collect(Collectors.toCollection(LinkedList::new));
-
-    }
+//    public List<TraineeDto> getTraineeListForSkillId(Long id) {
+//
+//        logger.info("Service lädt die Liste von Auszubildenden für Standort-ID " + id);
+//
+//        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Location l " +
+//                "join l.trainees t " +
+//                "where l.id = " + id, Trainee.class);
+//
+//        List<Trainee> traineeList = query.getResultList();
+//
+//        return traineeList
+//                .stream()
+//                .map(t -> new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
+//                .collect(Collectors.toCollection(LinkedList::new));
+//
+//    }
 
     @Transactional
     public void deleteLocation(Long id) {

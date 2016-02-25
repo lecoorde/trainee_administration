@@ -35,22 +35,22 @@ public class SkillService {
         return query.getSingleResult();
     }
 
-    public List<TraineeDto> getTraineeListForSkillId(Long id) {
-        logger.info("Service lädt die Liste von Auszubildenden für Skill-ID " + id);
-
-        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Skill s " +
-                "join s.trainees t " +
-                "where s.id = " + id, Trainee.class);
-
-        List<Trainee> traineeList = query.getResultList();
-
-
-        return traineeList
-                .stream()
-                .map(t -> new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
-                .collect(Collectors.toCollection(LinkedList::new));
-
-    }
+//    public List<TraineeDto> getTraineeListForSkillId(Long id) {
+//        logger.info("Service lädt die Liste von Auszubildenden für Skill-ID " + id);
+//
+//        TypedQuery<Trainee> query = this.entityManager.createQuery("select t from Skill s " +
+//                "join s.trainees t " +
+//                "where s.id = " + id, Trainee.class);
+//
+//        List<Trainee> traineeList = query.getResultList();
+//
+//
+//        return traineeList
+//                .stream()
+//                .map(t -> new TraineeDto(t.getId(), t.getLastName(), t.getForename(), null, null, null, null, null))
+//                .collect(Collectors.toCollection(LinkedList::new));
+//
+//    }
 
     @Transactional
     public void deleteSkill(Long id) {
